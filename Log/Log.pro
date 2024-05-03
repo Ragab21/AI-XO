@@ -13,6 +13,7 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    StackIbdex.h \
     mainwindow.h
 
 FORMS += \

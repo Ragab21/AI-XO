@@ -25,7 +25,7 @@ void MainWindow::on_pushButton_LogIn_clicked()
         ui->stackedWidget->setCurrentIndex(2);
 
     }
-    else if(username == "test")
+    else if(username == "test") //ggg
     {
         QMessageBox::warning(this, "LogIn", "wrong password");
     }
@@ -35,6 +35,7 @@ void MainWindow::on_pushButton_LogIn_clicked()
     }
 }
 
+/////ffnndsjghshgsjh
 
 void MainWindow::on_pushButton_SignUp_clicked()
 {
