@@ -37,6 +37,20 @@ bool GameBoard::playAtPosition(int row, int col)
     return true;
 }
 
+int GameBoard::checkboard(){
+    if(checkWin(getPlayer1Symbol())){
+        return 1;   //win
+    }
+    else if(checkWin(getPlayer2Symbol())){
+        return -1;  //lose
+    }
+    else if(getMoveNum()==9){
+        return 2;   //draw
+    }
+    else    //continuou
+        return 0;
+}
+
 bool GameBoard::checkWin(const QString &symbol) const
 {
     // Check rows, columns, and diagonals for a win

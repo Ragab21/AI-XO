@@ -8,6 +8,8 @@
 #include <QWidget>
 #include <QVector>
 
+
+
 class GameBoard : public QObject
 {
     Q_OBJECT
@@ -16,7 +18,7 @@ public:
     explicit GameBoard(QObject *parent = nullptr);
     Q_INVOKABLE void clear();
     Q_INVOKABLE bool playAtPosition(int row, int col);
-    Q_INVOKABLE bool checkWin(const QString &symbol) const;
+    int checkboard();
     Q_INVOKABLE QString getCellValue(int row, int col) const;
 
     // Getter and setter for mode
@@ -42,6 +44,7 @@ signals:
     void boardChanged();
 
 private:
+    Q_INVOKABLE bool checkWin(const QString &symbol) const;
     QVector<QVector<QString>> m_board;
     QString m_player1Symbol="X";
     QString m_player2Symbol="O";

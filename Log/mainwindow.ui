@@ -59,13 +59,23 @@
                 <layout class="QHBoxLayout" name="horizontalLayout">
                  <item>
                   <widget class="QLabel" name="label_Username">
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(255, 0, 4);
+background-color: rgb(0, 0, 0);
+border: none;
+font: 14pt &quot;My Puma&quot;;</string>
+                   </property>
                    <property name="text">
                     <string>Username:  </string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_Username"/>
+                  <widget class="QLineEdit" name="lineEdit_Username">
+                   <property name="styleSheet">
+                    <string notr="true"/>
+                   </property>
+                  </widget>
                  </item>
                 </layout>
                </item>
@@ -73,6 +83,12 @@
                 <layout class="QHBoxLayout" name="horizontalLayout_2">
                  <item>
                   <widget class="QLabel" name="label_Password">
+                   <property name="styleSheet">
+                    <string notr="true">color: rgb(255, 0, 4);
+background-color: rgb(0, 0, 0);
+border: none;
+font: 14pt &quot;My Puma&quot;;</string>
+                   </property>
                    <property name="text">
                     <string>Password:   </string>
                    </property>
@@ -109,6 +125,12 @@
                </item>
                <item row="0" column="1">
                 <widget class="QLabel" name="label_3">
+                 <property name="styleSheet">
+                  <string notr="true">color: rgb(255, 0, 4);
+background-color: rgb(0, 0, 0);
+border: none;
+font: 14pt &quot;My Puma&quot;;</string>
+                 </property>
                  <property name="text">
                   <string> Don't have an account</string>
                  </property>
@@ -116,6 +138,12 @@
                </item>
                <item row="1" column="0">
                 <widget class="QPushButton" name="pushButton_LogIn">
+                 <property name="styleSheet">
+                  <string notr="true">color: rgb(255, 0, 4);
+background-color: rgb(0, 0, 0);
+border: none;
+font: 14pt &quot;My Puma&quot;;</string>
+                 </property>
                  <property name="text">
                   <string>LogIn</string>
                  </property>
@@ -123,6 +151,12 @@
                </item>
                <item row="1" column="1">
                 <widget class="QPushButton" name="pushButton_SignUp">
+                 <property name="styleSheet">
+                  <string notr="true">color: rgb(255, 0, 4);
+background-color: rgb(0, 0, 0);
+border: none;
+font: 14pt &quot;My Puma&quot;;</string>
+                 </property>
                  <property name="text">
                   <string>SignUp</string>
                  </property>
@@ -386,11 +420,14 @@ font: 14pt &quot;My Puma&quot;;</string>
       </widget>
       <widget class="QWidget" name="Selection_Page"/>
       <widget class="QWidget" name="Game_Page">
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
        <layout class="QVBoxLayout" name="verticalLayout_8">
         <item>
          <widget class="QGroupBox" name="groupBox_3">
           <property name="title">
-           <string>GroupBox</string>
+           <string/>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_9">
            <item>
@@ -402,6 +439,12 @@ font: 14pt &quot;My Puma&quot;;</string>
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(220, 40, 16);
+border: none;
+font: 14pt &quot;My Puma&quot;;</string>
                </property>
                <property name="text">
                 <string/>
@@ -416,6 +459,12 @@ font: 14pt &quot;My Puma&quot;;</string>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="styleSheet">
+                <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(220, 40, 16);
+border: none;
+font: 14pt &quot;My Puma&quot;;</string>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -428,6 +477,12 @@ font: 14pt &quot;My Puma&quot;;</string>
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(220, 40, 16);
+border: none;
+font: 14pt &quot;My Puma&quot;;</string>
                </property>
                <property name="text">
                 <string/>
@@ -442,6 +497,12 @@ font: 14pt &quot;My Puma&quot;;</string>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="styleSheet">
+                <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(220, 40, 16);
+border: none;
+font: 14pt &quot;My Puma&quot;;</string>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -454,6 +515,12 @@ font: 14pt &quot;My Puma&quot;;</string>
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(220, 40, 16);
+border: none;
+font: 14pt &quot;My Puma&quot;;</string>
                </property>
                <property name="text">
                 <string/>
@@ -468,6 +535,12 @@ font: 14pt &quot;My Puma&quot;;</string>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="styleSheet">
+                <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(220, 40, 16);
+border: none;
+font: 14pt &quot;My Puma&quot;;</string>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -480,6 +553,12 @@ font: 14pt &quot;My Puma&quot;;</string>
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(220, 40, 16);
+border: none;
+font: 14pt &quot;My Puma&quot;;</string>
                </property>
                <property name="text">
                 <string/>
@@ -494,6 +573,12 @@ font: 14pt &quot;My Puma&quot;;</string>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
+               <property name="styleSheet">
+                <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(220, 40, 16);
+border: none;
+font: 14pt &quot;My Puma&quot;;</string>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -506,6 +591,12 @@ font: 14pt &quot;My Puma&quot;;</string>
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(220, 40, 16);
+border: none;
+font: 14pt &quot;My Puma&quot;;</string>
                </property>
                <property name="text">
                 <string/>

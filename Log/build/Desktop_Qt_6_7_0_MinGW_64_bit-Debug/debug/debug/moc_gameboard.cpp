@@ -42,9 +42,9 @@ constexpr auto qt_meta_stringdata_CLASSGameBoardENDCLASS = QtMocHelpers::stringD
     "playAtPosition",
     "row",
     "col",
+    "getCellValue",
     "checkWin",
-    "symbol",
-    "getCellValue"
+    "symbol"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -70,8 +70,8 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSGameBoardENDCLASS[] = {
  // methods: name, argc, parameters, tag, flags, initial metatype offsets
        3,    0,   45,    2, 0x02,    2 /* Public */,
        4,    2,   46,    2, 0x02,    3 /* Public */,
-       7,    1,   51,    2, 0x102,    6 /* Public | MethodIsConst  */,
-       9,    2,   54,    2, 0x102,    8 /* Public | MethodIsConst  */,
+       7,    2,   51,    2, 0x102,    6 /* Public | MethodIsConst  */,
+       8,    1,   56,    2, 0x100,    9 /* Private | MethodIsConst  */,
 
  // signals: parameters
     QMetaType::Void,
@@ -79,8 +79,8 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSGameBoardENDCLASS[] = {
  // methods: parameters
     QMetaType::Void,
     QMetaType::Bool, QMetaType::Int, QMetaType::Int,    5,    6,
-    QMetaType::Bool, QMetaType::QString,    8,
     QMetaType::QString, QMetaType::Int, QMetaType::Int,    5,    6,
+    QMetaType::Bool, QMetaType::QString,    9,
 
        0        // eod
 };
@@ -102,13 +102,13 @@ Q_CONSTINIT const QMetaObject GameBoard::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<bool, std::false_type>,
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
-        // method 'checkWin'
-        QtPrivate::TypeAndForceComplete<bool, std::false_type>,
-        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
         // method 'getCellValue'
         QtPrivate::TypeAndForceComplete<QString, std::false_type>,
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
-        QtPrivate::TypeAndForceComplete<int, std::false_type>
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        // method 'checkWin'
+        QtPrivate::TypeAndForceComplete<bool, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>
     >,
     nullptr
 } };
@@ -123,10 +123,10 @@ void GameBoard::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 1: _t->clear(); break;
         case 2: { bool _r = _t->playAtPosition((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 3: { bool _r = _t->checkWin((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])));
-            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 4: { QString _r = _t->getCellValue((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])));
+        case 3: { QString _r = _t->getCellValue((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])));
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
+        case 4: { bool _r = _t->checkWin((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])));
+            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
