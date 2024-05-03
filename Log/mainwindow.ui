@@ -24,7 +24,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="LogIn_Page"/>
       <widget class="QWidget" name="SignUp_Page">
@@ -96,7 +96,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>PushButton</string>
+         <string>O</string>
         </property>
        </widget>
        <widget class="QPushButton" name="pushButton_5">
@@ -161,7 +161,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>PushButton</string>
+         <string>X</string>
         </property>
        </widget>
        <widget class="QPushButton" name="pushButton_10">
@@ -188,7 +188,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>25</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
