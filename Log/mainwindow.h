@@ -36,6 +36,12 @@ private slots:
 
     void on_XO6_clicked();
 
+    void on_play_clicked();
+
+    void on_history_clicked();
+
+    void on_logout_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
