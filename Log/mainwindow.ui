@@ -385,7 +385,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>25</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
@@ -395,8 +395,6 @@
   <tabstop>lineEdit_Password</tabstop>
   <tabstop>pushButton_LogIn</tabstop>
   <tabstop>pushButton_SignUp</tabstop>
-  <tabstop>pushButton_2</tabstop>
-  <tabstop>pushButton_12</tabstop>
   <tabstop>pushButton</tabstop>
   <tabstop>pushButton_11</tabstop>
   <tabstop>lineEdit_Username</tabstop>
