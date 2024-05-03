@@ -61,12 +61,18 @@ void MainWindow::on_pushButton_SignUp_LogIn_clicked()
     QString username = ui->lineEdit_Username1->text();
     QString password = ui->lineEdit_Password1->text();
     QString confirm_password = ui->lineEdit_ConfirmPassword->text();
+    if (username.isEmpty() || password.isEmpty() || confirm_password.isEmpty())
+    {
+        QMessageBox::warning(this, "SignUp", "Please fill in all fields.");
+        return;  // Stop further execution
+    }
     if(password == confirm_password)
     {
         ui->stackedWidget->setCurrentIndex(0);
     }
     else
         QMessageBox::warning(this, "SignUp", "password doesn't match");
+    return;
 }
 
 

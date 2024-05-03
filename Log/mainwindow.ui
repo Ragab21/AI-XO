@@ -24,7 +24,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="LogIn_Page">
        <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -56,7 +56,7 @@
                  <item>
                   <widget class="QLabel" name="label_Username">
                    <property name="text">
-                    <string>Username  </string>
+                    <string>Username:  </string>
                    </property>
                   </widget>
                  </item>
@@ -70,7 +70,7 @@
                  <item>
                   <widget class="QLabel" name="label_Password">
                    <property name="text">
-                    <string>Password   </string>
+                    <string>Password:   </string>
                    </property>
                   </widget>
                  </item>
@@ -168,14 +168,14 @@
                <item row="2" column="0" colspan="2">
                 <widget class="QLabel" name="label_ConfirmPassword">
                  <property name="text">
-                  <string>Confirm Password</string>
+                  <string>Confirm Password:</string>
                  </property>
                 </widget>
                </item>
                <item row="0" column="0" colspan="2">
                 <widget class="QLabel" name="label_Username1">
                  <property name="text">
-                  <string>Username</string>
+                  <string>Username:</string>
                  </property>
                 </widget>
                </item>
@@ -192,7 +192,7 @@
                <item row="1" column="0" colspan="2">
                 <widget class="QLabel" name="label_Password1">
                  <property name="text">
-                  <string>Password </string>
+                  <string>Password:</string>
                  </property>
                 </widget>
                </item>
