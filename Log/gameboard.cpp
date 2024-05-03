@@ -4,7 +4,7 @@
 
 GameBoard::GameBoard(QObject *parent) : QObject(parent), m_board(3, QVector<QString>(3, " ")), m_player1Symbol("X")
 {
-    // Constructor initializes the board with empty spaces
+    clear();
 }
 
 void GameBoard::clear()
@@ -32,6 +32,7 @@ bool GameBoard::playAtPosition(int row, int col)
     }else{
         m_board[row][col] = m_player2Symbol;
     }
+    moveNum++;
     emit boardChanged();
     return true;
 }

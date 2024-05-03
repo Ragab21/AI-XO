@@ -36,6 +36,20 @@ private slots:
 
     void on_XO6_clicked();
 
+    void on_XO8_clicked();
+
+    void on_X01_clicked();
+
+    void on_XO4_clicked();
+
+    void on_XO5_clicked();
+
+    void on_XO7_clicked();
+
+    void on_XO9_clicked();
+
+    void on_XO1_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

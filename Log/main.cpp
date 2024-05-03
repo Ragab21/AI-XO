@@ -1,6 +1,7 @@
-#include "mainwindow.h"//Yousef
-
+#include "mainwindow.h"
+#include "gameboard.h"
 #include <QApplication>
+
 
 int main(int argc, char *argv[])
 {
