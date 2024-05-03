@@ -44,6 +44,12 @@ void MainWindow::on_pushButton_SignUp_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    //ggggggg
+
+}
+
+
+void MainWindow::on_pushButton_12_clicked()
+{
+    //hello
 }
 

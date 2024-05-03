@@ -15,7 +15,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="1">
+    <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -150,10 +150,10 @@
        <widget class="QGroupBox" name="groupBox_2">
         <property name="geometry">
          <rect>
-          <x>90</x>
-          <y>80</y>
-          <width>491</width>
-          <height>331</height>
+          <x>40</x>
+          <y>60</y>
+          <width>641</width>
+          <height>421</height>
          </rect>
         </property>
         <property name="title">
@@ -162,8 +162,21 @@
         <widget class="QPushButton" name="pushButton_2">
          <property name="geometry">
           <rect>
-           <x>210</x>
-           <y>130</y>
+           <x>290</x>
+           <y>210</y>
+           <width>93</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>PushButton</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushButton_12">
+         <property name="geometry">
+          <rect>
+           <x>260</x>
+           <y>140</y>
            <width>93</width>
            <height>29</height>
           </rect>
