@@ -23,6 +23,10 @@
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(0, 0, 0);
+</string>
+      </property>
       <property name="currentIndex">
        <number>5</number>
       </property>
@@ -253,7 +257,105 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="Main_Page"/>
+      <widget class="QWidget" name="Main_Page">
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
+         <spacer name="verticalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_9">
+          <item>
+           <spacer name="verticalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="play">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(220, 40, 16);
+border: none;
+font: 14pt &quot;My Puma&quot;;</string>
+            </property>
+            <property name="text">
+             <string>Play</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="history">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(220, 40, 16);
+border: none;
+font: 14pt &quot;My Puma&quot;;</string>
+            </property>
+            <property name="text">
+             <string>History</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="logout">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(255, 0, 4);
+background-color: rgb(0, 0, 0);
+border: none;
+font: 14pt &quot;My Puma&quot;;</string>
+            </property>
+            <property name="text">
+             <string>Logout</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_4">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
       <widget class="QWidget" name="History_Page">
        <widget class="QPushButton" name="pushButton">
         <property name="geometry">

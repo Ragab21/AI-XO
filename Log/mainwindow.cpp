@@ -140,6 +140,7 @@ void MainWindow::on_XO6_clicked()
 }
 
 
+
 void MainWindow::on_XO7_clicked()
 {
     // Disable the button
@@ -178,5 +179,24 @@ void MainWindow::on_XO9_clicked()
 
 
 
+
+
+
+void MainWindow::on_play_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(4);
+}
+
+
+void MainWindow::on_history_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3);
+}
+
+
+void MainWindow::on_logout_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+}
 
 
