@@ -26,6 +26,10 @@ private slots:
 
     void on_pushButton_12_clicked();
 
+    void on_pushButton_SignUp_Back_clicked();
+
+    void on_pushButton_SignUp_LogIn_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

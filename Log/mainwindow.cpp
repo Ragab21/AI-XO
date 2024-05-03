@@ -7,6 +7,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
 }
 
 MainWindow::~MainWindow()
@@ -25,7 +26,7 @@ void MainWindow::on_pushButton_LogIn_clicked()
         ui->stackedWidget->setCurrentIndex(2);
 
     }
-    else if(username == "test") //ggg
+    else if(username == "test")
     {
         QMessageBox::warning(this, "LogIn", "wrong password");
     }
@@ -35,7 +36,7 @@ void MainWindow::on_pushButton_LogIn_clicked()
     }
 }
 
-/////ffnndsjghshgsjh
+
 
 void MainWindow::on_pushButton_SignUp_clicked()
 {
@@ -43,14 +44,24 @@ void MainWindow::on_pushButton_SignUp_clicked()
 }
 
 
-void MainWindow::on_pushButton_2_clicked()
-{
 
+void MainWindow::on_pushButton_SignUp_Back_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
 }
 
 
-void MainWindow::on_pushButton_12_clicked()
+void MainWindow::on_pushButton_SignUp_LogIn_clicked()
 {
-    //hello
+    //save to database
+    QString username = ui->lineEdit_Username1->text();
+    QString password = ui->lineEdit_Password1->text();
+    QString confirm_password = ui->lineEdit_ConfirmPassword->text();
+    if(password == confirm_password)
+    {
+        ui->stackedWidget->setCurrentIndex(0);
+    }
+    else
+        QMessageBox::warning(this, "SignUp", "password doesn't match");
 }
 
