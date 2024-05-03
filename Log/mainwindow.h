@@ -30,6 +30,12 @@ private slots:
 
     void on_pushButton_SignUp_LogIn_clicked();
 
+    void on_XO2_clicked();
+
+    void on_XO3_clicked();
+
+    void on_XO6_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

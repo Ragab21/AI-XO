@@ -11,7 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 
-    ui->stackedWidget->setCurrentIndex(LogIn_Page);
+    ui->stackedWidget->setCurrentIndex(6);
 }
 
 MainWindow::~MainWindow()
@@ -67,5 +67,33 @@ void MainWindow::on_pushButton_SignUp_LogIn_clicked()
     }
     else
         QMessageBox::warning(this, "SignUp", "password doesn't match");
+}
+
+
+void MainWindow::on_XO2_clicked()
+{
+    QMessageBox::warning(this, "SignUp", "password doesn't match");
+}
+
+void MainWindow:: on_pushButton_12_clicked()
+{
+    QMessageBox::warning(this, "SignUp", "password doesn't match");
+}
+
+void MainWindow:: on_pushButton_2_clicked()
+{
+    QMessageBox::warning(this, "SignUp", "password doesn't match");
+}
+
+
+void MainWindow::on_XO3_clicked()
+{
+    QMessageBox::warning(this, "SignUp", "password doesn't match");
+}
+
+
+void MainWindow::on_XO6_clicked()
+{
+    QMessageBox::warning(this, "SignUp", "password doesn't match");
 }
 
