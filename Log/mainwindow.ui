@@ -24,7 +24,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="LogIn_Page"/>
       <widget class="QWidget" name="SignUp_Page">
@@ -43,7 +43,34 @@
        </widget>
       </widget>
       <widget class="QWidget" name="Main_Page"/>
-      <widget class="QWidget" name="History_Page"/>
+      <widget class="QWidget" name="History_Page">
+       <widget class="QPushButton" name="pushButton">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>140</y>
+          <width>83</width>
+          <height>29</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>PushButton</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_11">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>370</y>
+          <width>83</width>
+          <height>29</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>History</string>
+        </property>
+       </widget>
+      </widget>
       <widget class="QWidget" name="Selection_Page"/>
       <widget class="QWidget" name="Game_Page">
        <widget class="QPushButton" name="pushButton_3">
@@ -161,7 +188,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>26</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>
