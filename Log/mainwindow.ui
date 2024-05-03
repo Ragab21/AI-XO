@@ -24,7 +24,7 @@
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="LogIn_Page">
        <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -147,17 +147,17 @@
        </layout>
       </widget>
       <widget class="QWidget" name="SignUp_Page">
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QGroupBox" name="groupBox_2">
         <property name="geometry">
          <rect>
-          <x>350</x>
-          <y>200</y>
-          <width>93</width>
-          <height>29</height>
+          <x>90</x>
+          <y>80</y>
+          <width>491</width>
+          <height>331</height>
          </rect>
         </property>
-        <property name="text">
-         <string>PushButton</string>
+        <property name="title">
+         <string>SignUp</string>
         </property>
        </widget>
       </widget>
