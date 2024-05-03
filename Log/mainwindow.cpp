@@ -7,7 +7,9 @@
 GameBoard currentgame;
 char EnableARRAY[9]={1,1,1,1,1,1,1,1,1};
 int gamestate=0;
-QColor textColor;
+const QColor Enable_COLOR(220, 40, 16);
+const QColor Disable_COLOR(128, 128, 128);
+
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -42,7 +44,7 @@ void MainWindow::on_pushButton_LogIn_clicked()
     if(username == "test" && password == "test")
     {
 
-        ui->stackedWidget->setCurrentIndex(2);
+        ui->stackedWidget->setCurrentIndex(Main_Page);
 
     }
     else if(username == "test")
@@ -59,14 +61,14 @@ void MainWindow::on_pushButton_LogIn_clicked()
 
 void MainWindow::on_pushButton_SignUp_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(1);
+    ui->stackedWidget->setCurrentIndex(SignUp_Page);
 }
 
 
 
 void MainWindow::on_pushButton_SignUp_Back_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(0);
+    ui->stackedWidget->setCurrentIndex(LogIn_Page);
 }
 
 
@@ -83,7 +85,7 @@ void MainWindow::on_pushButton_SignUp_LogIn_clicked()
     }
     if(password == confirm_password)
     {
-        ui->stackedWidget->setCurrentIndex(0);
+        ui->stackedWidget->setCurrentIndex(LogIn_Page);
     }
     else
         QMessageBox::warning(this, "SignUp", "password doesn't match");
@@ -92,355 +94,156 @@ void MainWindow::on_pushButton_SignUp_LogIn_clicked()
 
 void MainWindow::on_XO1_clicked()
 {
-    // Disable the button
-    EnableARRAY[0]=0;
-    DisableBoard();
-    currentgame.playAtPosition(0,0);
-    // Set the text on the button
-    ui->XO1->setText(currentgame.getCellValue(0,0));
-    if(currentgame.getMoveNum()%2==0){
-    ui->XO1->setStyleSheet("font-size: 60px; font-weight: bold; color: blue;"
-                           "background-color: rgb(128, 128, 128);");
-    }
-    else{
-        ui->XO1->setStyleSheet("font-size: 60px; font-weight: bold; color: yellow;"
-                               "background-color: rgb(128, 128, 128);");
-    }
+    updateButton(0);
     CheckEnableBoard();
-    gamestate=currentgame.checkboard();
-    switch (gamestate) {
-    case 0:
-
-        break;
-    case 1:
-        QMessageBox::warning(this, "Win", "game Ended");
-        DisableBoard();
-        break;
-    case -1:
-        QMessageBox::warning(this, "Lose", "game Ended");
-        DisableBoard();
-        break;
-    case 2:
-        QMessageBox::warning(this, "Draw", "game Ended");
-        DisableBoard();
-        break;
-
-    default:
-        QMessageBox::warning(this, "Error", "something went wrong");
-        break;
-    }
+    checkgamestate();
 
 
 }
 
 void MainWindow::on_XO2_clicked()
 {
-    // Disable the button
-    EnableARRAY[1]=0;
-    DisableBoard();
-    currentgame.playAtPosition(0,1);
-    // Set the text on the button
-    ui->XO2->setText(currentgame.getCellValue(0,1));
-    if(currentgame.getMoveNum()%2==0){
-        ui->XO2->setStyleSheet("font-size: 60px; font-weight: bold; color: blue;"
-                               "background-color: rgb(128, 128, 128);");
-    }
-    else{
-        ui->XO2->setStyleSheet("font-size: 60px; font-weight: bold; color: yellow;"
-                               "background-color: rgb(128, 128, 128);");
-    }
+    updateButton(1);
     CheckEnableBoard();
-    gamestate=currentgame.checkboard();
-    switch (gamestate) {
-    case 0:
-
-        break;
-    case 1:
-        QMessageBox::warning(this, "Win", "game Ended");
-        DisableBoard();
-        break;
-    case -1:
-        QMessageBox::warning(this, "Lose", "game Ended");
-        DisableBoard();
-        break;
-    case 2:
-        QMessageBox::warning(this, "Draw", "game Ended");
-        DisableBoard();
-        break;
-
-    default:
-        QMessageBox::warning(this, "Error", "something went wrong");
-        break;
-    }
+    checkgamestate();
 }
 
 void MainWindow::on_XO3_clicked()
 {
-    // Disable the button
-    EnableARRAY[2]=0;
-    DisableBoard();
-    currentgame.playAtPosition(0,2);
-    // Set the text on the button
-    ui->XO3->setText(currentgame.getCellValue(0,2));
-    if(currentgame.getMoveNum()%2==0){
-        ui->XO3->setStyleSheet("font-size: 60px; font-weight: bold; color: blue;"
-                               "background-color: rgb(128, 128, 128);");
-    }
-    else{
-        ui->XO3->setStyleSheet("font-size: 60px; font-weight: bold; color: yellow;"
-                               "background-color: rgb(128, 128, 128);");
-    }
+    updateButton(2);
     CheckEnableBoard();
-    gamestate=currentgame.checkboard();
-    switch (gamestate) {
-    case 0:
-
-        break;
-    case 1:
-        QMessageBox::warning(this, "Win", "game Ended");
-        DisableBoard();
-        break;
-    case -1:
-        QMessageBox::warning(this, "Lose", "game Ended");
-        DisableBoard();
-        break;
-    case 2:
-        QMessageBox::warning(this, "Draw", "game Ended");
-        DisableBoard();
-        break;
-
-    default:
-        QMessageBox::warning(this, "Error", "something went wrong");
-        break;
-    }
+    checkgamestate();
 }
 
 void MainWindow::on_XO4_clicked()
 {
-    // Disable the button
-    EnableARRAY[3]=0;
-    DisableBoard();
-    currentgame.playAtPosition(1,0);
-    // Set the text on the button
-    ui->XO4->setText(currentgame.getCellValue(1,0));
-    if(currentgame.getMoveNum()%2==0){
-        ui->XO4->setStyleSheet("font-size: 60px; font-weight: bold; color: blue;"
-                               "background-color: rgb(128, 128, 128);");
-    }
-    else{
-        ui->XO4->setStyleSheet("font-size: 60px; font-weight: bold; color: yellow;"
-                               "background-color: rgb(128, 128, 128);");
-    }
+    updateButton(3);
     CheckEnableBoard();
-    gamestate=currentgame.checkboard();
-    switch (gamestate) {
-    case 0:
-
-        break;
-    case 1:
-        QMessageBox::warning(this, "Win", "game Ended");
-        DisableBoard();
-        break;
-    case -1:
-        QMessageBox::warning(this, "Lose", "game Ended");
-        DisableBoard();
-        break;
-    case 2:
-        QMessageBox::warning(this, "Draw", "game Ended");
-        DisableBoard();
-        break;
-
-    default:
-        QMessageBox::warning(this, "Error", "something went wrong");
-        break;
-    }
+    checkgamestate();
 }
 
 void MainWindow::on_XO5_clicked()
 {
-    // Disable the button
-    EnableARRAY[4]=0;
-    DisableBoard();
-    currentgame.playAtPosition(1,1);
-    // Set the text on the button
-    ui->XO5->setText(currentgame.getCellValue(1,1));
-    if(currentgame.getMoveNum()%2==0){
-        ui->XO5->setStyleSheet("font-size: 60px; font-weight: bold; color: blue;"
-                               "background-color: rgb(128, 128, 128);");
-    }
-    else{
-        ui->XO5->setStyleSheet("font-size: 60px; font-weight: bold; color: yellow;"
-                               "background-color: rgb(128, 128, 128);");
-    }
+    updateButton(4);
     CheckEnableBoard();
-    gamestate=currentgame.checkboard();
-    switch (gamestate) {
-    case 0:
-
-        break;
-    case 1:
-        QMessageBox::warning(this, "Win", "game Ended");
-        DisableBoard();
-        break;
-    case -1:
-        QMessageBox::warning(this, "Lose", "game Ended");
-        DisableBoard();
-        break;
-    case 2:
-        QMessageBox::warning(this, "Draw", "game Ended");
-        DisableBoard();
-        break;
-
-    default:
-        QMessageBox::warning(this, "Error", "something went wrong");
-        break;
-    }
+    checkgamestate();
 }
 
 void MainWindow::on_XO6_clicked()
 {
-    // Disable the button
-    EnableARRAY[5]=0;
-    DisableBoard();
-    currentgame.playAtPosition(1,2);
-    // Set the text on the button
-    ui->XO6->setText(currentgame.getCellValue(1,2));
-    if(currentgame.getMoveNum()%2==0){
-        ui->XO6->setStyleSheet("font-size: 60px; font-weight: bold; color: blue;"
-                               "background-color: rgb(128, 128, 128);");
-    }
-    else{
-        ui->XO6->setStyleSheet("font-size: 60px; font-weight: bold; color: yellow;"
-                               "background-color: rgb(128, 128, 128);");
-    }
+    updateButton(5);
     CheckEnableBoard();
-    gamestate=currentgame.checkboard();
-    switch (gamestate) {
-    case 0:
-
-        break;
-    case 1:
-        QMessageBox::warning(this, "Win", "game Ended");
-        DisableBoard();
-        break;
-    case -1:
-        QMessageBox::warning(this, "Lose", "game Ended");
-        DisableBoard();
-        break;
-    case 2:
-        QMessageBox::warning(this, "Draw", "game Ended");
-        DisableBoard();
-        break;
-
-    default:
-        QMessageBox::warning(this, "Error", "something went wrong");
-        break;
-    }
+    checkgamestate();
 }
 
 
 
 void MainWindow::on_XO7_clicked()
 {
-    // Disable the button
-    EnableARRAY[6]=0;
-    DisableBoard();
-    currentgame.playAtPosition(2,0);
-    // Set the text on the button
-    ui->XO7->setText(currentgame.getCellValue(2,0));
-    if(currentgame.getMoveNum()%2==0){
-        ui->XO7->setStyleSheet("font-size: 60px; font-weight: bold; color: blue;"
-                               "background-color: rgb(128, 128, 128);");
-    }
-    else{
-        ui->XO7->setStyleSheet("font-size: 60px; font-weight: bold; color: yellow;"
-                               "background-color: rgb(128, 128, 128);");
-    }
+    updateButton(6);
     CheckEnableBoard();
-    gamestate=currentgame.checkboard();
-    switch (gamestate) {
-    case 0:
-
-        break;
-    case 1:
-        QMessageBox::warning(this, "Win", "game Ended");
-        DisableBoard();
-        break;
-    case -1:
-        QMessageBox::warning(this, "Lose", "game Ended");
-        DisableBoard();
-        break;
-    case 2:
-        QMessageBox::warning(this, "Draw", "game Ended");
-        DisableBoard();
-        break;
-
-    default:
-        QMessageBox::warning(this, "Error", "something went wrong");
-        break;
-    }
+    checkgamestate();
 }
 
 
 void MainWindow::on_XO8_clicked()
 {
-    // Disable the button
-    EnableARRAY[7]=0;
-    DisableBoard();
-    currentgame.playAtPosition(2,1);
-    // Set the text on the button
-    ui->XO8->setText(currentgame.getCellValue(2,1));
-    if(currentgame.getMoveNum()%2==0){
-        ui->XO8->setStyleSheet("font-size: 60px; font-weight: bold; color: blue;"
-                               "background-color: rgb(128, 128, 128);");
-    }
-    else{
-        ui->XO8->setStyleSheet("font-size: 60px; font-weight: bold; color: yellow;"
-                               "background-color: rgb(128, 128, 128);");
-    }
+    updateButton(7);
     CheckEnableBoard();
-    gamestate=currentgame.checkboard();
-    switch (gamestate) {
-    case 0:
-
-        break;
-    case 1:
-        QMessageBox::warning(this, "Win", "game Ended");
-        DisableBoard();
-        break;
-    case -1:
-        QMessageBox::warning(this, "Lose", "game Ended");
-        DisableBoard();
-        break;
-    case 2:
-        QMessageBox::warning(this, "Draw", "game Ended");
-        DisableBoard();
-        break;
-
-    default:
-        QMessageBox::warning(this, "Error", "something went wrong");
-        break;
-    }
+    checkgamestate();
 }
 
 
 void MainWindow::on_XO9_clicked()
 {
-    // Disable the button
-    EnableARRAY[8]=0;
-    DisableBoard();
-    currentgame.playAtPosition(2,2);
-    // Set the text on the button
-    ui->XO9->setText(currentgame.getCellValue(2,2));
-    if(currentgame.getMoveNum()%2==0){
-        ui->XO9->setStyleSheet("font-size: 60px; font-weight: bold; color: blue;"
-                               "background-color: rgb(128, 128, 128);");
-    }
-    else{
-        ui->XO9->setStyleSheet("font-size: 60px; font-weight: bold; color: yellow;"
-                               "background-color: rgb(128, 128, 128);");
-    }
+    updateButton(8);
     CheckEnableBoard();
+    checkgamestate();
+}
+
+void MainWindow::enableButton(int index) {
+    // Retrieve the current text color from the palette
+    const QPalette& palette = XObuttons[index]->palette();
+    QColor textColor = palette.color(QPalette::ButtonText);
+
+    // Set the new style with the current text color and background color
+    XObuttons[index]->setStyleSheet("font-size: 60px; font-weight: bold; "
+                                    "color: " + textColor.name() + ";"
+                                                         "background-color: " + Enable_COLOR.name());
+
+    // Enable the button
+    XObuttons[index]->setEnabled(true);
+}
+
+void MainWindow::updateButton(int index) {
+    // Disable the button
+    EnableARRAY[index] = 0;
+    DisableBoard();
+
+    // Determine the row and column from the index
+    int row = (index / 3) ;  // Assuming 3x3 grid
+    int col = (index % 3) ;  // Assuming 3x3 grid
+
+    // Play at position corresponding to the index
+    currentgame.playAtPosition(row, col);
+
+    // Set the text on the button
+    XObuttons[index]->setText(currentgame.getCellValue(row, col));
+
+    // Determine the color based on move number
+    QString textColor = (currentgame.getMoveNum() % 2 == 0) ? "blue" : "yellow";
+
+    // Set the style sheet for the button
+    XObuttons[index]->setStyleSheet("font-size: 60px; font-weight: bold; color: " + textColor + ";"
+                                                                                                    "background-color: rgb(128, 128, 128);");
+
+    // Check and enable the board based on EnableARRAY
+    CheckEnableBoard();
+}
+
+
+void MainWindow::disableButton(int index){
+    // Retrieve the current text color from the palette
+    const QPalette& palette = XObuttons[index]->palette();
+    QColor textColor = palette.color(QPalette::ButtonText);
+
+    // Set the new style with the current text color and background color
+    XObuttons[index]->setStyleSheet("font-size: 60px; font-weight: bold; "
+                                    "color: " + textColor.name() + ";"
+                                                         "background-color: " + Disable_COLOR.name());
+
+    // Enable the button
+    XObuttons[index]->setEnabled(false);
+}
+
+void MainWindow::DisableBoard(){
+    // Loop through the array of QPushButton pointers
+    for (int i = 0; i < 9; ++i) {
+        disableButton(i);
+    }
+
+
+}
+
+void MainWindow::EnableBoard(){
+    // Loop through the array of QPushButton pointers
+    for (int i = 0; i < 9; ++i) {
+        enableButton(i);
+    }
+
+}
+
+void MainWindow::CheckEnableBoard(){
+    // Loop through the array of QPushButton pointers
+    for (int i = 0; i < 9; ++i) {
+        if (EnableARRAY[i] == 1) {
+            enableButton(i); // Use the specified background color constant
+        }
+    }
+
+}
+
+void MainWindow::checkgamestate(){
     gamestate=currentgame.checkboard();
     switch (gamestate) {
     case 0:
@@ -463,126 +266,26 @@ void MainWindow::on_XO9_clicked()
         QMessageBox::warning(this, "Error", "something went wrong");
         break;
     }
-}
 
-
-void MainWindow::DisableBoard(){
-    ui->XO1->setEnabled(false);
-    // Get the current palette of the button
-    //palette = ui->XO1->palette();
-
-    // Retrieve the current text color from the palette
-    textColor = (ui->XO1->palette()).color(QPalette::ButtonText);
-
-    // Set the new style with the current text color
-    ui->XO1->setStyleSheet("font-size: 60px; font-weight: bold; "
-                           "color: " + textColor.name() + ";"
-                           "background-color: rgb(128, 128, 128)");
-    ui->XO2->setEnabled(false);
-    // Get the current palette of the button
-    //palette = ui->XO2->palette();
-
-    // Retrieve the current text color from the palette
-    textColor = (ui->XO2->palette()).color(QPalette::ButtonText);
-
-    // Set the new style with the current text color
-    ui->XO2->setStyleSheet("font-size: 60px; font-weight: bold; "
-                           "color: " + textColor.name() + ";"
-                           "background-color: rgb(128, 128, 128)");
-    ui->XO3->setEnabled(false);
-    ui->XO4->setEnabled(false);
-    ui->XO5->setEnabled(false);
-    ui->XO6->setEnabled(false);
-    ui->XO7->setEnabled(false);
-    ui->XO8->setEnabled(false);
-    ui->XO9->setEnabled(false);
-}
-
-void MainWindow::EnableBoard(){
-    ui->XO1->setEnabled(true);
-    ui->XO1->setStyleSheet("font-size: 60px; font-weight: bold;"
-                           "background-color: rgb(220, 40, 16)");
-    ui->XO2->setEnabled(true);
-    ui->XO2->setStyleSheet("font-size: 60px; font-weight: bold;"
-                           "background-color: rgb(220, 40, 16)");
-    ui->XO3->setEnabled(true);
-    ui->XO4->setEnabled(true);
-    ui->XO5->setEnabled(true);
-    ui->XO6->setEnabled(true);
-    ui->XO7->setEnabled(true);
-    ui->XO8->setEnabled(true);
-    ui->XO9->setEnabled(true);
-}
-
-void MainWindow::CheckEnableBoard(){
-    if(EnableARRAY[0]==1){
-        // Get the current palette of the button
-        //palette = ui->XO1->palette();
-
-        // Retrieve the current text color from the palette
-        textColor = (ui->XO1->palette()).color(QPalette::ButtonText);
-
-        // Set the new style with the current text color
-        ui->XO1->setStyleSheet("font-size: 60px; font-weight: bold; "
-                               "color: " + textColor.name() + ";"
-                                                    "background-color: rgb(220, 40, 16)");
-
-         ui->XO1->setEnabled(true);
-    }
-    if(EnableARRAY[1]==1){
-        // Get the current palette of the button
-        //palette = ui->XO2->palette();
-
-        // Retrieve the current text color from the palette
-        textColor = (ui->XO2->palette()).color(QPalette::ButtonText);
-
-        // Set the new style with the current text color
-        ui->XO2->setStyleSheet("font-size: 60px; font-weight: bold; "
-                               "color: " + textColor.name() + ";"
-                                                    "background-color: rgb(220, 40, 16)");
-
-        ui->XO2->setEnabled(true);
-    }
-    if(EnableARRAY[2]==1){
-        ui->XO3->setEnabled(true);
-    }
-    if(EnableARRAY[3]==1){
-        ui->XO4->setEnabled(true);
-    }
-    if(EnableARRAY[4]==1){
-        ui->XO5->setEnabled(true);
-    }
-    if(EnableARRAY[5]==1){
-        ui->XO6->setEnabled(true);
-    }
-    if(EnableARRAY[6]==1){
-        ui->XO7->setEnabled(true);
-    }
-    if(EnableARRAY[7]==1){
-        ui->XO8->setEnabled(true);
-    }
-    if(EnableARRAY[8]==1){
-        ui->XO9->setEnabled(true);
-    }
 }
 
 
 
 void MainWindow::on_play_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(4);
+    ui->stackedWidget->setCurrentIndex(Selection_Page);
 }
 
 
 void MainWindow::on_history_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(3);
+    ui->stackedWidget->setCurrentIndex(History_Page);
 }
 
 
 void MainWindow::on_logout_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(0);
+    ui->stackedWidget->setCurrentIndex(LogIn_Page);
 }
 
 

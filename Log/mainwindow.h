@@ -20,7 +20,10 @@ public:
     QPushButton *XObuttons[9];
 
 private slots:
-
+    void updateButton(int index);
+    void enableButton(int index);
+    void disableButton(int index);
+    void checkgamestate();
     void EnableBoard();
     void CheckEnableBoard();
     void DisableBoard();
