@@ -83,7 +83,25 @@ QString GameBoard::getCellValue(int row, int col) const
 {
     // Retrieve the value of the cell at the specified position
     if (row < 0 || row >= 3 || col < 0 || col >= 3) {
-        return "";
+        return "0";
     }
     return m_board[row][col];
+}
+
+int GameBoard::getCPUindex(){
+    int x=rand()%9;
+    switch (mode) {
+    case 1: //easy
+        while(getCellValue(x/3,x%3)!="0"){//to ensure non repeating
+            x=rand()%9;
+        }
+        return x;
+        break;
+    case 2: //Impossible
+        return 1;
+        break;
+    default:
+        return 1;
+        break;
+    }
 }

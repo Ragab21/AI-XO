@@ -30,6 +30,7 @@ private slots:
     void CheckEnableBoard();
     void DisableBoard();
     void clearButtonText();
+    void checkCPU();
 
     void on_pushButton_LogIn_clicked();
 

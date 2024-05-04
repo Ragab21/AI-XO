@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QObject>
+#include <cmath>
 //#include <QQuickItem>
 #include <QSharedDataPointer>
 #include <QWidget>
@@ -44,6 +45,8 @@ public:
     const QVector<QVector<QString>>& getBoard() const { return m_board; }
     void setBoard(const QVector<QVector<QString>>& board) { m_board = board; }
 
+    int getCPUindex();
+
 signals:
     void boardChanged();
 
@@ -52,7 +55,7 @@ private:
     QVector<QVector<QString>> m_board;
     QString m_player1Symbol="X";
     QString m_player2Symbol="O";
-    int mode=0; //1:CPU 2:Player2
+    int mode=1; //1:Easy 2:Impossiblle 3:Player2
     int moveNum=0; //how many moves
     int wincode=-1;
 };

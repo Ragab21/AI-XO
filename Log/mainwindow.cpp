@@ -12,6 +12,7 @@ const QColor Win_COLOR(220, 255, 200);
 QString player1name = "You"; // Example player name
 QString player2name = "CPU"; // Example player name
 
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -94,10 +95,10 @@ void MainWindow::on_pushButton_SignUp_LogIn_clicked()
 
 void MainWindow::on_XO1_clicked()
 {
-    updateButton(0);
+     updateButton(0);
     CheckEnableBoard();
     checkgamestate();
-
+    checkCPU();
 
 }
 
@@ -106,6 +107,7 @@ void MainWindow::on_XO2_clicked()
     updateButton(1);
     CheckEnableBoard();
     checkgamestate();
+    checkCPU();
 }
 
 void MainWindow::on_XO3_clicked()
@@ -113,6 +115,7 @@ void MainWindow::on_XO3_clicked()
     updateButton(2);
     CheckEnableBoard();
     checkgamestate();
+    checkCPU();
 }
 
 void MainWindow::on_XO4_clicked()
@@ -120,6 +123,7 @@ void MainWindow::on_XO4_clicked()
     updateButton(3);
     CheckEnableBoard();
     checkgamestate();
+    checkCPU();
 }
 
 void MainWindow::on_XO5_clicked()
@@ -127,6 +131,7 @@ void MainWindow::on_XO5_clicked()
     updateButton(4);
     CheckEnableBoard();
     checkgamestate();
+    checkCPU();
 }
 
 void MainWindow::on_XO6_clicked()
@@ -134,6 +139,7 @@ void MainWindow::on_XO6_clicked()
     updateButton(5);
     CheckEnableBoard();
     checkgamestate();
+    checkCPU();
 }
 
 
@@ -143,6 +149,7 @@ void MainWindow::on_XO7_clicked()
     updateButton(6);
     CheckEnableBoard();
     checkgamestate();
+    checkCPU();
 }
 
 
@@ -151,6 +158,7 @@ void MainWindow::on_XO8_clicked()
     updateButton(7);
     CheckEnableBoard();
     checkgamestate();
+    checkCPU();
 }
 
 
@@ -159,6 +167,7 @@ void MainWindow::on_XO9_clicked()
     updateButton(8);
     CheckEnableBoard();
     checkgamestate();
+    checkCPU();
 }
 
 void MainWindow:: colorButton(int index){
@@ -289,6 +298,26 @@ void MainWindow::clearButtonText() {
     }
 }
 
+void MainWindow::checkCPU(){
+    switch (currentgame.getMode()) {
+    case 3: //2player
+        //Nothing
+        break;
+    case 2: //impossible
+        updateButton(currentgame.getCPUindex());
+        CheckEnableBoard();
+        checkgamestate();
+        break;
+    case 1: //easy
+        updateButton(currentgame.getCPUindex());
+        CheckEnableBoard();
+        checkgamestate();
+        break;
+    default:
+        QMessageBox::warning(this, "Error", "something went wrong");
+        break;
+    }
+}
 
 void MainWindow::checkgamestate(){
     int gamestate=currentgame.checkboard();
@@ -318,28 +347,6 @@ void MainWindow::checkgamestate(){
 
 }
 
-/*
-// Check rows, columns, and diagonals for a win
-for (int i = 0; i < 3; ++i) {
-    if (m_board[i][0] == symbol && m_board[i][1] == symbol && m_board[i][2] == symbol) {
-        wincode=i*10+4;
-        return true; // Check rows
-    }
-    if (m_board[0][i] == symbol && m_board[1][i] == symbol && m_board[2][i] == symbol) {
-        wincode=i+40;
-        return true; // Check columns
-    }
-}
-// Check diagonals
-if (m_board[0][0] == symbol && m_board[1][1] == symbol && m_board[2][2] == symbol) {
-    wincode=110;
-    return true;
-}
-if(m_board[0][2] == symbol && m_board[1][1] == symbol && m_board[2][0] == symbol){
-    wincode=101;
-    return true;
-}
-*/
 
 void MainWindow::on_play_clicked()
 {
