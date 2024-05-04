@@ -28,7 +28,7 @@
 </string>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="LogIn_Page">
        <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -60,13 +60,16 @@
                  <item>
                   <widget class="QLabel" name="label_Username">
                    <property name="styleSheet">
-                    <string notr="true">color: rgb(255, 0, 4);
-background-color: rgb(0, 0, 0);
+                    <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(220, 40, 16);
 border: none;
 font: 14pt &quot;My Puma&quot;;</string>
                    </property>
                    <property name="text">
                     <string>Username:  </string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -84,13 +87,16 @@ font: 14pt &quot;My Puma&quot;;</string>
                  <item>
                   <widget class="QLabel" name="label_Password">
                    <property name="styleSheet">
-                    <string notr="true">color: rgb(255, 0, 4);
-background-color: rgb(0, 0, 0);
+                    <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(220, 40, 16);
 border: none;
 font: 14pt &quot;My Puma&quot;;</string>
                    </property>
                    <property name="text">
                     <string>Password:   </string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -126,21 +132,24 @@ font: 14pt &quot;My Puma&quot;;</string>
                <item row="0" column="1">
                 <widget class="QLabel" name="label_3">
                  <property name="styleSheet">
-                  <string notr="true">color: rgb(255, 0, 4);
-background-color: rgb(0, 0, 0);
+                  <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(220, 40, 16);
 border: none;
 font: 14pt &quot;My Puma&quot;;</string>
                  </property>
                  <property name="text">
                   <string> Don't have an account</string>
                  </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                 </property>
                 </widget>
                </item>
                <item row="1" column="0">
                 <widget class="QPushButton" name="pushButton_LogIn">
                  <property name="styleSheet">
-                  <string notr="true">color: rgb(255, 0, 4);
-background-color: rgb(0, 0, 0);
+                  <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(220, 40, 16);
 border: none;
 font: 14pt &quot;My Puma&quot;;</string>
                  </property>
@@ -152,8 +161,8 @@ font: 14pt &quot;My Puma&quot;;</string>
                <item row="1" column="1">
                 <widget class="QPushButton" name="pushButton_SignUp">
                  <property name="styleSheet">
-                  <string notr="true">color: rgb(255, 0, 4);
-background-color: rgb(0, 0, 0);
+                  <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(220, 40, 16);
 border: none;
 font: 14pt &quot;My Puma&quot;;</string>
                  </property>
@@ -205,8 +214,17 @@ font: 14pt &quot;My Puma&quot;;</string>
                </item>
                <item row="2" column="0" colspan="2">
                 <widget class="QLabel" name="label_ConfirmPassword">
+                 <property name="styleSheet">
+                  <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(220, 40, 16);
+border: none;
+font: 14pt &quot;My Puma&quot;;</string>
+                 </property>
                  <property name="text">
                   <string>Confirm Password:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
                  </property>
                 </widget>
                </item>
@@ -214,6 +232,9 @@ font: 14pt &quot;My Puma&quot;;</string>
                 <widget class="QLabel" name="label_Username1">
                  <property name="text">
                   <string>Username:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
                  </property>
                 </widget>
                </item>
@@ -231,6 +252,9 @@ font: 14pt &quot;My Puma&quot;;</string>
                 <widget class="QLabel" name="label_Password1">
                  <property name="text">
                   <string>Password:</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignCenter</set>
                  </property>
                 </widget>
                </item>
@@ -400,6 +424,12 @@ font: 14pt &quot;My Puma&quot;;</string>
           <height>29</height>
          </rect>
         </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(220, 40, 16);
+border: none;
+font: 14pt &quot;My Puma&quot;;</string>
+        </property>
         <property name="text">
          <string>PushButton</string>
         </property>
@@ -413,12 +443,38 @@ font: 14pt &quot;My Puma&quot;;</string>
           <height>29</height>
          </rect>
         </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(220, 40, 16);
+border: none;
+font: 14pt &quot;My Puma&quot;;</string>
+        </property>
         <property name="text">
          <string>History</string>
         </property>
        </widget>
       </widget>
-      <widget class="QWidget" name="Selection_Page"/>
+      <widget class="QWidget" name="Selection_Page">
+       <widget class="QPushButton" name="testb">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>250</y>
+          <width>83</width>
+          <height>29</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(220, 40, 16);
+border: none;
+font: 14pt &quot;My Puma&quot;;</string>
+        </property>
+        <property name="text">
+         <string>PushButton</string>
+        </property>
+       </widget>
+      </widget>
       <widget class="QWidget" name="Game_Page">
        <property name="styleSheet">
         <string notr="true"/>
@@ -430,6 +486,46 @@ font: 14pt &quot;My Puma&quot;;</string>
            <string/>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_9">
+           <item>
+            <widget class="QGroupBox" name="gameStatebox">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="title">
+              <string/>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_6">
+              <item>
+               <widget class="QLabel" name="gamestatelabel">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="layoutDirection">
+                 <enum>Qt::LeftToRight</enum>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(220, 40, 16);
+border: none;
+font: 14pt &quot;My Puma&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>TextLabel</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
            <item>
             <layout class="QGridLayout" name="gridLayout_4">
              <item row="0" column="0">
@@ -604,6 +700,40 @@ font: 14pt &quot;My Puma&quot;;</string>
               </widget>
              </item>
             </layout>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="XObackbox">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="title">
+              <string/>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_8">
+              <item>
+               <widget class="QPushButton" name="XOback">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(220, 40, 16);
+border: none;
+font: 14pt &quot;My Puma&quot;;</string>
+                </property>
+                <property name="text">
+                 <string>Back</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
            </item>
           </layout>
          </widget>

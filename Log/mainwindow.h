@@ -27,6 +27,7 @@ private slots:
     void EnableBoard();
     void CheckEnableBoard();
     void DisableBoard();
+    void clearButtonText();
 
     void on_pushButton_LogIn_clicked();
 
@@ -62,6 +63,10 @@ private slots:
 
     void on_logout_clicked();
 
+
+    void on_XOback_clicked();
+
+    void on_testb_clicked();
 
 private:
     Ui::MainWindow *ui;

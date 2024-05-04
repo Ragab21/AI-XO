@@ -78,7 +78,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSGameBoardENDCLASS[] = {
 
  // methods: parameters
     QMetaType::Void,
-    QMetaType::Bool, QMetaType::Int, QMetaType::Int,    5,    6,
+    QMetaType::Int, QMetaType::Int, QMetaType::Int,    5,    6,
     QMetaType::QString, QMetaType::Int, QMetaType::Int,    5,    6,
     QMetaType::Bool, QMetaType::QString,    9,
 
@@ -99,7 +99,7 @@ Q_CONSTINIT const QMetaObject GameBoard::staticMetaObject = { {
         // method 'clear'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'playAtPosition'
-        QtPrivate::TypeAndForceComplete<bool, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
         QtPrivate::TypeAndForceComplete<int, std::false_type>,
         // method 'getCellValue'
@@ -121,8 +121,8 @@ void GameBoard::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         switch (_id) {
         case 0: _t->boardChanged(); break;
         case 1: _t->clear(); break;
-        case 2: { bool _r = _t->playAtPosition((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])));
-            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
+        case 2: { int _r = _t->playAtPosition((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])));
+            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         case 3: { QString _r = _t->getCellValue((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2])));
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
         case 4: { bool _r = _t->checkWin((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])));

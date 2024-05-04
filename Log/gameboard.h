@@ -17,7 +17,7 @@ class GameBoard : public QObject
 public:
     explicit GameBoard(QObject *parent = nullptr);
     Q_INVOKABLE void clear();
-    Q_INVOKABLE bool playAtPosition(int row, int col);
+    Q_INVOKABLE int playAtPosition(int row, int col);
     int checkboard();
     Q_INVOKABLE QString getCellValue(int row, int col) const;
 

@@ -6,7 +6,6 @@
 
 GameBoard currentgame;
 char EnableARRAY[9]={1,1,1,1,1,1,1,1,1};
-int gamestate=0;
 const QColor Enable_COLOR(220, 40, 16);
 const QColor Disable_COLOR(128, 128, 128);
 
@@ -161,20 +160,6 @@ void MainWindow::on_XO9_clicked()
     checkgamestate();
 }
 
-void MainWindow::enableButton(int index) {
-    // Retrieve the current text color from the palette
-    const QPalette& palette = XObuttons[index]->palette();
-    QColor textColor = palette.color(QPalette::ButtonText);
-
-    // Set the new style with the current text color and background color
-    XObuttons[index]->setStyleSheet("font-size: 60px; font-weight: bold; "
-                                    "color: " + textColor.name() + ";"
-                                                         "background-color: " + Enable_COLOR.name());
-
-    // Enable the button
-    XObuttons[index]->setEnabled(true);
-}
-
 void MainWindow::updateButton(int index) {
     // Disable the button
     EnableARRAY[index] = 0;
@@ -195,12 +180,25 @@ void MainWindow::updateButton(int index) {
 
     // Set the style sheet for the button
     XObuttons[index]->setStyleSheet("font-size: 60px; font-weight: bold; color: " + textColor + ";"
-                                                                                                    "background-color: rgb(128, 128, 128);");
+                                    "background-color: rgb(128, 128, 128);");
 
     // Check and enable the board based on EnableARRAY
     CheckEnableBoard();
 }
 
+void MainWindow::enableButton(int index) {
+    // Retrieve the current text color from the palette
+    const QPalette& palette = XObuttons[index]->palette();
+    QColor textColor = palette.color(QPalette::ButtonText);
+
+    // Set the new style with the current text color and background color
+    XObuttons[index]->setStyleSheet("font-size: 60px; font-weight: bold; "
+                                    "color: " + textColor.name() + ";"
+                                    "background-color: " + Enable_COLOR.name());
+
+    // Enable the button
+    XObuttons[index]->setEnabled(true);
+}
 
 void MainWindow::disableButton(int index){
     // Retrieve the current text color from the palette
@@ -210,7 +208,7 @@ void MainWindow::disableButton(int index){
     // Set the new style with the current text color and background color
     XObuttons[index]->setStyleSheet("font-size: 60px; font-weight: bold; "
                                     "color: " + textColor.name() + ";"
-                                                         "background-color: " + Disable_COLOR.name());
+                                    "background-color: " + Disable_COLOR.name());
 
     // Enable the button
     XObuttons[index]->setEnabled(false);
@@ -243,8 +241,15 @@ void MainWindow::CheckEnableBoard(){
 
 }
 
+void MainWindow::clearButtonText() {
+    for (int i = 0; i < 9; ++i) {
+        XObuttons[i]->setText("");
+    }
+}
+
+
 void MainWindow::checkgamestate(){
-    gamestate=currentgame.checkboard();
+    int gamestate=currentgame.checkboard();
     switch (gamestate) {
     case 0:
 
@@ -288,4 +293,27 @@ void MainWindow::on_logout_clicked()
     ui->stackedWidget->setCurrentIndex(LogIn_Page);
 }
 
+void setEnableArray(char value) {
+    for (int i = 0; i < 9; ++i) {
+        EnableARRAY[i] = value;
+    }
+}
+
+
+void MainWindow::on_XOback_clicked()
+{   currentgame.clear();
+    setEnableArray(0);
+    EnableBoard();
+    clearButtonText();
+    ui->stackedWidget->setCurrentIndex(Selection_Page);
+}
+
+
+void MainWindow::on_testb_clicked()
+{   currentgame.clear();
+    setEnableArray(1);
+    EnableBoard();
+    clearButtonText();
+    ui->stackedWidget->setCurrentIndex(Game_Page);
+}
 

@@ -15,14 +15,15 @@ void GameBoard::clear()
             m_board[i][j] = "0";
         }
     }
+    moveNum=0;
     emit boardChanged();
 }
 
-bool GameBoard::playAtPosition(int row, int col)
+int GameBoard::playAtPosition(int row, int col)
 {
     // Check if the position is valid and not already taken
     if (row < 0 || row >= 3 || col < 0 || col >= 3 || m_board[row][col] != "0") {
-        return false;
+        return -1;
     }
 
     // Place the symbol at the specified position
@@ -34,7 +35,7 @@ bool GameBoard::playAtPosition(int row, int col)
     }
     moveNum++;
     emit boardChanged();
-    return true;
+    return row * 3 + col;
 }
 
 int GameBoard::checkboard(){

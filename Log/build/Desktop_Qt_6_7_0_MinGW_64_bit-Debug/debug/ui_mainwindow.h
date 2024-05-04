@@ -84,10 +84,14 @@ public:
     QPushButton *pushButton;
     QPushButton *pushButton_11;
     QWidget *Selection_Page;
+    QPushButton *testb;
     QWidget *Game_Page;
     QVBoxLayout *verticalLayout_8;
     QGroupBox *groupBox_3;
     QVBoxLayout *verticalLayout_91;
+    QGroupBox *gameStatebox;
+    QHBoxLayout *horizontalLayout_6;
+    QLabel *gamestatelabel;
     QGridLayout *gridLayout_4;
     QPushButton *XO1;
     QPushButton *XO2;
@@ -98,6 +102,9 @@ public:
     QPushButton *XO7;
     QPushButton *XO8;
     QPushButton *XO9;
+    QGroupBox *XObackbox;
+    QHBoxLayout *horizontalLayout_8;
+    QPushButton *XOback;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -139,10 +146,11 @@ public:
         horizontalLayout->setObjectName("horizontalLayout");
         label_Username = new QLabel(groupBox);
         label_Username->setObjectName("label_Username");
-        label_Username->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 4);\n"
-"background-color: rgb(0, 0, 0);\n"
+        label_Username->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+"background-color: rgb(220, 40, 16);\n"
 "border: none;\n"
 "font: 14pt \"My Puma\";"));
+        label_Username->setAlignment(Qt::AlignCenter);
 
         horizontalLayout->addWidget(label_Username);
 
@@ -159,10 +167,11 @@ public:
         horizontalLayout_2->setObjectName("horizontalLayout_2");
         label_Password = new QLabel(groupBox);
         label_Password->setObjectName("label_Password");
-        label_Password->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 4);\n"
-"background-color: rgb(0, 0, 0);\n"
+        label_Password->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+"background-color: rgb(220, 40, 16);\n"
 "border: none;\n"
 "font: 14pt \"My Puma\";"));
+        label_Password->setAlignment(Qt::AlignCenter);
 
         horizontalLayout_2->addWidget(label_Password);
 
@@ -186,17 +195,18 @@ public:
 
         label_3 = new QLabel(groupBox);
         label_3->setObjectName("label_3");
-        label_3->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 4);\n"
-"background-color: rgb(0, 0, 0);\n"
+        label_3->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+"background-color: rgb(220, 40, 16);\n"
 "border: none;\n"
 "font: 14pt \"My Puma\";"));
+        label_3->setAlignment(Qt::AlignCenter);
 
         gridLayout_2->addWidget(label_3, 0, 1, 1, 1);
 
         pushButton_LogIn = new QPushButton(groupBox);
         pushButton_LogIn->setObjectName("pushButton_LogIn");
-        pushButton_LogIn->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 4);\n"
-"background-color: rgb(0, 0, 0);\n"
+        pushButton_LogIn->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+"background-color: rgb(220, 40, 16);\n"
 "border: none;\n"
 "font: 14pt \"My Puma\";"));
 
@@ -204,8 +214,8 @@ public:
 
         pushButton_SignUp = new QPushButton(groupBox);
         pushButton_SignUp->setObjectName("pushButton_SignUp");
-        pushButton_SignUp->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 4);\n"
-"background-color: rgb(0, 0, 0);\n"
+        pushButton_SignUp->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+"background-color: rgb(220, 40, 16);\n"
 "border: none;\n"
 "font: 14pt \"My Puma\";"));
 
@@ -245,11 +255,17 @@ public:
 
         label_ConfirmPassword = new QLabel(groupBox_2);
         label_ConfirmPassword->setObjectName("label_ConfirmPassword");
+        label_ConfirmPassword->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+"background-color: rgb(220, 40, 16);\n"
+"border: none;\n"
+"font: 14pt \"My Puma\";"));
+        label_ConfirmPassword->setAlignment(Qt::AlignCenter);
 
         gridLayout_3->addWidget(label_ConfirmPassword, 2, 0, 1, 2);
 
         label_Username1 = new QLabel(groupBox_2);
         label_Username1->setObjectName("label_Username1");
+        label_Username1->setAlignment(Qt::AlignCenter);
 
         gridLayout_3->addWidget(label_Username1, 0, 0, 1, 2);
 
@@ -266,6 +282,7 @@ public:
 
         label_Password1 = new QLabel(groupBox_2);
         label_Password1->setObjectName("label_Password1");
+        label_Password1->setAlignment(Qt::AlignCenter);
 
         gridLayout_3->addWidget(label_Password1, 1, 0, 1, 2);
 
@@ -365,12 +382,27 @@ public:
         pushButton = new QPushButton(History_Page);
         pushButton->setObjectName("pushButton");
         pushButton->setGeometry(QRect(180, 140, 83, 29));
+        pushButton->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+"background-color: rgb(220, 40, 16);\n"
+"border: none;\n"
+"font: 14pt \"My Puma\";"));
         pushButton_11 = new QPushButton(History_Page);
         pushButton_11->setObjectName("pushButton_11");
         pushButton_11->setGeometry(QRect(450, 370, 83, 29));
+        pushButton_11->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+"background-color: rgb(220, 40, 16);\n"
+"border: none;\n"
+"font: 14pt \"My Puma\";"));
         stackedWidget->addWidget(History_Page);
         Selection_Page = new QWidget();
         Selection_Page->setObjectName("Selection_Page");
+        testb = new QPushButton(Selection_Page);
+        testb->setObjectName("testb");
+        testb->setGeometry(QRect(450, 250, 83, 29));
+        testb->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+"background-color: rgb(220, 40, 16);\n"
+"border: none;\n"
+"font: 14pt \"My Puma\";"));
         stackedWidget->addWidget(Selection_Page);
         Game_Page = new QWidget();
         Game_Page->setObjectName("Game_Page");
@@ -381,6 +413,34 @@ public:
         groupBox_3->setObjectName("groupBox_3");
         verticalLayout_91 = new QVBoxLayout(groupBox_3);
         verticalLayout_91->setObjectName("verticalLayout_91");
+        gameStatebox = new QGroupBox(groupBox_3);
+        gameStatebox->setObjectName("gameStatebox");
+        QSizePolicy sizePolicy1(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Maximum);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(gameStatebox->sizePolicy().hasHeightForWidth());
+        gameStatebox->setSizePolicy(sizePolicy1);
+        horizontalLayout_6 = new QHBoxLayout(gameStatebox);
+        horizontalLayout_6->setObjectName("horizontalLayout_6");
+        gamestatelabel = new QLabel(gameStatebox);
+        gamestatelabel->setObjectName("gamestatelabel");
+        QSizePolicy sizePolicy2(QSizePolicy::Policy::Maximum, QSizePolicy::Policy::Maximum);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(gamestatelabel->sizePolicy().hasHeightForWidth());
+        gamestatelabel->setSizePolicy(sizePolicy2);
+        gamestatelabel->setLayoutDirection(Qt::LeftToRight);
+        gamestatelabel->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+"background-color: rgb(220, 40, 16);\n"
+"border: none;\n"
+"font: 14pt \"My Puma\";"));
+        gamestatelabel->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_6->addWidget(gamestatelabel);
+
+
+        verticalLayout_91->addWidget(gameStatebox);
+
         gridLayout_4 = new QGridLayout();
         gridLayout_4->setObjectName("gridLayout_4");
         XO1 = new QPushButton(groupBox_3);
@@ -485,6 +545,26 @@ public:
 
         verticalLayout_91->addLayout(gridLayout_4);
 
+        XObackbox = new QGroupBox(groupBox_3);
+        XObackbox->setObjectName("XObackbox");
+        sizePolicy1.setHeightForWidth(XObackbox->sizePolicy().hasHeightForWidth());
+        XObackbox->setSizePolicy(sizePolicy1);
+        horizontalLayout_8 = new QHBoxLayout(XObackbox);
+        horizontalLayout_8->setObjectName("horizontalLayout_8");
+        XOback = new QPushButton(XObackbox);
+        XOback->setObjectName("XOback");
+        sizePolicy2.setHeightForWidth(XOback->sizePolicy().hasHeightForWidth());
+        XOback->setSizePolicy(sizePolicy2);
+        XOback->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+"background-color: rgb(220, 40, 16);\n"
+"border: none;\n"
+"font: 14pt \"My Puma\";"));
+
+        horizontalLayout_8->addWidget(XOback);
+
+
+        verticalLayout_91->addWidget(XObackbox);
+
 
         verticalLayout_8->addWidget(groupBox_3);
 
@@ -508,7 +588,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(5);
+        stackedWidget->setCurrentIndex(4);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -534,7 +614,10 @@ public:
         logout->setText(QCoreApplication::translate("MainWindow", "Logout", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
         pushButton_11->setText(QCoreApplication::translate("MainWindow", "History", nullptr));
+        testb->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
         groupBox_3->setTitle(QString());
+        gameStatebox->setTitle(QString());
+        gamestatelabel->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         XO1->setText(QString());
         XO2->setText(QString());
         XO3->setText(QString());
@@ -544,6 +627,8 @@ public:
         XO7->setText(QString());
         XO8->setText(QString());
         XO9->setText(QString());
+        XObackbox->setTitle(QString());
+        XOback->setText(QCoreApplication::translate("MainWindow", "Back", nullptr));
     } // retranslateUi
 
 };
