@@ -8,8 +8,8 @@ GameBoard currentgame;
 char EnableARRAY[9]={1,1,1,1,1,1,1,1,1};
 const QColor Enable_COLOR(220, 40, 16);
 const QColor Disable_COLOR(128, 128, 128);
-
-
+QString player1name = "You"; // Example player name
+QString player2name = "CPU"; // Example player name
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -176,8 +176,14 @@ void MainWindow::updateButton(int index) {
     XObuttons[index]->setText(currentgame.getCellValue(row, col));
 
     // Determine the color based on move number
-    QString textColor = (currentgame.getMoveNum() % 2 == 0) ? "blue" : "yellow";
-
+    QString textColor = "blue";
+    if(currentgame.getMoveNum() % 2 == 0){
+        ui->gamestatelabel->setText(player1name+"'s turn");
+    }
+    else{
+        textColor = "yellow";
+        ui->gamestatelabel->setText(player2name+"'s turn");
+    }
     // Set the style sheet for the button
     XObuttons[index]->setStyleSheet("font-size: 60px; font-weight: bold; color: " + textColor + ";"
                                     "background-color: rgb(128, 128, 128);");
@@ -252,18 +258,18 @@ void MainWindow::checkgamestate(){
     int gamestate=currentgame.checkboard();
     switch (gamestate) {
     case 0:
-
+        //continuou
         break;
     case 1:
-        QMessageBox::warning(this, "Win", "game Ended");
+        ui->gamestatelabel->setText(player1name+" Win");
         DisableBoard();
         break;
     case -1:
-        QMessageBox::warning(this, "Lose", "game Ended");
+        ui->gamestatelabel->setText(player2name+" Win");
         DisableBoard();
         break;
     case 2:
-        QMessageBox::warning(this, "Draw", "game Ended");
+        ui->gamestatelabel->setText("It's a Tie");
         DisableBoard();
         break;
 
@@ -302,7 +308,7 @@ void setEnableArray(char value) {
 
 void MainWindow::on_XOback_clicked()
 {   currentgame.clear();
-    setEnableArray(0);
+    setEnableArray(1);
     EnableBoard();
     clearButtonText();
     ui->stackedWidget->setCurrentIndex(Selection_Page);
@@ -310,10 +316,22 @@ void MainWindow::on_XOback_clicked()
 
 
 void MainWindow::on_testb_clicked()
-{   currentgame.clear();
+{
+    ui->gamestatelabel->setText(player1name+"'s turn");
+    currentgame.clear();
     setEnableArray(1);
     EnableBoard();
     clearButtonText();
     ui->stackedWidget->setCurrentIndex(Game_Page);
+}
+
+
+void MainWindow::on_XOreset_clicked()
+{
+    ui->gamestatelabel->setText(player1name+"'s turn");
+    currentgame.clear();
+    setEnableArray(1);
+    EnableBoard();
+    clearButtonText();
 }
 

@@ -52,21 +52,27 @@ int GameBoard::checkboard(){
         return 0;
 }
 
-bool GameBoard::checkWin(const QString &symbol) const
+bool GameBoard::checkWin(const QString &symbol)
 {
     // Check rows, columns, and diagonals for a win
     for (int i = 0; i < 3; ++i) {
         if (m_board[i][0] == symbol && m_board[i][1] == symbol && m_board[i][2] == symbol) {
+            wincode=i*10;
             return true; // Check rows
         }
         if (m_board[0][i] == symbol && m_board[1][i] == symbol && m_board[2][i] == symbol) {
+            wincode=i;
             return true; // Check columns
         }
     }
 
     // Check diagonals
-    if ((m_board[0][0] == symbol && m_board[1][1] == symbol && m_board[2][2] == symbol) ||
-        (m_board[0][2] == symbol && m_board[1][1] == symbol && m_board[2][0] == symbol)) {
+    if (m_board[0][0] == symbol && m_board[1][1] == symbol && m_board[2][2] == symbol) {
+        wincode=110;
+        return true;
+    }
+    if(m_board[0][2] == symbol && m_board[1][1] == symbol && m_board[2][0] == symbol){
+        wincode=101;
         return true;
     }
 

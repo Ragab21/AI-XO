@@ -103,8 +103,11 @@ public:
     QPushButton *XO8;
     QPushButton *XO9;
     QGroupBox *XObackbox;
-    QHBoxLayout *horizontalLayout_8;
+    QVBoxLayout *verticalLayout_10;
+    QHBoxLayout *horizontalLayout_7;
     QPushButton *XOback;
+    QSpacerItem *horizontalSpacer_4;
+    QPushButton *XOreset;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -549,8 +552,10 @@ public:
         XObackbox->setObjectName("XObackbox");
         sizePolicy1.setHeightForWidth(XObackbox->sizePolicy().hasHeightForWidth());
         XObackbox->setSizePolicy(sizePolicy1);
-        horizontalLayout_8 = new QHBoxLayout(XObackbox);
-        horizontalLayout_8->setObjectName("horizontalLayout_8");
+        verticalLayout_10 = new QVBoxLayout(XObackbox);
+        verticalLayout_10->setObjectName("verticalLayout_10");
+        horizontalLayout_7 = new QHBoxLayout();
+        horizontalLayout_7->setObjectName("horizontalLayout_7");
         XOback = new QPushButton(XObackbox);
         XOback->setObjectName("XOback");
         sizePolicy2.setHeightForWidth(XOback->sizePolicy().hasHeightForWidth());
@@ -560,7 +565,25 @@ public:
 "border: none;\n"
 "font: 14pt \"My Puma\";"));
 
-        horizontalLayout_8->addWidget(XOback);
+        horizontalLayout_7->addWidget(XOback);
+
+        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Policy::Maximum, QSizePolicy::Policy::Minimum);
+
+        horizontalLayout_7->addItem(horizontalSpacer_4);
+
+        XOreset = new QPushButton(XObackbox);
+        XOreset->setObjectName("XOreset");
+        sizePolicy2.setHeightForWidth(XOreset->sizePolicy().hasHeightForWidth());
+        XOreset->setSizePolicy(sizePolicy2);
+        XOreset->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+"background-color: rgb(220, 40, 16);\n"
+"border: none;\n"
+"font: 14pt \"My Puma\";"));
+
+        horizontalLayout_7->addWidget(XOreset);
+
+
+        verticalLayout_10->addLayout(horizontalLayout_7);
 
 
         verticalLayout_91->addWidget(XObackbox);
@@ -588,7 +611,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(4);
+        stackedWidget->setCurrentIndex(5);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -629,6 +652,7 @@ public:
         XO9->setText(QString());
         XObackbox->setTitle(QString());
         XOback->setText(QCoreApplication::translate("MainWindow", "Back", nullptr));
+        XOreset->setText(QCoreApplication::translate("MainWindow", "Reset", nullptr));
     } // retranslateUi
 
 };

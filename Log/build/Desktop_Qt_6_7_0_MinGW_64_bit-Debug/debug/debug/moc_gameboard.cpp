@@ -71,7 +71,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSGameBoardENDCLASS[] = {
        3,    0,   45,    2, 0x02,    2 /* Public */,
        4,    2,   46,    2, 0x02,    3 /* Public */,
        7,    2,   51,    2, 0x102,    6 /* Public | MethodIsConst  */,
-       8,    1,   56,    2, 0x100,    9 /* Private | MethodIsConst  */,
+       8,    1,   56,    2, 0x00,    9 /* Private */,
 
  // signals: parameters
     QMetaType::Void,

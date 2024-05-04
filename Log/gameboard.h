@@ -29,6 +29,10 @@ public:
     int getMoveNum() const { return moveNum; }
     void setMoveNum(int value) { moveNum = value; }
 
+    // Getter and setter for wincode
+    int getwincode() const { return wincode; }
+    void setwincode(int value) { wincode = value; }
+
     // Getters and setters for player symbols
     QString getPlayer1Symbol() const { return m_player1Symbol; }
     void setPlayer1Symbol(const QString &symbol) { m_player1Symbol = symbol; }
@@ -44,12 +48,13 @@ signals:
     void boardChanged();
 
 private:
-    Q_INVOKABLE bool checkWin(const QString &symbol) const;
+    Q_INVOKABLE bool checkWin(const QString &symbol);
     QVector<QVector<QString>> m_board;
     QString m_player1Symbol="X";
     QString m_player2Symbol="O";
     int mode=0; //1:CPU 2:Player2
     int moveNum=0; //how many moves
+    int wincode=-1;
 };
 
 #endif // GAMEBOARD_H

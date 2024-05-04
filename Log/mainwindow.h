@@ -68,6 +68,8 @@ private slots:
 
     void on_testb_clicked();
 
+    void on_XOreset_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
