@@ -98,7 +98,9 @@ void MainWindow::on_XO1_clicked()
      updateButton(0);
     CheckEnableBoard();
     checkgamestate();
-    checkCPU();
+    if(currentgame.getwincode()==-1){ //continuou
+        checkCPU();
+    }
 
 }
 
@@ -107,7 +109,9 @@ void MainWindow::on_XO2_clicked()
     updateButton(1);
     CheckEnableBoard();
     checkgamestate();
-    checkCPU();
+    if(currentgame.getwincode()==-1){ //continuou
+        checkCPU();
+    }
 }
 
 void MainWindow::on_XO3_clicked()
@@ -115,7 +119,9 @@ void MainWindow::on_XO3_clicked()
     updateButton(2);
     CheckEnableBoard();
     checkgamestate();
-    checkCPU();
+    if(currentgame.getwincode()==-1){ //continuou
+        checkCPU();
+    }
 }
 
 void MainWindow::on_XO4_clicked()
@@ -131,7 +137,9 @@ void MainWindow::on_XO5_clicked()
     updateButton(4);
     CheckEnableBoard();
     checkgamestate();
-    checkCPU();
+    if(currentgame.getwincode()==-1){ //continuou
+        checkCPU();
+    }
 }
 
 void MainWindow::on_XO6_clicked()
@@ -139,7 +147,9 @@ void MainWindow::on_XO6_clicked()
     updateButton(5);
     CheckEnableBoard();
     checkgamestate();
-    checkCPU();
+    if(currentgame.getwincode()==-1){ //continuou
+        checkCPU();
+    }
 }
 
 
@@ -149,7 +159,9 @@ void MainWindow::on_XO7_clicked()
     updateButton(6);
     CheckEnableBoard();
     checkgamestate();
-    checkCPU();
+    if(currentgame.getwincode()==-1){ //continuou
+        checkCPU();
+    }
 }
 
 
@@ -158,7 +170,9 @@ void MainWindow::on_XO8_clicked()
     updateButton(7);
     CheckEnableBoard();
     checkgamestate();
-    checkCPU();
+    if(currentgame.getwincode()==-1){ //continuou
+        checkCPU();
+    }
 }
 
 
@@ -167,7 +181,9 @@ void MainWindow::on_XO9_clicked()
     updateButton(8);
     CheckEnableBoard();
     checkgamestate();
-    checkCPU();
+    if(currentgame.getwincode()==-1){ //continuou
+        checkCPU();
+    }
 }
 
 void MainWindow:: colorButton(int index){

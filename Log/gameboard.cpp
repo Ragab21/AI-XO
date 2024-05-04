@@ -46,6 +46,7 @@ int GameBoard::checkboard(){
         return -1;  //lose
     }
     else if(getMoveNum()==9){
+        wincode=-2;
         return 2;   //draw
     }
     else    //continuou
@@ -75,7 +76,7 @@ bool GameBoard::checkWin(const QString &symbol)
         wincode=101;
         return true;
     }
-
+    wincode=-1;
     return false; // No win found
 }
 
