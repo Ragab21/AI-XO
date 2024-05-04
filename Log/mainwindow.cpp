@@ -8,6 +8,7 @@ GameBoard currentgame;
 char EnableARRAY[9]={1,1,1,1,1,1,1,1,1};
 const QColor Enable_COLOR(220, 40, 16);
 const QColor Disable_COLOR(128, 128, 128);
+const QColor Win_COLOR(220, 255, 200);
 QString player1name = "You"; // Example player name
 QString player2name = "CPU"; // Example player name
 
@@ -160,6 +161,15 @@ void MainWindow::on_XO9_clicked()
     checkgamestate();
 }
 
+void MainWindow:: colorButton(int index){
+    // Retrieve the current text color from the palette
+    const QPalette& palette = XObuttons[index]->palette();
+    QColor textColor = palette.color(QPalette::ButtonText);
+    // Set the style sheet for the button
+    XObuttons[index]->setStyleSheet("font-size: 60px; font-weight: bold; color: " + textColor.name() + ";"
+                                    "background-color: " + Win_COLOR.name());
+}
+
 void MainWindow::updateButton(int index) {
     // Disable the button
     EnableARRAY[index] = 0;
@@ -237,6 +247,32 @@ void MainWindow::EnableBoard(){
 
 }
 
+void MainWindow::ColorBoard(int wincode){
+    if(wincode==101){
+        for (int i = 0; i < 3; ++i) {
+            colorButton(2*i+2);
+        }
+    }
+    else if(wincode==110){
+        for (int i = 0; i < 9; i += 4) {
+            colorButton(i);
+        }
+    }
+    else if(wincode/10==4){
+        wincode-=40;
+        for (int i = 0; i < 3; i ++) {
+            colorButton(3*i+wincode);
+        }
+    }
+    else{
+        wincode-=4;
+        wincode/=10;
+        for (int i = 0; i < 3; i ++) {
+            colorButton(3*wincode+i);
+        }
+    }
+}
+
 void MainWindow::CheckEnableBoard(){
     // Loop through the array of QPushButton pointers
     for (int i = 0; i < 9; ++i) {
@@ -263,10 +299,12 @@ void MainWindow::checkgamestate(){
     case 1:
         ui->gamestatelabel->setText(player1name+" Win");
         DisableBoard();
+        ColorBoard(currentgame.getwincode());
         break;
     case -1:
         ui->gamestatelabel->setText(player2name+" Win");
         DisableBoard();
+        ColorBoard(currentgame.getwincode());
         break;
     case 2:
         ui->gamestatelabel->setText("It's a Tie");
@@ -280,7 +318,28 @@ void MainWindow::checkgamestate(){
 
 }
 
-
+/*
+// Check rows, columns, and diagonals for a win
+for (int i = 0; i < 3; ++i) {
+    if (m_board[i][0] == symbol && m_board[i][1] == symbol && m_board[i][2] == symbol) {
+        wincode=i*10+4;
+        return true; // Check rows
+    }
+    if (m_board[0][i] == symbol && m_board[1][i] == symbol && m_board[2][i] == symbol) {
+        wincode=i+40;
+        return true; // Check columns
+    }
+}
+// Check diagonals
+if (m_board[0][0] == symbol && m_board[1][1] == symbol && m_board[2][2] == symbol) {
+    wincode=110;
+    return true;
+}
+if(m_board[0][2] == symbol && m_board[1][1] == symbol && m_board[2][0] == symbol){
+    wincode=101;
+    return true;
+}
+*/
 
 void MainWindow::on_play_clicked()
 {

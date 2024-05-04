@@ -57,11 +57,11 @@ bool GameBoard::checkWin(const QString &symbol)
     // Check rows, columns, and diagonals for a win
     for (int i = 0; i < 3; ++i) {
         if (m_board[i][0] == symbol && m_board[i][1] == symbol && m_board[i][2] == symbol) {
-            wincode=i*10;
+            wincode=i*10+4;
             return true; // Check rows
         }
         if (m_board[0][i] == symbol && m_board[1][i] == symbol && m_board[2][i] == symbol) {
-            wincode=i;
+            wincode=i+40;
             return true; // Check columns
         }
     }

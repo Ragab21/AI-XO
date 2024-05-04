@@ -21,10 +21,12 @@ public:
 
 private slots:
     void updateButton(int index);
+    void colorButton(int index);
     void enableButton(int index);
     void disableButton(int index);
     void checkgamestate();
     void EnableBoard();
+    void ColorBoard(int wincode);
     void CheckEnableBoard();
     void DisableBoard();
     void clearButtonText();
