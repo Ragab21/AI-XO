@@ -16,6 +16,7 @@ void GameBoard::clear()
         }
     }
     moveNum=0;
+    wincode=-1;
     emit boardChanged();
 }
 

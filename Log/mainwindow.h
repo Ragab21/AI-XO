@@ -73,6 +73,20 @@ private slots:
 
     void on_XOreset_clicked();
 
+    void on_player2b_clicked();
+
+    void on_Player2_lineedit_cursorPositionChanged(int arg1, int arg2);
+
+    void on_pushButton_SignUp_2_clicked();
+
+    void on_CPUb_clicked();
+
+    void on_AIb_clicked();
+
+    void on_Player2_backb_clicked();
+
+    void on_Selection_backb_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

@@ -45,6 +45,14 @@ public:
     const QVector<QVector<QString>>& getBoard() const { return m_board; }
     void setBoard(const QVector<QVector<QString>>& board) { m_board = board; }
 
+    // Getters and setters for player1 name
+    QString getPlayer1name() const { return player1name; }
+    void setPlayer1name(const QString &name) { player1name = name; }
+
+    // Getters and setters for player1 name
+    QString getPlayer2name() const { return player2name; }
+    void setPlayer2name(const QString &name) { player2name = name; }
+
     int getCPUindex();
 
 signals:
@@ -58,6 +66,8 @@ private:
     int mode=1; //1:Easy 2:Impossiblle 3:Player2
     int moveNum=0; //how many moves
     int wincode=-1;
+    QString player1name = "You"; // Example player name
+    QString player2name = "CPU"; // Example player name
 };
 
 #endif // GAMEBOARD_H

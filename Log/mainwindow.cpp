@@ -9,8 +9,6 @@ char EnableARRAY[9]={1,1,1,1,1,1,1,1,1};
 const QColor Enable_COLOR(220, 40, 16);
 const QColor Disable_COLOR(128, 128, 128);
 const QColor Win_COLOR(220, 255, 200);
-QString player1name = "You"; // Example player name
-QString player2name = "CPU"; // Example player name
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -29,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
     XObuttons[8] = ui->XO9;
 
 
-    ui->stackedWidget->setCurrentIndex(Game_Page);
+    ui->stackedWidget->setCurrentIndex(Player2_Page);
 }
 
 MainWindow::~MainWindow()
@@ -44,7 +42,7 @@ void MainWindow::on_pushButton_LogIn_clicked()
     QString password = ui->lineEdit_Password->text();
     if(username == "test" && password == "test")
     {
-
+        currentgame.setPlayer1name(username);
         ui->stackedWidget->setCurrentIndex(Main_Page);
 
     }
@@ -213,11 +211,11 @@ void MainWindow::updateButton(int index) {
     // Determine the color based on move number
     QString textColor = "blue";
     if(currentgame.getMoveNum() % 2 == 0){
-        ui->gamestatelabel->setText(player1name+"'s turn");
+        ui->gamestatelabel->setText(currentgame.getPlayer1name()+"'s turn");
     }
     else{
         textColor = "yellow";
-        ui->gamestatelabel->setText(player2name+"'s turn");
+        ui->gamestatelabel->setText(currentgame.getPlayer2name()+"'s turn");
     }
     // Set the style sheet for the button
     XObuttons[index]->setStyleSheet("font-size: 60px; font-weight: bold; color: " + textColor + ";"
@@ -342,17 +340,20 @@ void MainWindow::checkgamestate(){
         //continuou
         break;
     case 1:
-        ui->gamestatelabel->setText(player1name+" Win");
+        ui->gamestatelabel->setText(currentgame.getPlayer1name()+" Win");
         DisableBoard();
         ColorBoard(currentgame.getwincode());
+        QMessageBox::warning(this, "Reminder", "Don't forget to save the match");
         break;
     case -1:
-        ui->gamestatelabel->setText(player2name+" Win");
+        ui->gamestatelabel->setText(currentgame.getPlayer2name()+" Win");
         DisableBoard();
         ColorBoard(currentgame.getwincode());
+        QMessageBox::warning(this, "Reminder", "Don't forget to save the match");
         break;
     case 2:
         ui->gamestatelabel->setText("It's a Tie");
+        QMessageBox::warning(this, "Reminder", "Don't forget to save the match");
         DisableBoard();
         break;
 
@@ -399,7 +400,7 @@ void MainWindow::on_XOback_clicked()
 
 void MainWindow::on_testb_clicked()
 {
-    ui->gamestatelabel->setText(player1name+"'s turn");
+    ui->gamestatelabel->setText(currentgame.getPlayer1name()+"'s turn");
     currentgame.clear();
     setEnableArray(1);
     EnableBoard();
@@ -410,10 +411,70 @@ void MainWindow::on_testb_clicked()
 
 void MainWindow::on_XOreset_clicked()
 {
-    ui->gamestatelabel->setText(player1name+"'s turn");
+    ui->gamestatelabel->setText(currentgame.getPlayer1name()+"'s turn");
     currentgame.clear();
     setEnableArray(1);
     EnableBoard();
     clearButtonText();
+}
+
+
+void MainWindow::on_player2b_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(Player2_Page);
+}
+
+
+void MainWindow::on_pushButton_SignUp_2_clicked()
+{
+   QString P2name = ui->Player2_lineedit->text();
+    if (P2name.isEmpty()){
+       QMessageBox::critical(this, "Error", "No Name entered");
+        return;
+   }
+    currentgame.clear();
+    currentgame.setMode(3);
+   ui->gamestatelabel->setText(currentgame.getPlayer1name()+"'s turn");
+   ui->stackedWidget->setCurrentIndex(Game_Page);
+}
+
+
+void MainWindow::on_CPUb_clicked()
+{
+    currentgame.clear();
+    currentgame.setMode(1);
+    ui->gamestatelabel->setText(currentgame.getPlayer1name()+"'s turn");
+    ui->stackedWidget->setCurrentIndex(Game_Page);
+}
+
+
+void MainWindow::on_AIb_clicked()
+{
+    currentgame.clear();
+    currentgame.setMode(2);
+    ui->gamestatelabel->setText(currentgame.getPlayer1name()+"'s turn");
+    ui->stackedWidget->setCurrentIndex(Game_Page);
+}
+
+
+void MainWindow::on_Player2_backb_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(Selection_Page);
+}
+
+
+void MainWindow::on_Selection_backb_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(Main_Page);
+}
+
+
+
+
+
+//to avoid error
+void MainWindow::on_Player2_lineedit_cursorPositionChanged(int arg1, int arg2)
+{
+
 }
 
