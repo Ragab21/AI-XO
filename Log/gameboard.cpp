@@ -1,8 +1,10 @@
-// GameBoard.cpp
-
 #include "gameboard.h"
+#include "AI_minimax_beta.h"
+#include "CPU.h"
+#include <algorithm>
+#include <limits.h>
 
-GameBoard::GameBoard(QObject *parent) : QObject(parent), m_board(3, QVector<QString>(3, " ")), m_player1Symbol("X")
+GameBoard::GameBoard(QObject *parent) : QObject(parent), m_board(3, QVector<QString>(3, "0")), m_player1Symbol("X"), m_player2Symbol("O"), mode(1), moveNum(0), wincode(-1), player1name("You"), player2name("CPU")
 {
     clear();
 }
@@ -15,8 +17,8 @@ void GameBoard::clear()
             m_board[i][j] = "0";
         }
     }
-    moveNum=0;
-    wincode=-1;
+    moveNum = 0;
+    wincode = -1;
     emit boardChanged();
 }
 
@@ -28,10 +30,10 @@ int GameBoard::playAtPosition(int row, int col)
     }
 
     // Place the symbol at the specified position
-    if(moveNum%2==0) //player1
+    if (moveNum % 2 == 0) //player1
     {
         m_board[row][col] = m_player1Symbol;
-    }else{
+    } else {
         m_board[row][col] = m_player2Symbol;
     }
     moveNum++;
@@ -39,18 +41,16 @@ int GameBoard::playAtPosition(int row, int col)
     return row * 3 + col;
 }
 
-int GameBoard::checkboard(){
-    if(checkWin(getPlayer1Symbol())){
+int GameBoard::checkboard()
+{
+    if (checkWin(getPlayer1Symbol())) {
         return 1;   //win
-    }
-    else if(checkWin(getPlayer2Symbol())){
+    } else if (checkWin(getPlayer2Symbol())) {
         return -1;  //lose
-    }
-    else if(getMoveNum()==9){
-        wincode=-2;
+    } else if (getMoveNum() == 9) {
+        wincode = -2;
         return 2;   //draw
-    }
-    else    //continuou
+    } else //continue
         return 0;
 }
 
@@ -59,25 +59,25 @@ bool GameBoard::checkWin(const QString &symbol)
     // Check rows, columns, and diagonals for a win
     for (int i = 0; i < 3; ++i) {
         if (m_board[i][0] == symbol && m_board[i][1] == symbol && m_board[i][2] == symbol) {
-            wincode=i*10+4;
+            wincode = i * 10 + 4;
             return true; // Check rows
         }
         if (m_board[0][i] == symbol && m_board[1][i] == symbol && m_board[2][i] == symbol) {
-            wincode=i+40;
+            wincode = i + 40;
             return true; // Check columns
         }
     }
 
     // Check diagonals
     if (m_board[0][0] == symbol && m_board[1][1] == symbol && m_board[2][2] == symbol) {
-        wincode=110;
+        wincode = 110;
         return true;
     }
-    if(m_board[0][2] == symbol && m_board[1][1] == symbol && m_board[2][0] == symbol){
-        wincode=101;
+    if (m_board[0][2] == symbol && m_board[1][1] == symbol && m_board[2][0] == symbol) {
+        wincode = 101;
         return true;
     }
-    wincode=-1;
+    wincode = -1;
     return false; // No win found
 }
 
@@ -90,20 +90,14 @@ QString GameBoard::getCellValue(int row, int col) const
     return m_board[row][col];
 }
 
-int GameBoard::getCPUindex(){
-    int x=rand()%9;
-    switch (mode) {
-    case 1: //easy
-        while(getCellValue(x/3,x%3)!="0"){//to ensure non repeating
-            x=rand()%9;
-        }
-        return x;
-        break;
-    case 2: //Impossible
-        return 1;
-        break;
-    default:
-        return 1;
-        break;
+int GameBoard::getCPUindex()
+{
+    if (mode == 1) { // Easy
+        return easyCPU(*this);
+    } else if (mode == 2) { // Impossible
+        auto bestMove = ::getBestMove(*this);
+        return bestMove.first * 3 + bestMove.second;
     }
+    return 1; // default case
 }
+

@@ -4,12 +4,9 @@
 #include <QMainWindow>
 #include <QObject>
 #include <cmath>
-//#include <QQuickItem>
 #include <QSharedDataPointer>
 #include <QWidget>
 #include <QVector>
-
-
 
 class GameBoard : public QObject
 {
@@ -43,13 +40,13 @@ public:
 
     // Getter and setter for m_board
     const QVector<QVector<QString>>& getBoard() const { return m_board; }
-    void setBoard(const QVector<QVector<QString>>& board) { m_board = board; }
+    void setBoard(int raw,int col,QString symbol) { m_board[raw][col] = symbol; }
 
     // Getters and setters for player1 name
     QString getPlayer1name() const { return player1name; }
     void setPlayer1name(const QString &name) { player1name = name; }
 
-    // Getters and setters for player1 name
+    // Getters and setters for player2 name
     QString getPlayer2name() const { return player2name; }
     void setPlayer2name(const QString &name) { player2name = name; }
 
@@ -66,8 +63,10 @@ private:
     int mode=1; //1:Easy 2:Impossiblle 3:Player2
     int moveNum=0; //how many moves
     int wincode=-1;
-    QString player1name = "You"; // Example player name
-    QString player2name = "CPU"; // Example player name
+    QString player1name = "You";
+    QString player2name = "CPU";
+
+
 };
 
 #endif // GAMEBOARD_H

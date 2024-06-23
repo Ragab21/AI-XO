@@ -9,11 +9,15 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    AI_minimax_beta.cpp \
+    CPU.cpp \
     gameboard.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
+    AI_minimax_beta.h \
+    CPU.h \
     StackIbdex.h \
     gameboard.h \
     mainwindow.h

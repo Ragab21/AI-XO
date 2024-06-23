@@ -434,6 +434,7 @@ void MainWindow::on_pushButton_SignUp_2_clicked()
    }
     currentgame.clear();
     currentgame.setMode(3);
+    currentgame.setPlayer2name(P2name);
    ui->gamestatelabel->setText(currentgame.getPlayer1name()+"'s turn");
    ui->stackedWidget->setCurrentIndex(Game_Page);
 }
@@ -443,6 +444,7 @@ void MainWindow::on_CPUb_clicked()
 {
     currentgame.clear();
     currentgame.setMode(1);
+    currentgame.setPlayer2name("CPU");
     ui->gamestatelabel->setText(currentgame.getPlayer1name()+"'s turn");
     ui->stackedWidget->setCurrentIndex(Game_Page);
 }
@@ -452,6 +454,7 @@ void MainWindow::on_AIb_clicked()
 {
     currentgame.clear();
     currentgame.setMode(2);
+    currentgame.setPlayer2name("AI");
     ui->gamestatelabel->setText(currentgame.getPlayer1name()+"'s turn");
     ui->stackedWidget->setCurrentIndex(Game_Page);
 }
