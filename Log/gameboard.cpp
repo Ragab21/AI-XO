@@ -9,6 +9,38 @@ GameBoard::GameBoard(QObject *parent) : QObject(parent), m_board(3, QVector<QStr
     clear();
 }
 
+void GameBoard::setPlayer1Symbol(const QString &symbol){
+    m_player1Symbol=symbol;
+    if(m_player1Symbol=="X"){
+        m_player2Symbol="O";
+    }
+    else if(m_player1Symbol=="x"){
+        m_player2Symbol="o";
+    }
+    else if(m_player1Symbol=="O"){
+        m_player2Symbol="X";
+    }
+    else if(m_player1Symbol=="o"){
+        m_player2Symbol="x";
+    }
+}
+
+void GameBoard::setPlayer2Symbol(const QString &symbol){
+    m_player2Symbol=symbol;
+    if(m_player2Symbol=="X"){
+        m_player1Symbol="O";
+    }
+    else if(m_player2Symbol=="x"){
+        m_player1Symbol="o";
+    }
+    else if(m_player2Symbol=="O"){
+        m_player1Symbol="X";
+    }
+    else if(m_player2Symbol=="o"){
+        m_player1Symbol="x";
+    }
+}
+
 void GameBoard::clear()
 {
     // Clear the board by resetting all elements to empty spaces

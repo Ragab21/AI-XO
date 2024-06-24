@@ -3,6 +3,12 @@
 #include "StackIbdex.h"
 #include "gameboard.h"
 #include <QMessageBox>
+#include <QCryptographicHash>
+#include <QMessageBox>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QDebug>
+
 
 GameBoard currentgame;
 char EnableARRAY[9]={1,1,1,1,1,1,1,1,1};
@@ -27,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent)
     XObuttons[8] = ui->XO9;
 
 
-    ui->stackedWidget->setCurrentIndex(Player2_Page);
+    ui->stackedWidget->setCurrentIndex(SignUp_Page);
 }
 
 MainWindow::~MainWindow()
@@ -42,6 +48,11 @@ void MainWindow::on_pushButton_LogIn_clicked()
     QString password = ui->lineEdit_Password->text();
     if(username == "test" && password == "test")
     {
+        //search for the hasshed password
+        // Hash the input password using SHA-256
+        QByteArray inputPasswordHash = QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Sha256);
+        QString inputPasswordHashHex = inputPasswordHash.toHex();
+        //if(inputPasswordHashHex==SQLhashedpassword)
         currentgame.setPlayer1name(username);
         ui->stackedWidget->setCurrentIndex(Main_Page);
 
@@ -84,6 +95,11 @@ void MainWindow::on_pushButton_SignUp_LogIn_clicked()
     }
     if(password == confirm_password)
     {
+        QByteArray passwordHash = QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Sha256);
+        QString hashedPasswordHex = passwordHash.toHex();
+
+        // Print the hashed password in hexadecimal format
+        qDebug() << "Hashed password:" << hashedPasswordHex;
         ui->stackedWidget->setCurrentIndex(LogIn_Page);
     }
     else
@@ -436,7 +452,7 @@ void MainWindow::on_pushButton_SignUp_2_clicked()
     currentgame.setMode(3);
     currentgame.setPlayer2name(P2name);
    ui->gamestatelabel->setText(currentgame.getPlayer1name()+"'s turn");
-   ui->stackedWidget->setCurrentIndex(Game_Page);
+   ui->stackedWidget->setCurrentIndex(Player1_Page);
 }
 
 
@@ -446,7 +462,7 @@ void MainWindow::on_CPUb_clicked()
     currentgame.setMode(1);
     currentgame.setPlayer2name("CPU");
     ui->gamestatelabel->setText(currentgame.getPlayer1name()+"'s turn");
-    ui->stackedWidget->setCurrentIndex(Game_Page);
+    ui->stackedWidget->setCurrentIndex(Player1_Page);
 }
 
 
@@ -456,7 +472,7 @@ void MainWindow::on_AIb_clicked()
     currentgame.setMode(2);
     currentgame.setPlayer2name("AI");
     ui->gamestatelabel->setText(currentgame.getPlayer1name()+"'s turn");
-    ui->stackedWidget->setCurrentIndex(Game_Page);
+    ui->stackedWidget->setCurrentIndex(Player1_Page);
 }
 
 
@@ -472,7 +488,23 @@ void MainWindow::on_Selection_backb_clicked()
 }
 
 
+void MainWindow::on_Ob_clicked()
+{
+    currentgame.setPlayer1Symbol("O");
+    ui->stackedWidget->setCurrentIndex(Game_Page);
+}
 
+
+void MainWindow::on_Xb_clicked()
+{
+    currentgame.setPlayer1Symbol("X");
+    ui->stackedWidget->setCurrentIndex(Game_Page);
+}
+
+void MainWindow::on_Player1_backb_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(Selection_Page);
+}
 
 
 //to avoid error
@@ -480,4 +512,6 @@ void MainWindow::on_Player2_lineedit_cursorPositionChanged(int arg1, int arg2)
 {
 
 }
+
+
 

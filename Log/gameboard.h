@@ -33,10 +33,10 @@ public:
 
     // Getters and setters for player symbols
     QString getPlayer1Symbol() const { return m_player1Symbol; }
-    void setPlayer1Symbol(const QString &symbol) { m_player1Symbol = symbol; }
+    void setPlayer1Symbol(const QString &symbol);
 
     QString getPlayer2Symbol() const { return m_player2Symbol; }
-    void setPlayer2Symbol(const QString &symbol) { m_player2Symbol = symbol; }
+    void setPlayer2Symbol(const QString &symbol);
 
     // Getter and setter for m_board
     const QVector<QVector<QString>>& getBoard() const { return m_board; }

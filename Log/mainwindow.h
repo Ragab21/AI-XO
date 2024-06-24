@@ -87,6 +87,12 @@ private slots:
 
     void on_Selection_backb_clicked();
 
+    void on_Ob_clicked();
+
+    void on_Xb_clicked();
+
+    void on_Player1_backb_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
