@@ -15,6 +15,7 @@ char EnableARRAY[9]={1,1,1,1,1,1,1,1,1};
 const QColor Enable_COLOR(220, 40, 16);
 const QColor Disable_COLOR(128, 128, 128);
 const QColor Win_COLOR(220, 255, 200);
+bool saveflage=false;
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -52,6 +53,7 @@ void MainWindow::on_pushButton_LogIn_clicked()
         // Hash the input password using SHA-256
         QByteArray inputPasswordHash = QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Sha256);
         QString inputPasswordHashHex = inputPasswordHash.toHex();
+        saveflage=true;
         //if(inputPasswordHashHex==SQLhashedpassword)
         currentgame.setPlayer1name(username);
         ui->stackedWidget->setCurrentIndex(Main_Page);
@@ -65,6 +67,13 @@ void MainWindow::on_pushButton_LogIn_clicked()
     {
         QMessageBox::warning(this, "LogIn", "Invalid user");
     }
+}
+
+
+void MainWindow::on_Defaultb_clicked()
+{
+    saveflage=false;
+    ui->stackedWidget->setCurrentIndex(Player2_Page);
 }
 
 
@@ -359,18 +368,24 @@ void MainWindow::checkgamestate(){
         ui->gamestatelabel->setText(currentgame.getPlayer1name()+" Win");
         DisableBoard();
         ColorBoard(currentgame.getwincode());
+        if(saveflage){
         QMessageBox::warning(this, "Reminder", "Don't forget to save the match");
+        }
         break;
     case -1:
         ui->gamestatelabel->setText(currentgame.getPlayer2name()+" Win");
         DisableBoard();
         ColorBoard(currentgame.getwincode());
-        QMessageBox::warning(this, "Reminder", "Don't forget to save the match");
+        if(saveflage){
+            QMessageBox::warning(this, "Reminder", "Don't forget to save the match");
+        }
         break;
     case 2:
         ui->gamestatelabel->setText("It's a Tie");
-        QMessageBox::warning(this, "Reminder", "Don't forget to save the match");
         DisableBoard();
+        if(saveflage){
+            QMessageBox::warning(this, "Reminder", "Don't forget to save the match");
+        }
         break;
 
     default:
@@ -483,8 +498,12 @@ void MainWindow::on_Player2_backb_clicked()
 
 
 void MainWindow::on_Selection_backb_clicked()
-{
+{   if(saveflage){
     ui->stackedWidget->setCurrentIndex(Main_Page);
+    }
+    else{
+    ui->stackedWidget->setCurrentIndex(LogIn_Page);
+    }
 }
 
 
@@ -515,3 +534,4 @@ void MainWindow::on_Player2_lineedit_cursorPositionChanged(int arg1, int arg2)
 
 
 //SQL
+

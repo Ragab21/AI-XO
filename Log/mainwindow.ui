@@ -28,7 +28,7 @@
 </string>
       </property>
       <property name="currentIndex">
-       <number>7</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="LogIn_Page">
        <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -113,21 +113,18 @@ font: 14pt &quot;My Puma&quot;;</string>
              </item>
              <item>
               <layout class="QGridLayout" name="gridLayout_2">
-               <item row="0" column="0">
-                <spacer name="horizontalSpacer">
-                 <property name="orientation">
-                  <enum>Qt::Vertical</enum>
+               <item row="1" column="1">
+                <widget class="QPushButton" name="pushButton_SignUp">
+                 <property name="styleSheet">
+                  <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(220, 40, 16);
+border: none;
+font: 14pt &quot;My Puma&quot;;</string>
                  </property>
-                 <property name="sizeType">
-                  <enum>QSizePolicy::Fixed</enum>
+                 <property name="text">
+                  <string>SignUp</string>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>20</width>
-                   <height>13</height>
-                  </size>
-                 </property>
-                </spacer>
+                </widget>
                </item>
                <item row="0" column="1">
                 <widget class="QLabel" name="label_3">
@@ -158,8 +155,8 @@ font: 14pt &quot;My Puma&quot;;</string>
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1">
-                <widget class="QPushButton" name="pushButton_SignUp">
+               <item row="0" column="0">
+                <widget class="QPushButton" name="Defaultb">
                  <property name="styleSheet">
                   <string notr="true">color: rgb(255, 255, 255);
 background-color: rgb(220, 40, 16);
@@ -167,7 +164,7 @@ border: none;
 font: 14pt &quot;My Puma&quot;;</string>
                  </property>
                  <property name="text">
-                  <string>SignUp</string>
+                  <string>Play as Default</string>
                  </property>
                 </widget>
                </item>

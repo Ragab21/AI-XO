@@ -93,6 +93,8 @@ private slots:
 
     void on_Player1_backb_clicked();
 
+    void on_Defaultb_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
