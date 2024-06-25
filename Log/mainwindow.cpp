@@ -33,11 +33,6 @@ MainWindow::MainWindow(QWidget *parent)
     XObuttons[7] = ui->XO8;
     XObuttons[8] = ui->XO9;
 
-    if (!connOpen()) {
-        qDebug() << "Error: Unable to connect to database!";
-        return;
-    }
-
 
     ui->stackedWidget->setCurrentIndex(LogIn_Page);
 }
@@ -62,30 +57,42 @@ void MainWindow::on_pushButton_LogIn_clicked()
     }
 
     QSqlQuery qry;
-    qry.prepare("SELECT * FROM Players_Data WHERE Name='"+username+"' AND Passward='"+password+"'  ");
 
-    if(username == "test" && password == "test")
+    //search for the hasshed password
+    // Hash the input password using SHA-256
+    QByteArray inputPasswordHash = QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Sha256);
+    QString inputPasswordHashHex = inputPasswordHash.toHex();
+
+    qry.prepare("SELECT * FROM Players_Data WHERE Name='"+username+"' AND Passward='"+inputPasswordHashHex+"'  ");
+
+    if((username == "test" && password == "test")||(qry.exec()))
     {
-        //search for the hasshed password
-        // Hash the input password using SHA-256
-        QByteArray inputPasswordHash = QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Sha256);
-        QString inputPasswordHashHex = inputPasswordHash.toHex();
-        saveflage=true;
-        //if(inputPasswordHashHex==SQLhashedpassword)
-        currentgame.setPlayer1name(username);
+        int count= 0;
+        while (qry.next())
+        {
+            count++;
+        }
 
-        //end time
-        auto end = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double, std::milli> elapsed = end - start;
-        qDebug() << "Data Base search time: " << 1000L*elapsed.count() << " us";
+        if(count==1)
+        {
+            connClose();
+            saveflage=true;
+            currentgame.setPlayer1name(username);
 
-        ui->stackedWidget->setCurrentIndex(Main_Page);
+            //end time
+            auto end = std::chrono::high_resolution_clock::now();
+            std::chrono::duration<double, std::milli> elapsed = end - start;
+            qDebug() << "Data Base search time: " << 1000L*elapsed.count() << " us";
 
+            ui->stackedWidget->setCurrentIndex(Main_Page);
+        }
     }
+    /*
     else if(username == "test")
     {
         QMessageBox::warning(this, "LogIn", "wrong password");
     }
+    */
     else
     {
         QMessageBox::warning(this, "LogIn", "Invalid user");
@@ -126,29 +133,71 @@ void MainWindow::on_pushButton_SignUp_LogIn_clicked()
     auto start = std::chrono::high_resolution_clock::now();
 
     //save to database
+    if (!connOpen()) {
+        qDebug() << "Error: Unable to connect to database!";
+        return;
+    }
+
+    QSqlQuery qry;
+
     QString username = ui->lineEdit_Username1->text();
     QString password = ui->lineEdit_Password1->text();
     QString confirm_password = ui->lineEdit_ConfirmPassword->text();
+
     if (username.isEmpty() || password.isEmpty() || confirm_password.isEmpty())
     {
         QMessageBox::warning(this, "SignUp", "Please fill in all fields.");
         return;  // Stop further execution
     }
-    if(password == confirm_password)
+    else if(password == confirm_password)
     {
+        qry.prepare("SELECT * FROM Players_Data WHERE Name='"+username+"' ");
 
-        QByteArray passwordHash = QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Sha256);
-        QString hashedPasswordHex = passwordHash.toHex();
+        if(qry.exec())
+        {
+            int count= 0;
+            while (qry.next())
+            {
+                count++;
+            }
+            if(count==0)
+            {
+                QByteArray passwordHash = QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Sha256);
+                QString hashedPasswordHex = passwordHash.toHex();
+                int zero =0;
 
-        // Print the hashed password in hexadecimal format
-        qDebug() << "Hashed password:" << hashedPasswordHex;
 
-        //end time
-        auto end = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double, std::milli> elapsed = end - start;
-        qDebug() << "Account saving to data base time: " << 1000L*elapsed.count() << " us";
+                qry.prepare("INSERT INTO Players_Data (Name, Passward, Win_Count, Lose_Count, Draw_Count) "
+                            "VALUES (:username, :hashedPasswordHex, :winCount, :loseCount, :drawCount)");
 
-        ui->stackedWidget->setCurrentIndex(LogIn_Page);
+                // Bind the values to the query
+                qry.bindValue(":username", username);
+                qry.bindValue(":hashedPasswordHex", hashedPasswordHex);
+                qry.bindValue(":winCount", zero);
+                qry.bindValue(":loseCount", zero);
+                qry.bindValue(":drawCount", zero);
+                // Print the hashed password in hexadecimal format
+
+                if (qry.exec())
+                {
+                    connClose();
+                    qDebug() << "Hashed password:" << hashedPasswordHex;
+
+                    //end time
+                    auto end = std::chrono::high_resolution_clock::now();
+                    std::chrono::duration<double, std::milli> elapsed = end - start;
+                    qDebug() << "Account saving to data base time: " << 1000L*elapsed.count() << " us";
+
+                    ui->stackedWidget->setCurrentIndex(LogIn_Page);
+                }
+            }
+            else
+            {
+                QMessageBox::warning(this, "SignUp", "Username already taken ");
+            }
+
+        }
+
     }
     else
         QMessageBox::warning(this, "SignUp", "password doesn't match");
@@ -157,7 +206,7 @@ void MainWindow::on_pushButton_SignUp_LogIn_clicked()
 
 void MainWindow::on_XO1_clicked()
 {
-     updateButton(0);
+    updateButton(0);
     CheckEnableBoard();
     checkgamestate();
     if(currentgame.getwincode()==-1){ //continuou
@@ -254,7 +303,7 @@ void MainWindow:: colorButton(int index){
     QColor textColor = palette.color(QPalette::ButtonText);
     // Set the style sheet for the button
     XObuttons[index]->setStyleSheet("font-size: 60px; font-weight: bold; color: " + textColor.name() + ";"
-                                    "background-color: " + Win_COLOR.name());
+                                                                                                       "background-color: " + Win_COLOR.name());
 }
 
 void MainWindow::updateButton(int index) {
@@ -283,7 +332,7 @@ void MainWindow::updateButton(int index) {
     }
     // Set the style sheet for the button
     XObuttons[index]->setStyleSheet("font-size: 60px; font-weight: bold; color: " + textColor + ";"
-                                    "background-color: rgb(128, 128, 128);");
+                                                                                                "background-color: rgb(128, 128, 128);");
 
     // Check and enable the board based on EnableARRAY
     CheckEnableBoard();
@@ -297,7 +346,7 @@ void MainWindow::enableButton(int index) {
     // Set the new style with the current text color and background color
     XObuttons[index]->setStyleSheet("font-size: 60px; font-weight: bold; "
                                     "color: " + textColor.name() + ";"
-                                    "background-color: " + Enable_COLOR.name());
+                                                         "background-color: " + Enable_COLOR.name());
 
     // Enable the button
     XObuttons[index]->setEnabled(true);
@@ -311,7 +360,7 @@ void MainWindow::disableButton(int index){
     // Set the new style with the current text color and background color
     XObuttons[index]->setStyleSheet("font-size: 60px; font-weight: bold; "
                                     "color: " + textColor.name() + ";"
-                                    "background-color: " + Disable_COLOR.name());
+                                                         "background-color: " + Disable_COLOR.name());
 
     // Enable the button
     XObuttons[index]->setEnabled(false);
@@ -408,7 +457,7 @@ void MainWindow::checkgamestate(){
         DisableBoard();
         ColorBoard(currentgame.getwincode());
         if(saveflage){
-        QMessageBox::warning(this, "Reminder", "Don't forget to save the match");
+            QMessageBox::warning(this, "Reminder", "Don't forget to save the match");
         }
         break;
     case -1:
@@ -500,16 +549,16 @@ void MainWindow::on_player2b_clicked()
 
 void MainWindow::on_pushButton_SignUp_2_clicked()
 {
-   QString P2name = ui->Player2_lineedit->text();
+    QString P2name = ui->Player2_lineedit->text();
     if (P2name.isEmpty()){
-       QMessageBox::critical(this, "Error", "No Name entered");
+        QMessageBox::critical(this, "Error", "No Name entered");
         return;
-   }
+    }
     currentgame.clear();
     currentgame.setMode(3);
     currentgame.setPlayer2name(P2name);
-   ui->gamestatelabel->setText(currentgame.getPlayer1name()+"'s turn");
-   ui->stackedWidget->setCurrentIndex(Player1_Page);
+    ui->gamestatelabel->setText(currentgame.getPlayer1name()+"'s turn");
+    ui->stackedWidget->setCurrentIndex(Player1_Page);
 }
 
 
@@ -541,10 +590,10 @@ void MainWindow::on_Player2_backb_clicked()
 
 void MainWindow::on_Selection_backb_clicked()
 {   if(saveflage){
-    ui->stackedWidget->setCurrentIndex(Main_Page);
+        ui->stackedWidget->setCurrentIndex(Main_Page);
     }
     else{
-    ui->stackedWidget->setCurrentIndex(LogIn_Page);
+        ui->stackedWidget->setCurrentIndex(LogIn_Page);
     }
 }
 
@@ -576,4 +625,3 @@ void MainWindow::on_Player2_lineedit_cursorPositionChanged(int arg1, int arg2)
 
 
 //SQL
-
