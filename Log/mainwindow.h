@@ -3,6 +3,10 @@
 
 #include <QMainWindow>
 #include <QPushButton>
+#include <QCoreApplication>
+#include <QtSql>
+#include <QDebug>
+#include <QFileInfo>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -13,6 +17,31 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+
+public:
+    QSqlDatabase db;
+
+    void connClose(){
+        db.close();
+        db.removeDatabase(QSqlDatabase::defaultConnection);
+
+    }
+    bool connOpen()
+    {
+
+
+        db = QSqlDatabase::addDatabase("QSQLITE");
+        db.setDatabaseName("D:/eece/2nd_year/test.db");
+
+        if (!db.open()) {
+            qDebug() << "Error: Unable to connect to database!";
+            return false;
+        }
+        return true;
+    }
+
+
+
 
 public:
     MainWindow(QWidget *parent = nullptr);

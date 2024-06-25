@@ -1,7 +1,10 @@
 #include "mainwindow.h"
 #include "gameboard.h"
 #include <QApplication>
-
+#include <QCoreApplication>
+#include <QtSql>
+#include <QDebug>
+#include <QFileInfo>
 
 int main(int argc, char *argv[])
 {

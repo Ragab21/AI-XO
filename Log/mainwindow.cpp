@@ -33,6 +33,11 @@ MainWindow::MainWindow(QWidget *parent)
     XObuttons[7] = ui->XO8;
     XObuttons[8] = ui->XO9;
 
+    if (!connOpen()) {
+        qDebug() << "Error: Unable to connect to database!";
+        return;
+    }
+
 
     ui->stackedWidget->setCurrentIndex(LogIn_Page);
 }
@@ -49,6 +54,16 @@ void MainWindow::on_pushButton_LogIn_clicked()
 
     QString username = ui->lineEdit_Username->text();
     QString password = ui->lineEdit_Password->text();
+
+
+    if (!connOpen()) {
+        qDebug() << "Error: Unable to connect to database!";
+        return;
+    }
+
+    QSqlQuery qry;
+    qry.prepare("SELECT * FROM Players_Data WHERE Name='"+username+"' AND Passward='"+password+"'  ");
+
     if(username == "test" && password == "test")
     {
         //search for the hasshed password
