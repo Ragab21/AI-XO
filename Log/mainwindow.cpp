@@ -34,7 +34,7 @@ MainWindow::MainWindow(QWidget *parent)
     XObuttons[8] = ui->XO9;
 
 
-    ui->stackedWidget->setCurrentIndex(SignUp_Page);
+    ui->stackedWidget->setCurrentIndex(LogIn_Page);
 }
 
 MainWindow::~MainWindow()
@@ -44,6 +44,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_LogIn_clicked()
 {
+    //start time
+    auto start = std::chrono::high_resolution_clock::now();
 
     QString username = ui->lineEdit_Username->text();
     QString password = ui->lineEdit_Password->text();
@@ -56,6 +58,12 @@ void MainWindow::on_pushButton_LogIn_clicked()
         saveflage=true;
         //if(inputPasswordHashHex==SQLhashedpassword)
         currentgame.setPlayer1name(username);
+
+        //end time
+        auto end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double, std::milli> elapsed = end - start;
+        qDebug() << "Data Base search time: " << 1000L*elapsed.count() << " us";
+
         ui->stackedWidget->setCurrentIndex(Main_Page);
 
     }
@@ -73,13 +81,17 @@ void MainWindow::on_pushButton_LogIn_clicked()
 void MainWindow::on_Defaultb_clicked()
 {
     saveflage=false;
-    ui->stackedWidget->setCurrentIndex(Player2_Page);
+    currentgame.setPlayer1name("Default");
+    ui->stackedWidget->setCurrentIndex(Selection_Page);
 }
 
 
 
 void MainWindow::on_pushButton_SignUp_clicked()
 {
+    ui->lineEdit_Username1->clear();
+    ui->lineEdit_Password1->clear();
+    ui->lineEdit_ConfirmPassword->clear();
     ui->stackedWidget->setCurrentIndex(SignUp_Page);
 }
 
@@ -87,12 +99,17 @@ void MainWindow::on_pushButton_SignUp_clicked()
 
 void MainWindow::on_pushButton_SignUp_Back_clicked()
 {
+    ui->lineEdit_Username->clear();
+    ui->lineEdit_Password->clear();
     ui->stackedWidget->setCurrentIndex(LogIn_Page);
 }
 
 
 void MainWindow::on_pushButton_SignUp_LogIn_clicked()
 {
+    //start time
+    auto start = std::chrono::high_resolution_clock::now();
+
     //save to database
     QString username = ui->lineEdit_Username1->text();
     QString password = ui->lineEdit_Password1->text();
@@ -104,11 +121,18 @@ void MainWindow::on_pushButton_SignUp_LogIn_clicked()
     }
     if(password == confirm_password)
     {
+
         QByteArray passwordHash = QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Sha256);
         QString hashedPasswordHex = passwordHash.toHex();
 
         // Print the hashed password in hexadecimal format
         qDebug() << "Hashed password:" << hashedPasswordHex;
+
+        //end time
+        auto end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double, std::milli> elapsed = end - start;
+        qDebug() << "Account saving to data base time: " << 1000L*elapsed.count() << " us";
+
         ui->stackedWidget->setCurrentIndex(LogIn_Page);
     }
     else
@@ -404,6 +428,8 @@ void MainWindow::on_play_clicked()
 
 void MainWindow::on_history_clicked()
 {
+    ui->lineEdit_Username->clear();
+    ui->lineEdit_Password->clear();
     ui->stackedWidget->setCurrentIndex(History_Page);
 }
 
@@ -452,6 +478,7 @@ void MainWindow::on_XOreset_clicked()
 
 void MainWindow::on_player2b_clicked()
 {
+    ui->Player2_lineedit->clear();
     ui->stackedWidget->setCurrentIndex(Player2_Page);
 }
 

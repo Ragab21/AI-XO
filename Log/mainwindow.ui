@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>635</height>
+    <height>699</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,7 +28,7 @@
 </string>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="LogIn_Page">
        <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -705,6 +705,9 @@ margin-bottom: 5px;</string>
         </item>
         <item row="1" column="1">
          <widget class="QPushButton" name="player2b">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
           <property name="styleSheet">
            <string notr="true">color: rgb(255, 255, 255);
 background-color: rgb(220, 40, 16);

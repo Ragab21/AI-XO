@@ -139,7 +139,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(800, 635);
+        MainWindow->resize(800, 699);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         gridLayout = new QGridLayout(centralwidget);
@@ -573,6 +573,7 @@ public:
 
         player2b = new QPushButton(Selection_Page);
         player2b->setObjectName("player2b");
+        player2b->setEnabled(true);
         player2b->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
 "background-color: rgb(220, 40, 16);\n"
 "border: none;\n"
@@ -845,7 +846,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(2);
+        stackedWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
