@@ -3,6 +3,9 @@
 
 #endif // AI_MINIMAX_BETA_H
 #include "gameboard.h"
+#include <iostream>
+#include <chrono>
+#include <limits>
 
 class TreeNode {
 public:

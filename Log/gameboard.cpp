@@ -124,9 +124,16 @@ QString GameBoard::getCellValue(int row, int col) const
 
 int GameBoard::getCPUindex()
 {
+    auto start = std::chrono::high_resolution_clock::now();
     if (mode == 1) { // Easy
+        auto end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double, std::milli> elapsed = end - start;
+        qDebug() << "CPU decision time: " << elapsed.count() << " ms";
         return easyCPU(*this);
     } else if (mode == 2) { // Impossible
+        auto end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double, std::milli> elapsed = end - start;
+        qDebug() << "AI decision time: " << elapsed.count() << " ms";
         auto bestMove = ::getBestMove(*this);
         return bestMove.first * 3 + bestMove.second;
     }
