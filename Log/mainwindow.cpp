@@ -500,6 +500,8 @@ void MainWindow::on_history_clicked()
 
 void MainWindow::on_logout_clicked()
 {
+    ui->lineEdit_Username->clear();
+    ui->lineEdit_Password->clear();
     ui->stackedWidget->setCurrentIndex(LogIn_Page);
 }
 
