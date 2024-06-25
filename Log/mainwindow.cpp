@@ -206,7 +206,7 @@ void MainWindow::on_pushButton_SignUp_LogIn_clicked()
 
 void MainWindow::on_XO1_clicked()
 {
-    updateButton(0);
+     updateButton(0);
     CheckEnableBoard();
     checkgamestate();
     if(currentgame.getwincode()==-1){ //continuou
@@ -303,7 +303,7 @@ void MainWindow:: colorButton(int index){
     QColor textColor = palette.color(QPalette::ButtonText);
     // Set the style sheet for the button
     XObuttons[index]->setStyleSheet("font-size: 60px; font-weight: bold; color: " + textColor.name() + ";"
-                                                                                                       "background-color: " + Win_COLOR.name());
+                                    "background-color: " + Win_COLOR.name());
 }
 
 void MainWindow::updateButton(int index) {
@@ -332,7 +332,7 @@ void MainWindow::updateButton(int index) {
     }
     // Set the style sheet for the button
     XObuttons[index]->setStyleSheet("font-size: 60px; font-weight: bold; color: " + textColor + ";"
-                                                                                                "background-color: rgb(128, 128, 128);");
+                                    "background-color: rgb(128, 128, 128);");
 
     // Check and enable the board based on EnableARRAY
     CheckEnableBoard();
@@ -346,7 +346,7 @@ void MainWindow::enableButton(int index) {
     // Set the new style with the current text color and background color
     XObuttons[index]->setStyleSheet("font-size: 60px; font-weight: bold; "
                                     "color: " + textColor.name() + ";"
-                                                         "background-color: " + Enable_COLOR.name());
+                                    "background-color: " + Enable_COLOR.name());
 
     // Enable the button
     XObuttons[index]->setEnabled(true);
@@ -360,7 +360,7 @@ void MainWindow::disableButton(int index){
     // Set the new style with the current text color and background color
     XObuttons[index]->setStyleSheet("font-size: 60px; font-weight: bold; "
                                     "color: " + textColor.name() + ";"
-                                                         "background-color: " + Disable_COLOR.name());
+                                    "background-color: " + Disable_COLOR.name());
 
     // Enable the button
     XObuttons[index]->setEnabled(false);
@@ -457,7 +457,7 @@ void MainWindow::checkgamestate(){
         DisableBoard();
         ColorBoard(currentgame.getwincode());
         if(saveflage){
-            QMessageBox::warning(this, "Reminder", "Don't forget to save the match");
+        QMessageBox::warning(this, "Reminder", "Don't forget to save the match");
         }
         break;
     case -1:
@@ -549,16 +549,16 @@ void MainWindow::on_player2b_clicked()
 
 void MainWindow::on_pushButton_SignUp_2_clicked()
 {
-    QString P2name = ui->Player2_lineedit->text();
+   QString P2name = ui->Player2_lineedit->text();
     if (P2name.isEmpty()){
-        QMessageBox::critical(this, "Error", "No Name entered");
+       QMessageBox::critical(this, "Error", "No Name entered");
         return;
-    }
+   }
     currentgame.clear();
     currentgame.setMode(3);
     currentgame.setPlayer2name(P2name);
-    ui->gamestatelabel->setText(currentgame.getPlayer1name()+"'s turn");
-    ui->stackedWidget->setCurrentIndex(Player1_Page);
+   ui->gamestatelabel->setText(currentgame.getPlayer1name()+"'s turn");
+   ui->stackedWidget->setCurrentIndex(Player1_Page);
 }
 
 
@@ -590,10 +590,10 @@ void MainWindow::on_Player2_backb_clicked()
 
 void MainWindow::on_Selection_backb_clicked()
 {   if(saveflage){
-        ui->stackedWidget->setCurrentIndex(Main_Page);
+    ui->stackedWidget->setCurrentIndex(Main_Page);
     }
     else{
-        ui->stackedWidget->setCurrentIndex(LogIn_Page);
+    ui->stackedWidget->setCurrentIndex(LogIn_Page);
     }
 }
 
@@ -625,3 +625,4 @@ void MainWindow::on_Player2_lineedit_cursorPositionChanged(int arg1, int arg2)
 
 
 //SQL
+
