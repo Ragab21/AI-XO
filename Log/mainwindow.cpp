@@ -87,16 +87,10 @@ void MainWindow::on_pushButton_LogIn_clicked()
             ui->stackedWidget->setCurrentIndex(Main_Page);
         }
     }
-    /*
-    else if(username == "test")
-    {
-        QMessageBox::warning(this, "LogIn", "wrong password");
-    }
-    */
-    else
-    {
-        QMessageBox::warning(this, "LogIn", "Invalid user");
-    }
+
+
+    QMessageBox::warning(this, "LogIn", "Invalid user");
+
 }
 
 
@@ -192,31 +186,18 @@ void MainWindow::on_pushButton_SignUp_LogIn_clicked()
                 }
 
                 // Construct the SQL query string
+
                 QString createTableQuery = QString(
                                                "CREATE TABLE \"%1\" ("
+                                               "\"ID\" INTEGER PRIMARY KEY AUTOINCREMENT, "
                                                "\"Name\" TEXT, "
                                                "\"Date\" TEXT, "
                                                "\"Win_Situation\" TEXT, "
                                                "\"Game_Mode\" TEXT, "
-                                               "\"I00\" INTEGER, "
-                                               "\"I00_Kind\" INTEGER, "
-                                               "\"I01\" INTEGER, "
-                                               "\"I01_Kind\" INTEGER, "
-                                               "\"I02\" INTEGER, "
-                                               "\"I02_Kind\" INTEGER, "
-                                               "\"I10\" INTEGER, "
-                                               "\"I10_Kind\" INTEGER, "
-                                               "\"I11\" INTEGER, "
-                                               "\"I11_Kind\" INTEGER, "
-                                               "\"I12\" INTEGER, "
-                                               "\"I12_Kind\" INTEGER, "
-                                               "\"I20\" INTEGER, "
-                                               "\"I20_Kind\" INTEGER, "
-                                               "\"I21\" INTEGER, "
-                                               "\"I21_Kind\" INTEGER, "
-                                               "\"I22\" INTEGER, "
-                                               "\"I22_Kind\" INTEGER);"
+                                               "\"Game_Format\" TEXT"
+                                               ");"
                                                ).arg(username);
+
                 if (!qry.exec(createTableQuery)) {
                     qDebug() << "Error creating table:" << qry.lastError();
                 } else {
@@ -510,9 +491,6 @@ void MainWindow::insert_into_Database( QString winSituation )
         loseIncrement=1;
     if(winSituation=="Draw")
         drawIncrement=1;
-
-
-
 
 
 
