@@ -756,7 +756,7 @@ void MainWindow::on_pushButton_11_clicked()
     qry->prepare( "SELECT Name, Date, Win_Situation ,Game_Mode FROM '"+username+"' ");
     qry->exec();
     Model->setQuery(*qry);
-    ui->History_Table->setModel(Model);
+    //ui->History_Table->setModel(Model);
 
     connClose();
 
