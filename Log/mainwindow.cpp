@@ -757,7 +757,7 @@ void MainWindow::on_pushButton_11_clicked()
     qry->prepare( "SELECT * FROM '"+username+"' ");
     qry->exec();
     Model->setQuery(*qry);
-    ui->History_Table->setModel(Model);
+    //ui->History_Table->setModel(Model);
 
     connClose();
 
