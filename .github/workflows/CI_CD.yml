@@ -24,12 +24,12 @@ jobs:
         target: 'desktop'
         arch: 'gcc_64'
         dir: '$HOME/Qt'
-    
-    - name: Debug Qt Installation
+
+    - name: Verify Qt installation
       run: |
-        echo "Listing Qt directory contents"
-        ls -R $HOME/Qt
-    
+        echo "Verifying Qt directory structure"
+        ls -R $HOME/Qt || { echo "Qt installation failed"; exit 1; }
+
     - name: Set up Qt environment
       run: |
         if [ -f "$HOME/Qt/5.15.2/gcc_64/bin/qt-env.sh" ]; then
@@ -78,11 +78,11 @@ jobs:
         arch: 'gcc_64'
         dir: '$HOME/Qt'
     
-    - name: Debug Qt Installation
+    - name: Verify Qt installation
       run: |
-        echo "Listing Qt directory contents"
-        ls -R $HOME/Qt
-    
+        echo "Verifying Qt directory structure"
+        ls -R $HOME/Qt || { echo "Qt installation failed"; exit 1; }
+
     - name: Set up Qt environment
       run: |
         if [ -f "$HOME/Qt/5.15.2/gcc_64/bin/qt-env.sh" ]; then
