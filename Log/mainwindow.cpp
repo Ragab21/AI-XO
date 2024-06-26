@@ -482,6 +482,14 @@ void MainWindow::checkCPU(){
 
 void MainWindow::insert_into_Database( QString winSituation )
 {
+    QVector<QVector<QString>> currentBoard = currentgame.getBoard();
+    QString SQLgame=" ";
+    for(int i=0;i<3;i++){
+        for(int j=0;j<3;j++){
+            SQLgame+=currentBoard[i][j];
+        }
+    }
+    qDebug() << SQLgame;
 
     if (!connOpen())
     {
@@ -541,7 +549,7 @@ void MainWindow::insert_into_Database( QString winSituation )
     if(gamemode==3)
         gamelevel="two_players";
 
-    qry.prepare("insert into " + username + " (Name,Date,Win_Situation,Game_Mode) values ('"+username+"','"+date+"','"+winSituation+"','"+gamelevel+"')");
+    qry.prepare("insert into " + username + " (Name,Date,Win_Situation,Game_Mode,Game_Format) values ('"+username+"','"+date+"','"+winSituation+"','"+gamelevel+"','"+SQLgame+"')");
     if(qry.exec()){
         qDebug() << "Data updated successfully for username:" <<username ;
     } else {
@@ -556,6 +564,18 @@ void MainWindow::checkgamestate(){
 
 
     QString winSituation;
+    QVector<QVector<QString>> currentBoard = currentgame.getBoard();
+
+    qDebug() << "Current Board:";
+    for (int i = 0; i < 3; ++i) {
+        QString row = " ";
+        for (int j = 0; j < 3; ++j) {
+            QString cell = currentBoard[i][j].isEmpty() ? " " : currentBoard[i][j];
+            row += cell + "  ";
+        }
+        qDebug() << row;
+    }
+    qDebug() << currentBoard[0][0];
 
     int gamestate=currentgame.checkboard();
     switch (gamestate) {

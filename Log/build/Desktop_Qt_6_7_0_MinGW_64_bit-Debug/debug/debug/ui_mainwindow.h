@@ -17,6 +17,7 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
@@ -93,8 +94,9 @@ public:
     QSpacerItem *verticalSpacer_6;
     QSpacerItem *verticalSpacer_4;
     QWidget *History_Page;
-    QPushButton *pushButton;
     QPushButton *pushButton_11;
+    QPushButton *pushButton;
+    QListView *History_Table;
     QWidget *Selection_Page;
     QGridLayout *gridLayout_5;
     QPushButton *Selection_backb;
@@ -544,20 +546,24 @@ public:
         stackedWidget->addWidget(Main_Page);
         History_Page = new QWidget();
         History_Page->setObjectName("History_Page");
-        pushButton = new QPushButton(History_Page);
-        pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(152, 140, 241, 71));
-        pushButton->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
-"background-color: rgb(220, 40, 16);\n"
-"border: none;\n"
-"font: 14pt \"My Puma\";"));
         pushButton_11 = new QPushButton(History_Page);
         pushButton_11->setObjectName("pushButton_11");
-        pushButton_11->setGeometry(QRect(450, 370, 83, 29));
+        pushButton_11->setGeometry(QRect(50, 600, 171, 41));
         pushButton_11->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
 "background-color: rgb(220, 40, 16);\n"
 "border: none;\n"
 "font: 14pt \"My Puma\";"));
+        pushButton = new QPushButton(History_Page);
+        pushButton->setObjectName("pushButton");
+        pushButton->setGeometry(QRect(570, 600, 171, 41));
+        pushButton->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
+"background-color: rgb(220, 40, 16);\n"
+"border: none;\n"
+"font: 14pt \"My Puma\";"));
+        History_Table = new QListView(History_Page);
+        History_Table->setObjectName("History_Table");
+        History_Table->setGeometry(QRect(190, 150, 381, 321));
+        History_Table->setStyleSheet(QString::fromUtf8("background-color: #07F "));
         stackedWidget->addWidget(History_Page);
         Selection_Page = new QWidget();
         Selection_Page->setObjectName("Selection_Page");
@@ -898,11 +904,10 @@ public:
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
         MainWindow->setStatusBar(statusbar);
-        QWidget::setTabOrder(pushButton, pushButton_11);
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(3);
+        stackedWidget->setCurrentIndex(4);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -930,8 +935,8 @@ public:
         play->setText(QCoreApplication::translate("MainWindow", "Play", nullptr));
         history->setText(QCoreApplication::translate("MainWindow", "History", nullptr));
         logout->setText(QCoreApplication::translate("MainWindow", "Logout", nullptr));
+        pushButton_11->setText(QCoreApplication::translate("MainWindow", " Show History", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
-        pushButton_11->setText(QCoreApplication::translate("MainWindow", "History", nullptr));
         Selection_backb->setText(QCoreApplication::translate("MainWindow", "Back", nullptr));
         player2b->setText(QCoreApplication::translate("MainWindow", "2 Player", nullptr));
         AIb->setText(QCoreApplication::translate("MainWindow", "AI Impossible", nullptr));
