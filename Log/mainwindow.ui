@@ -28,7 +28,7 @@
 </string>
       </property>
       <property name="currentIndex">
-       <number>4</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="LogIn_Page">
        <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -1570,7 +1570,7 @@ margin-bottom: 5px;</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>25</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

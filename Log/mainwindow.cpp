@@ -605,6 +605,64 @@ void MainWindow::on_play_clicked()
 
 void MainWindow::on_history_clicked()
 {
+
+
+
+
+    if (!connOpen())
+    {
+        qDebug() << "Error: Unable to connect to database!";
+        return;
+    }
+
+    int idValue=1;
+    QString username = currentgame.getPlayer1name();
+
+    // Construct the SQL query string to select the data based on ID
+    QString selectQuery = QString(
+                              "SELECT Name, Date, Win_Situation, Game_Mode, Game_Format FROM %1 WHERE ID = :id"
+                              ).arg(username);
+
+    QSqlQuery qry;
+
+    // Prepare the query
+    qry.prepare(selectQuery);
+
+    // Bind the ID value to the placeholder
+    qry.bindValue(":id", idValue);
+
+    // Execute the query
+    if (!qry.exec()) {
+        qDebug() << "Error executing select query:" << qry.lastError();
+    } else {
+        // Check if the query returned a result
+        if (qry.next()) {
+            // Retrieve the values
+            QString name = qry.value("Name").toString();
+            QString date = qry.value("Date").toString();
+            QString winSituation = qry.value("Win_Situation").toString();
+            QString gameMode = qry.value("Game_Mode").toString();
+            QString gameFormat = qry.value("Game_Format").toString();
+
+            // Output the values
+            qDebug() << "Name:" << name;
+            qDebug() << "Date:" << date;
+            qDebug() << "Win_Situation:" << winSituation;
+            qDebug() << "Game_Mode:" << gameMode;
+            qDebug() << "Game_Format:" << gameFormat;
+        } else {
+            qDebug() << "No data found for ID:" << idValue;
+        }
+
+    }
+
+
+
+
+
+
+
+
     ui->lineEdit_Username->clear();
     ui->lineEdit_Password->clear();
     ui->stackedWidget->setCurrentIndex(History_Page);
@@ -743,6 +801,52 @@ void MainWindow::on_Player2_lineedit_cursorPositionChanged(int arg1, int arg2)
 
 void MainWindow::on_pushButton_11_clicked()
 {
+    int idValue=0;
+    QString username = currentgame.getPlayer1name();
+
+    // Construct the SQL query string to select the data based on ID
+    QString selectQuery = QString(
+                              "SELECT Name, Date, Win_Situation, Game_Mode, Game_Format FROM %1 WHERE ID = :id"
+                              ).arg(username);
+
+    QSqlQuery qry;
+
+    // Prepare the query
+    qry.prepare(selectQuery);
+
+    // Bind the ID value to the placeholder
+    qry.bindValue(":id", idValue);
+
+    // Execute the query
+    if (!qry.exec()) {
+        qDebug() << "Error executing select query:" << qry.lastError();
+    } else {
+        // Check if the query returned a result
+        if (qry.next()) {
+            // Retrieve the values
+            QString name = qry.value("Name").toString();
+            QString date = qry.value("Date").toString();
+            QString winSituation = qry.value("Win_Situation").toString();
+            QString gameMode = qry.value("Game_Mode").toString();
+            QString gameFormat = qry.value("Game_Format").toString();
+
+            // Output the values
+            qDebug() << "Name:" << name;
+            qDebug() << "Date:" << date;
+            qDebug() << "Win_Situation:" << winSituation;
+            qDebug() << "Game_Mode:" << gameMode;
+            qDebug() << "Game_Format:" << gameFormat;
+        } else {
+            qDebug() << "No data found for ID:" << idValue;
+        }
+    }
+
+
+
+
+
+
+    /*
     QSqlQueryModel * Model = new QSqlQueryModel();
     if (!connOpen())
     {
@@ -752,7 +856,7 @@ void MainWindow::on_pushButton_11_clicked()
     }
     QSqlQuery * qry= new QSqlQuery(db);
 
-    QString username = currentgame.getPlayer1name();
+
 
     qry->prepare( "SELECT * FROM '"+username+"' ");
     qry->exec();
@@ -760,7 +864,7 @@ void MainWindow::on_pushButton_11_clicked()
     //ui->History_Table->setModel(Model);
 
     connClose();
-
+*/
 
 }
 
