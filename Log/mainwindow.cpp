@@ -495,9 +495,42 @@ void MainWindow::insert_into_Database( QString winSituation )
 
     QString username = currentgame.getPlayer1name();
     QSqlQuery qry;
-    QSqlQuery qry1;
+    int winIncrement=0,loseIncrement=0,drawIncrement=0;
+    if(winSituation=="Win")
+        winIncrement=1;
+    if(winSituation=="Lose")
+        loseIncrement=1;
+    if(winSituation=="Draw")
+        drawIncrement=1;
 
-    qry1.prepare("UPDATE Players_Data SET win =win+:winCount_1, draw =draw+:drawCount_1, Lose_Count =Lose_Count+:loseCount_1 WHERE Name = :username");
+
+
+
+
+
+    // Prepare the query
+    qry.prepare(                              "UPDATE Players_Data SET "
+                 "Win_Count = Win_Count + :winIncrement, "
+                 "Lose_Count = Lose_Count + :loseIncrement, "
+                 "Draw_Count = Draw_Count + :drawIncrement "
+                 "WHERE Name = :username");
+
+    // Bind values to the placeholders
+    qry.bindValue(":winIncrement", winIncrement);
+    qry.bindValue(":loseIncrement", loseIncrement);
+    qry.bindValue(":drawIncrement", drawIncrement);
+    qry.bindValue(":username", username);
+
+    // Execute the query
+    if (!qry.exec()) {
+        qDebug() << "Error updating data in table:" << qry.lastError();
+    } else {
+        qDebug() << "Data successfully updated in table";
+    }
+
+
+
+
     int gamemode=currentgame.getMode();
 
     QString gamelevel ;
