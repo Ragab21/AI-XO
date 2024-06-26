@@ -8,6 +8,8 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QDebug>
+#include <QDate>
+#include <QString>
 
 
 GameBoard currentgame;
@@ -32,7 +34,6 @@ MainWindow::MainWindow(QWidget *parent)
     XObuttons[6] = ui->XO7;
     XObuttons[7] = ui->XO8;
     XObuttons[8] = ui->XO9;
-
 
     ui->stackedWidget->setCurrentIndex(LogIn_Page);
 }
@@ -75,15 +76,14 @@ void MainWindow::on_pushButton_LogIn_clicked()
 
         if(count==1)
         {
-            connClose();
+
             saveflage=true;
             currentgame.setPlayer1name(username);
-
             //end time
             auto end = std::chrono::high_resolution_clock::now();
             std::chrono::duration<double, std::milli> elapsed = end - start;
             qDebug() << "Data Base search time: " << 1000L*elapsed.count() << " us";
-
+            connClose();
             ui->stackedWidget->setCurrentIndex(Main_Page);
         }
     }
@@ -180,7 +180,7 @@ void MainWindow::on_pushButton_SignUp_LogIn_clicked()
 
                 if (qry.exec())
                 {
-                    connClose();
+
                     qDebug() << "Hashed password:" << hashedPasswordHex;
 
                     //end time
@@ -190,6 +190,20 @@ void MainWindow::on_pushButton_SignUp_LogIn_clicked()
 
                     ui->stackedWidget->setCurrentIndex(LogIn_Page);
                 }
+
+                // Construct the SQL query string
+                QString createTableQuery = QString(
+                                               "CREATE TABLE \"%1\" (""\"Name\" TEXT , ""\"Date\" TEXT  , "
+                                               "\"Win_Situation\" TEXT, ""\"I00\" INTEGER, ""\"I00_Kind\" INTEGER, ""\"I01\" INTEGER, "
+                                               "\"I01_Kind\" INTEGER, ""\"I02\" INTEGER, ""\"I02_Kind\" INTEGER, ""\"I10\" INTEGER, "
+                                               "\"I10_Kind\" INTEGER, ""\"I11\" INTEGER, ""\"I11_Kind\" INTEGER, ""\"I12\" INTEGER, ""\"I12_Kind\" INTEGER, "
+                                               "\"I20\" INTEGER, ""\"I20_Kind\" INTEGER, ""\"I21\" INTEGER, ""\"I21_Kind\" INTEGER, ""\"I22\" INTEGER, ""\"I22_Kind\" INTEGER);").arg(username);
+                if (!qry.exec(createTableQuery)) {
+                    qDebug() << "Error creating table:" << qry.lastError();
+                } else {
+                    qDebug() << "Table created successfully";
+                }
+                connClose();
             }
             else
             {
@@ -446,13 +460,47 @@ void MainWindow::checkCPU(){
     }
 }
 
+
+void MainWindow::insert_into_Database( QString winSituation )
+{
+
+    if (!connOpen())
+    {
+        qDebug() << "Error: Unable to connect to database!";
+        return;
+    }
+    // Get the current date
+    QDateTime currentDateTime = QDateTime::currentDateTime();
+
+    QString date = currentDateTime.toString("dd-MM-yyyy HH:mm:ss");
+
+    QString username = currentgame.getPlayer1name();
+    QSqlQuery qry;
+
+    qry.prepare("insert into " + username + " (Name,Date,Win_Situation) values ('"+username+"','"+date+"','"+winSituation+"')");
+    if(qry.exec()){
+        qDebug() << "Data updated successfully for username:" <<username ;
+    } else {
+        qDebug() << "Error updating data:" << qry.lastError().text();
+    }
+    connClose();
+}
+
 void MainWindow::checkgamestate(){
+
+
+
+
+    QString winSituation;
+
     int gamestate=currentgame.checkboard();
     switch (gamestate) {
     case 0:
         //continuou
         break;
     case 1:
+        winSituation="Win";
+        insert_into_Database(winSituation);
         ui->gamestatelabel->setText(currentgame.getPlayer1name()+" Win");
         DisableBoard();
         ColorBoard(currentgame.getwincode());
@@ -461,6 +509,8 @@ void MainWindow::checkgamestate(){
         }
         break;
     case -1:
+        winSituation="Lose";
+        insert_into_Database(winSituation);
         ui->gamestatelabel->setText(currentgame.getPlayer2name()+" Win");
         DisableBoard();
         ColorBoard(currentgame.getwincode());
@@ -469,6 +519,8 @@ void MainWindow::checkgamestate(){
         }
         break;
     case 2:
+        winSituation="Draw";
+        insert_into_Database(winSituation);
         ui->gamestatelabel->setText("It's a Tie");
         DisableBoard();
         if(saveflage){
@@ -480,7 +532,6 @@ void MainWindow::checkgamestate(){
         QMessageBox::warning(this, "Error", "something went wrong");
         break;
     }
-
 }
 
 

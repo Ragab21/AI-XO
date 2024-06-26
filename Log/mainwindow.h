@@ -31,7 +31,7 @@ public:
 
 
         db = QSqlDatabase::addDatabase("QSQLITE");
-        db.setDatabaseName("D:/project/AI-XO/copy/AI-XO/Log/test.db");
+        db.setDatabaseName("D:/eece/2nd_year/test.db");
 
         if (!db.open()) {
             qDebug() << "Error: Unable to connect to database!";
@@ -123,6 +123,8 @@ private slots:
     void on_Player1_backb_clicked();
 
     void on_Defaultb_clicked();
+
+    void insert_into_Database( QString winSituation );
 
 private:
     Ui::MainWindow *ui;
