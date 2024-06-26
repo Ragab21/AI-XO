@@ -193,11 +193,30 @@ void MainWindow::on_pushButton_SignUp_LogIn_clicked()
 
                 // Construct the SQL query string
                 QString createTableQuery = QString(
-                                               "CREATE TABLE \"%1\" (""\"Name\" TEXT , ""\"Date\" TEXT  , "
-                                               "\"Win_Situation\" TEXT, ""\"I00\" INTEGER, ""\"I00_Kind\" INTEGER, ""\"I01\" INTEGER, "
-                                               "\"I01_Kind\" INTEGER, ""\"I02\" INTEGER, ""\"I02_Kind\" INTEGER, ""\"I10\" INTEGER, "
-                                               "\"I10_Kind\" INTEGER, ""\"I11\" INTEGER, ""\"I11_Kind\" INTEGER, ""\"I12\" INTEGER, ""\"I12_Kind\" INTEGER, "
-                                               "\"I20\" INTEGER, ""\"I20_Kind\" INTEGER, ""\"I21\" INTEGER, ""\"I21_Kind\" INTEGER, ""\"I22\" INTEGER, ""\"I22_Kind\" INTEGER);").arg(username);
+                                               "CREATE TABLE \"%1\" ("
+                                               "\"Name\" TEXT, "
+                                               "\"Date\" TEXT, "
+                                               "\"Win_Situation\" TEXT, "
+                                               "\"Game_Mode\" TEXT, "
+                                               "\"I00\" INTEGER, "
+                                               "\"I00_Kind\" INTEGER, "
+                                               "\"I01\" INTEGER, "
+                                               "\"I01_Kind\" INTEGER, "
+                                               "\"I02\" INTEGER, "
+                                               "\"I02_Kind\" INTEGER, "
+                                               "\"I10\" INTEGER, "
+                                               "\"I10_Kind\" INTEGER, "
+                                               "\"I11\" INTEGER, "
+                                               "\"I11_Kind\" INTEGER, "
+                                               "\"I12\" INTEGER, "
+                                               "\"I12_Kind\" INTEGER, "
+                                               "\"I20\" INTEGER, "
+                                               "\"I20_Kind\" INTEGER, "
+                                               "\"I21\" INTEGER, "
+                                               "\"I21_Kind\" INTEGER, "
+                                               "\"I22\" INTEGER, "
+                                               "\"I22_Kind\" INTEGER);"
+                                               ).arg(username);
                 if (!qry.exec(createTableQuery)) {
                     qDebug() << "Error creating table:" << qry.lastError();
                 } else {
@@ -476,8 +495,20 @@ void MainWindow::insert_into_Database( QString winSituation )
 
     QString username = currentgame.getPlayer1name();
     QSqlQuery qry;
+    QSqlQuery qry1;
 
-    qry.prepare("insert into " + username + " (Name,Date,Win_Situation) values ('"+username+"','"+date+"','"+winSituation+"')");
+    qry1.prepare("UPDATE Players_Data SET win =win+:winCount_1, draw =draw+:drawCount_1, Lose_Count =Lose_Count+:loseCount_1 WHERE Name = :username");
+    int gamemode=currentgame.getMode();
+
+    QString gamelevel ;
+    if(gamemode==1)
+        gamelevel="esay";
+    if(gamemode==2)
+        gamelevel="impossible";
+    if(gamemode==3)
+        gamelevel="two_players";
+
+    qry.prepare("insert into " + username + " (Name,Date,Win_Situation,Game_Mode) values ('"+username+"','"+date+"','"+winSituation+"','"+gamelevel+"')");
     if(qry.exec()){
         qDebug() << "Data updated successfully for username:" <<username ;
     } else {
@@ -678,3 +709,26 @@ void MainWindow::on_Player2_lineedit_cursorPositionChanged(int arg1, int arg2)
 
 
 //SQL
+
+void MainWindow::on_pushButton_11_clicked()
+{
+    QSqlQueryModel * Model = new QSqlQueryModel();
+    if (!connOpen())
+    {
+        qDebug() << "Error: Unable to connect to database!";
+        return;
+    }
+    QSqlQuery * qry= new QSqlQuery(db);
+
+    QString username = currentgame.getPlayer1name();
+
+    qry->prepare( "SELECT Name, Date, Win_Situation ,Game_Mode FROM '"+username+"' ");
+    qry->exec();
+    Model->setQuery(*qry);
+    ui->History_Table->setModel(Model);
+
+    connClose();
+
+
+}
+

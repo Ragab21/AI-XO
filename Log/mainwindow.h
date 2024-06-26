@@ -126,6 +126,8 @@ private slots:
 
     void insert_into_Database( QString winSituation );
 
+    void on_pushButton_11_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
