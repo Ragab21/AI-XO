@@ -25,8 +25,19 @@ jobs:
         arch: 'gcc_64'
         dir: '$HOME/Qt'
     
+    - name: Debug Qt Installation
+      run: |
+        echo "Listing Qt directory contents"
+        ls -R $HOME/Qt
+    
     - name: Set up Qt environment
-      run: source $HOME/Qt/5.15.2/gcc_64/bin/qt-env.sh
+      run: |
+        if [ -f "$HOME/Qt/5.15.2/gcc_64/bin/qt-env.sh" ]; then
+          source $HOME/Qt/5.15.2/gcc_64/bin/qt-env.sh
+        else
+          echo "qt-env.sh not found"
+          exit 1
+        fi
 
     - name: Install dependencies
       run: sudo apt-get update && sudo apt-get install -y qtbase5-dev qtdeclarative5-dev libqt5svg5-dev qt5-qmake g++
@@ -62,13 +73,24 @@ jobs:
       uses: jurplel/install-qt-action@v2
       with:
         version: '5.15.2'
-        host: 'ubuntu'
+        host: 'linux'
         target: 'desktop'
         arch: 'gcc_64'
         dir: '$HOME/Qt'
     
+    - name: Debug Qt Installation
+      run: |
+        echo "Listing Qt directory contents"
+        ls -R $HOME/Qt
+    
     - name: Set up Qt environment
-      run: source $HOME/Qt/5.15.2/gcc_64/bin/qt-env.sh
+      run: |
+        if [ -f "$HOME/Qt/5.15.2/gcc_64/bin/qt-env.sh" ]; then
+          source $HOME/Qt/5.15.2/gcc_64/bin/qt-env.sh
+        else
+          echo "qt-env.sh not found"
+          exit 1
+        fi
 
     - name: Install dependencies
       run: sudo apt-get update && sudo apt-get install -y qtbase5-dev qtdeclarative5-dev libqt5svg5-dev qt5-qmake g++
