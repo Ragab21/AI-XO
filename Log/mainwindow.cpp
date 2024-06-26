@@ -65,10 +65,10 @@ void MainWindow::on_pushButton_LogIn_clicked()
     QString inputPasswordHashHex = inputPasswordHash.toHex();
 
     qry.prepare("SELECT * FROM Players_Data WHERE Name='"+username+"' AND Passward='"+inputPasswordHashHex+"'  ");
+    int count= 0;
 
     if((username == "test" && password == "test")||(qry.exec()))
     {
-        int count= 0;
         while (qry.next())
         {
             count++;
@@ -88,8 +88,8 @@ void MainWindow::on_pushButton_LogIn_clicked()
         }
     }
 
-
-    QMessageBox::warning(this, "LogIn", "Invalid user");
+    if(1!=count)
+        QMessageBox::warning(this, "LogIn", "Invalid user or passward");
 
 }
 
@@ -747,13 +747,14 @@ void MainWindow::on_pushButton_11_clicked()
     if (!connOpen())
     {
         qDebug() << "Error: Unable to connect to database!";
+        delete Model;
         return;
     }
     QSqlQuery * qry= new QSqlQuery(db);
 
     QString username = currentgame.getPlayer1name();
 
-    qry->prepare( "SELECT Name, Date, Win_Situation ,Game_Mode FROM '"+username+"' ");
+    qry->prepare( "SELECT * FROM '"+username+"' ");
     qry->exec();
     Model->setQuery(*qry);
     ui->History_Table->setModel(Model);
