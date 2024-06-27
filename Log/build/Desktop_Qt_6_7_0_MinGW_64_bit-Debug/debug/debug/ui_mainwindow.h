@@ -95,23 +95,26 @@ public:
     QWidget *History_Page;
     QPushButton *Historybackb;
     QPushButton *historybext;
-    QWidget *layoutWidget;
-    QGridLayout *gridLayout_7;
-    QPushButton *XO7_h;
-    QPushButton *XO5_h;
-    QPushButton *XO8_h;
-    QPushButton *XO3_h;
-    QPushButton *XO4_h;
-    QPushButton *XO2_h;
-    QPushButton *XO9_h;
-    QPushButton *XO6_h;
-    QPushButton *XO1_h;
     QLabel *label_Username_2;
     QLabel *Datelabel;
     QLabel *Vslabel;
     QLabel *label_Username_3;
     QLabel *Gamestatelabel;
     QPushButton *historyPrev;
+    QWidget *widget;
+    QGridLayout *gridLayout_7;
+    QHBoxLayout *horizontalLayout_2;
+    QLabel *XO4_h;
+    QLabel *XO5_h;
+    QLabel *XO6_h;
+    QHBoxLayout *horizontalLayout_6;
+    QLabel *XO7_h;
+    QLabel *test_8;
+    QLabel *test_9;
+    QHBoxLayout *horizontalLayout;
+    QLabel *XO1_h;
+    QLabel *XO2_h;
+    QLabel *XO3_h;
     QWidget *Selection_Page;
     QGridLayout *gridLayout_5;
     QPushButton *Selection_backb;
@@ -575,120 +578,6 @@ public:
 "background-color: rgb(220, 40, 16);\n"
 "border: none;\n"
 "font: 14pt \"My Puma\";"));
-        layoutWidget = new QWidget(History_Page);
-        layoutWidget->setObjectName("layoutWidget");
-        layoutWidget->setGeometry(QRect(310, 200, 436, 232));
-        gridLayout_7 = new QGridLayout(layoutWidget);
-        gridLayout_7->setObjectName("gridLayout_7");
-        gridLayout_7->setContentsMargins(0, 0, 0, 0);
-        XO7_h = new QPushButton(layoutWidget);
-        XO7_h->setObjectName("XO7_h");
-        sizePolicy.setHeightForWidth(XO7_h->sizePolicy().hasHeightForWidth());
-        XO7_h->setSizePolicy(sizePolicy);
-        XO7_h->setStyleSheet(QString::fromUtf8("color: rgb(220, 40, 16);\n"
-"border: none;\n"
-"font: 60px bold;\n"
-"background-color: rgb(220, 40, 16);\n"
-"border-radius: 5px"));
-
-        gridLayout_7->addWidget(XO7_h, 2, 0, 1, 1);
-
-        XO5_h = new QPushButton(layoutWidget);
-        XO5_h->setObjectName("XO5_h");
-        sizePolicy.setHeightForWidth(XO5_h->sizePolicy().hasHeightForWidth());
-        XO5_h->setSizePolicy(sizePolicy);
-        XO5_h->setStyleSheet(QString::fromUtf8("color: rgb(220, 40, 16);\n"
-"border: none;\n"
-"font: 60px bold;\n"
-"background-color: rgb(220, 40, 16);\n"
-"border-radius: 5px"));
-
-        gridLayout_7->addWidget(XO5_h, 1, 1, 1, 1);
-
-        XO8_h = new QPushButton(layoutWidget);
-        XO8_h->setObjectName("XO8_h");
-        sizePolicy.setHeightForWidth(XO8_h->sizePolicy().hasHeightForWidth());
-        XO8_h->setSizePolicy(sizePolicy);
-        XO8_h->setStyleSheet(QString::fromUtf8("color: rgb(220, 40, 16);\n"
-"border: none;\n"
-"font: 60px bold;\n"
-"background-color: rgb(220, 40, 16);\n"
-"border-radius: 5px"));
-
-        gridLayout_7->addWidget(XO8_h, 2, 1, 1, 1);
-
-        XO3_h = new QPushButton(layoutWidget);
-        XO3_h->setObjectName("XO3_h");
-        sizePolicy.setHeightForWidth(XO3_h->sizePolicy().hasHeightForWidth());
-        XO3_h->setSizePolicy(sizePolicy);
-        XO3_h->setStyleSheet(QString::fromUtf8("color: rgb(220, 40, 16);\n"
-"border: none;\n"
-"font: 60px bold;\n"
-"background-color: rgb(220, 40, 16);\n"
-"border-radius: 5px"));
-
-        gridLayout_7->addWidget(XO3_h, 0, 2, 1, 1);
-
-        XO4_h = new QPushButton(layoutWidget);
-        XO4_h->setObjectName("XO4_h");
-        sizePolicy.setHeightForWidth(XO4_h->sizePolicy().hasHeightForWidth());
-        XO4_h->setSizePolicy(sizePolicy);
-        XO4_h->setStyleSheet(QString::fromUtf8("color: rgb(220, 40, 16);\n"
-"border: none;\n"
-"font: 60px bold;\n"
-"background-color: rgb(220, 40, 16);\n"
-"border-radius: 5px"));
-
-        gridLayout_7->addWidget(XO4_h, 1, 0, 1, 1);
-
-        XO2_h = new QPushButton(layoutWidget);
-        XO2_h->setObjectName("XO2_h");
-        sizePolicy.setHeightForWidth(XO2_h->sizePolicy().hasHeightForWidth());
-        XO2_h->setSizePolicy(sizePolicy);
-        XO2_h->setStyleSheet(QString::fromUtf8("color: rgb(220, 40, 16);\n"
-"border: none;\n"
-"font: 60px bold;\n"
-"background-color: rgb(220, 40, 16);\n"
-"border-radius: 5px"));
-
-        gridLayout_7->addWidget(XO2_h, 0, 1, 1, 1);
-
-        XO9_h = new QPushButton(layoutWidget);
-        XO9_h->setObjectName("XO9_h");
-        sizePolicy.setHeightForWidth(XO9_h->sizePolicy().hasHeightForWidth());
-        XO9_h->setSizePolicy(sizePolicy);
-        XO9_h->setStyleSheet(QString::fromUtf8("color: rgb(220, 40, 16);\n"
-"border: none;\n"
-"font: 60px bold;\n"
-"background-color: rgb(220, 40, 16);\n"
-"border-radius: 5px"));
-
-        gridLayout_7->addWidget(XO9_h, 2, 2, 1, 1);
-
-        XO6_h = new QPushButton(layoutWidget);
-        XO6_h->setObjectName("XO6_h");
-        sizePolicy.setHeightForWidth(XO6_h->sizePolicy().hasHeightForWidth());
-        XO6_h->setSizePolicy(sizePolicy);
-        XO6_h->setStyleSheet(QString::fromUtf8("color: rgb(220, 40, 16);\n"
-"border: none;\n"
-"font: 60px bold;\n"
-"background-color: rgb(220, 40, 16);\n"
-"border-radius: 5px"));
-
-        gridLayout_7->addWidget(XO6_h, 1, 2, 1, 1);
-
-        XO1_h = new QPushButton(layoutWidget);
-        XO1_h->setObjectName("XO1_h");
-        sizePolicy.setHeightForWidth(XO1_h->sizePolicy().hasHeightForWidth());
-        XO1_h->setSizePolicy(sizePolicy);
-        XO1_h->setStyleSheet(QString::fromUtf8("color: rgb(220, 40, 16);\n"
-"border: none;\n"
-"font: 60px bold;\n"
-"background-color: rgb(220, 40, 16);\n"
-"border-radius: 5px"));
-
-        gridLayout_7->addWidget(XO1_h, 0, 0, 1, 1);
-
         label_Username_2 = new QLabel(History_Page);
         label_Username_2->setObjectName("label_Username_2");
         label_Username_2->setGeometry(QRect(30, 50, 109, 24));
@@ -743,6 +632,135 @@ public:
 "background-color: rgb(220, 40, 16);\n"
 "border: none;\n"
 "font: 14pt \"My Puma\";"));
+        widget = new QWidget(History_Page);
+        widget->setObjectName("widget");
+        widget->setGeometry(QRect(230, 220, 511, 301));
+        gridLayout_7 = new QGridLayout(widget);
+        gridLayout_7->setObjectName("gridLayout_7");
+        gridLayout_7->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setObjectName("horizontalLayout_2");
+        XO4_h = new QLabel(widget);
+        XO4_h->setObjectName("XO4_h");
+        sizePolicy1.setHeightForWidth(XO4_h->sizePolicy().hasHeightForWidth());
+        XO4_h->setSizePolicy(sizePolicy1);
+        XO4_h->setLayoutDirection(Qt::LeftToRight);
+        XO4_h->setStyleSheet(QString::fromUtf8("\n"
+"font: 20pt \"My Puma\";\n"
+"color: rgb(220, 40, 16)"));
+        XO4_h->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_2->addWidget(XO4_h);
+
+        XO5_h = new QLabel(widget);
+        XO5_h->setObjectName("XO5_h");
+        sizePolicy1.setHeightForWidth(XO5_h->sizePolicy().hasHeightForWidth());
+        XO5_h->setSizePolicy(sizePolicy1);
+        XO5_h->setLayoutDirection(Qt::LeftToRight);
+        XO5_h->setStyleSheet(QString::fromUtf8("\n"
+"font: 20pt \"My Puma\";\n"
+"color: rgb(220, 40, 16)"));
+        XO5_h->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_2->addWidget(XO5_h);
+
+        XO6_h = new QLabel(widget);
+        XO6_h->setObjectName("XO6_h");
+        sizePolicy1.setHeightForWidth(XO6_h->sizePolicy().hasHeightForWidth());
+        XO6_h->setSizePolicy(sizePolicy1);
+        XO6_h->setLayoutDirection(Qt::LeftToRight);
+        XO6_h->setStyleSheet(QString::fromUtf8("\n"
+"font: 20pt \"My Puma\";\n"
+"color: rgb(220, 40, 16)"));
+        XO6_h->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_2->addWidget(XO6_h);
+
+
+        gridLayout_7->addLayout(horizontalLayout_2, 1, 0, 1, 1);
+
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setObjectName("horizontalLayout_6");
+        XO7_h = new QLabel(widget);
+        XO7_h->setObjectName("XO7_h");
+        sizePolicy1.setHeightForWidth(XO7_h->sizePolicy().hasHeightForWidth());
+        XO7_h->setSizePolicy(sizePolicy1);
+        XO7_h->setLayoutDirection(Qt::LeftToRight);
+        XO7_h->setStyleSheet(QString::fromUtf8("\n"
+"font: 20pt \"My Puma\";\n"
+"color: rgb(220, 40, 16)"));
+        XO7_h->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_6->addWidget(XO7_h);
+
+        test_8 = new QLabel(widget);
+        test_8->setObjectName("test_8");
+        sizePolicy1.setHeightForWidth(test_8->sizePolicy().hasHeightForWidth());
+        test_8->setSizePolicy(sizePolicy1);
+        test_8->setLayoutDirection(Qt::LeftToRight);
+        test_8->setStyleSheet(QString::fromUtf8("\n"
+"font: 20pt \"My Puma\";\n"
+"color: rgb(220, 40, 16)"));
+        test_8->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_6->addWidget(test_8);
+
+        test_9 = new QLabel(widget);
+        test_9->setObjectName("test_9");
+        sizePolicy1.setHeightForWidth(test_9->sizePolicy().hasHeightForWidth());
+        test_9->setSizePolicy(sizePolicy1);
+        test_9->setLayoutDirection(Qt::LeftToRight);
+        test_9->setStyleSheet(QString::fromUtf8("\n"
+"font: 20pt \"My Puma\";\n"
+"color: rgb(220, 40, 16)"));
+        test_9->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout_6->addWidget(test_9);
+
+
+        gridLayout_7->addLayout(horizontalLayout_6, 2, 0, 1, 1);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName("horizontalLayout");
+        XO1_h = new QLabel(widget);
+        XO1_h->setObjectName("XO1_h");
+        sizePolicy1.setHeightForWidth(XO1_h->sizePolicy().hasHeightForWidth());
+        XO1_h->setSizePolicy(sizePolicy1);
+        XO1_h->setLayoutDirection(Qt::LeftToRight);
+        XO1_h->setStyleSheet(QString::fromUtf8("\n"
+"font: 20pt \"My Puma\";\n"
+"color: rgb(220, 40, 16)"));
+        XO1_h->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout->addWidget(XO1_h);
+
+        XO2_h = new QLabel(widget);
+        XO2_h->setObjectName("XO2_h");
+        sizePolicy1.setHeightForWidth(XO2_h->sizePolicy().hasHeightForWidth());
+        XO2_h->setSizePolicy(sizePolicy1);
+        XO2_h->setLayoutDirection(Qt::LeftToRight);
+        XO2_h->setStyleSheet(QString::fromUtf8("\n"
+"font: 20pt \"My Puma\";\n"
+"color: rgb(220, 40, 16)"));
+        XO2_h->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout->addWidget(XO2_h);
+
+        XO3_h = new QLabel(widget);
+        XO3_h->setObjectName("XO3_h");
+        sizePolicy1.setHeightForWidth(XO3_h->sizePolicy().hasHeightForWidth());
+        XO3_h->setSizePolicy(sizePolicy1);
+        XO3_h->setLayoutDirection(Qt::LeftToRight);
+        XO3_h->setStyleSheet(QString::fromUtf8("\n"
+"font: 20pt \"My Puma\";\n"
+"color: rgb(220, 40, 16)"));
+        XO3_h->setAlignment(Qt::AlignCenter);
+
+        horizontalLayout->addWidget(XO3_h);
+
+
+        gridLayout_7->addLayout(horizontalLayout, 0, 0, 1, 1);
+
         stackedWidget->addWidget(History_Page);
         Selection_Page = new QWidget();
         Selection_Page->setObjectName("Selection_Page");
@@ -1113,21 +1131,21 @@ public:
         logout->setText(QCoreApplication::translate("MainWindow", "Logout", nullptr));
         Historybackb->setText(QCoreApplication::translate("MainWindow", "Back", nullptr));
         historybext->setText(QCoreApplication::translate("MainWindow", "Next", nullptr));
-        XO7_h->setText(QString());
-        XO5_h->setText(QString());
-        XO8_h->setText(QString());
-        XO3_h->setText(QString());
-        XO4_h->setText(QString());
-        XO2_h->setText(QString());
-        XO9_h->setText(QString());
-        XO6_h->setText(QString());
-        XO1_h->setText(QString());
         label_Username_2->setText(QCoreApplication::translate("MainWindow", "Date", nullptr));
         Datelabel->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         Vslabel->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         label_Username_3->setText(QCoreApplication::translate("MainWindow", "Game State", nullptr));
         Gamestatelabel->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         historyPrev->setText(QCoreApplication::translate("MainWindow", "Prev", nullptr));
+        XO4_h->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        XO5_h->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        XO6_h->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        XO7_h->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        test_8->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        test_9->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        XO1_h->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        XO2_h->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        XO3_h->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         Selection_backb->setText(QCoreApplication::translate("MainWindow", "Back", nullptr));
         player2b->setText(QCoreApplication::translate("MainWindow", "2 Player", nullptr));
         AIb->setText(QCoreApplication::translate("MainWindow", "AI Impossible", nullptr));

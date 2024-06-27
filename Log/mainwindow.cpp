@@ -43,16 +43,15 @@ MainWindow::MainWindow(QWidget *parent)
     XObuttons[7] = ui->XO8;
     XObuttons[8] = ui->XO9;
 
-    //history
-    XObuttons_history[0] = ui->XO1_h;
-    XObuttons_history[1] = ui->XO2_h;
-    XObuttons_history[2] = ui->XO3_h;
-    XObuttons_history[3] = ui->XO4_h;
-    XObuttons_history[4] = ui->XO5_h;
-    XObuttons_history[5] = ui->XO6_h;
-    XObuttons_history[6] = ui->XO7_h;
-    XObuttons_history[7] = ui->XO8_h;
-    XObuttons_history[8] = ui->XO9_h;
+    history_labelArray[0]=ui->XO1_h;
+    history_labelArray[1]=ui->XO2_h;
+    history_labelArray[2]=ui->XO3_h;
+    history_labelArray[3]=ui->XO4_h;
+    history_labelArray[4]=ui->XO5_h;
+    history_labelArray[5]=ui->XO6_h;
+    history_labelArray[6]=ui->XO7_h;
+    history_labelArray[7]=ui->test_8;
+    history_labelArray[8]=ui->test_9;
 
     ui->stackedWidget->setCurrentIndex(LogIn_Page);
 }
@@ -558,8 +557,6 @@ void MainWindow::insert_into_Database( QString winSituation )
 void MainWindow::checkgamestate(){
 
 
-
-
     QString winSituation;
     QVector<QVector<QString>> currentBoard = currentgame.getBoard();
 
@@ -937,11 +934,22 @@ void MainWindow::on_pushButton_11_clicked()
 
 void MainWindow::display_hostory_id(){
 
-    //QString gameFormat;
+
     ui->Gamestatelabel->setText(winSituation);
     ui->Datelabel->setText(date);
     ui->Vslabel->setText(name+" Vs "+gameMode);
-    //XObuttons[index]->setText(currentgame.getCellValue(row, col));
+
+    for(int i=0;i<9;i++){
+        QString test=gameFormat[i+1];
+        history_labelArray[i]->setText(test+"   ");
+    }
+
+    /*
+    QString SQLgamed="1256";
+    qDebug() << SQLgamed[1];
+
+    XObuttons[index]->setText(currentgame.getCellValue(row, col));
+    */
 
 
 }

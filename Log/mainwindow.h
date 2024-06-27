@@ -7,6 +7,10 @@
 #include <QtSql>
 #include <QDebug>
 #include <QFileInfo>
+#include <QLabel>
+#include <QVector>
+#include <QGridLayout>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -47,7 +51,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     QPushButton *XObuttons[9];
-    QPushButton *XObuttons_history[9];
+    QLabel* history_labelArray[9];
 
 private slots:
     void updateButton(int index);
