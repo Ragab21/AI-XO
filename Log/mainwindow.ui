@@ -28,7 +28,7 @@
 </string>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="LogIn_Page">
        <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -695,7 +695,7 @@ font: 14pt &quot;My Puma&quot;;</string>
         </property>
         <layout class="QGridLayout" name="gridLayout_7">
          <item row="2" column="0">
-          <widget class="QPushButton" name="XO7_2">
+          <widget class="QPushButton" name="XO7_h">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -715,7 +715,7 @@ border-radius: 5px</string>
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QPushButton" name="XO5_2">
+          <widget class="QPushButton" name="XO5_h">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -735,7 +735,7 @@ border-radius: 5px</string>
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QPushButton" name="XO8_2">
+          <widget class="QPushButton" name="XO8_h">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -755,7 +755,7 @@ border-radius: 5px</string>
           </widget>
          </item>
          <item row="0" column="2">
-          <widget class="QPushButton" name="XO3_2">
+          <widget class="QPushButton" name="XO3_h">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -775,7 +775,7 @@ border-radius: 5px</string>
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QPushButton" name="XO4_2">
+          <widget class="QPushButton" name="XO4_h">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -795,7 +795,7 @@ border-radius: 5px</string>
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QPushButton" name="XO2_2">
+          <widget class="QPushButton" name="XO2_h">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -815,7 +815,7 @@ border-radius: 5px</string>
           </widget>
          </item>
          <item row="2" column="2">
-          <widget class="QPushButton" name="XO9_2">
+          <widget class="QPushButton" name="XO9_h">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -835,7 +835,7 @@ border-radius: 5px</string>
           </widget>
          </item>
          <item row="1" column="2">
-          <widget class="QPushButton" name="XO6_2">
+          <widget class="QPushButton" name="XO6_h">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -855,7 +855,7 @@ border-radius: 5px</string>
           </widget>
          </item>
          <item row="0" column="0">
-          <widget class="QPushButton" name="XO1_2">
+          <widget class="QPushButton" name="XO1_h">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -1570,7 +1570,7 @@ margin-bottom: 5px;</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>26</height>
+     <height>25</height>
     </rect>
    </property>
   </widget>

@@ -31,7 +31,7 @@ public:
 
 
         db = QSqlDatabase::addDatabase("QSQLITE");
-        db.setDatabaseName("D:/eece/2nd_year/test.db");
+        db.setDatabaseName("D:/project/AI-XO/copy/AI-XO/Log/test.db");
 
         if (!db.open()) {
             qDebug() << "Error: Unable to connect to database!";
@@ -47,6 +47,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     QPushButton *XObuttons[9];
+    QPushButton *XObuttons_history[9];
 
 private slots:
     void updateButton(int index);
@@ -127,6 +128,15 @@ private slots:
     void insert_into_Database( QString winSituation );
 
     void on_pushButton_11_clicked();
+    void readgames();
+
+    void on_Historybackb_clicked();
+
+    void on_historyPrev_clicked();
+
+    void on_historybext_clicked();
+
+    void display_hostory_id();
 
 private:
     Ui::MainWindow *ui;

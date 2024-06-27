@@ -18,6 +18,12 @@ const QColor Enable_COLOR(220, 40, 16);
 const QColor Disable_COLOR(128, 128, 128);
 const QColor Win_COLOR(220, 255, 200);
 bool saveflage=false;
+int idValue=1;
+QString name;
+QString date;
+QString winSituation;
+QString gameMode;
+QString gameFormat;
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -25,6 +31,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    //game
     XObuttons[0] = ui->XO1;
     XObuttons[1] = ui->XO2;
     XObuttons[2] = ui->XO3;
@@ -34,6 +42,17 @@ MainWindow::MainWindow(QWidget *parent)
     XObuttons[6] = ui->XO7;
     XObuttons[7] = ui->XO8;
     XObuttons[8] = ui->XO9;
+
+    //history
+    XObuttons_history[0] = ui->XO1_h;
+    XObuttons_history[1] = ui->XO2_h;
+    XObuttons_history[2] = ui->XO3_h;
+    XObuttons_history[3] = ui->XO4_h;
+    XObuttons_history[4] = ui->XO5_h;
+    XObuttons_history[5] = ui->XO6_h;
+    XObuttons_history[6] = ui->XO7_h;
+    XObuttons_history[7] = ui->XO8_h;
+    XObuttons_history[8] = ui->XO9_h;
 
     ui->stackedWidget->setCurrentIndex(LogIn_Page);
 }
@@ -561,32 +580,29 @@ void MainWindow::checkgamestate(){
         //continuou
         break;
     case 1:
-        winSituation="Win";
-        insert_into_Database(winSituation);
-        ui->gamestatelabel->setText(currentgame.getPlayer1name()+" Win");
         DisableBoard();
         ColorBoard(currentgame.getwincode());
+        ui->gamestatelabel->setText(currentgame.getPlayer1name()+" Win");
         if(saveflage){
-            QMessageBox::warning(this, "Reminder", "Don't forget to save the match");
+            winSituation="Win";
+            insert_into_Database(winSituation);
         }
         break;
     case -1:
-        winSituation="Lose";
-        insert_into_Database(winSituation);
-        ui->gamestatelabel->setText(currentgame.getPlayer2name()+" Win");
         DisableBoard();
         ColorBoard(currentgame.getwincode());
+        ui->gamestatelabel->setText(currentgame.getPlayer2name()+" Win");
         if(saveflage){
-            QMessageBox::warning(this, "Reminder", "Don't forget to save the match");
+            winSituation="Lose";
+            insert_into_Database(winSituation);
         }
         break;
     case 2:
-        winSituation="Draw";
-        insert_into_Database(winSituation);
         ui->gamestatelabel->setText("It's a Tie");
         DisableBoard();
         if(saveflage){
-            QMessageBox::warning(this, "Reminder", "Don't forget to save the match");
+            winSituation="Draw";
+            insert_into_Database(winSituation);
         }
         break;
 
@@ -602,12 +618,7 @@ void MainWindow::on_play_clicked()
     ui->stackedWidget->setCurrentIndex(Selection_Page);
 }
 
-
-void MainWindow::on_history_clicked()
-{
-
-
-
+void MainWindow::readgames(){
 
     if (!connOpen())
     {
@@ -615,6 +626,63 @@ void MainWindow::on_history_clicked()
         return;
     }
 
+    QString username = currentgame.getPlayer1name();
+
+    // Construct the SQL query string to select the data based on ID
+    QString selectQuery = QString(
+                              "SELECT Name, Date, Win_Situation, Game_Mode, Game_Format FROM %1 WHERE ID = :id"
+                              ).arg(username);
+
+    QSqlQuery qry;
+
+    // Prepare the query
+    qry.prepare(selectQuery);
+
+    // Bind the ID value to the placeholder
+    qry.bindValue(":id", idValue);
+
+    // Execute the query
+    if (!qry.exec()) {
+        qDebug() << "Error executing select query:" << qry.lastError();
+    } else {
+        // Check if the query returned a result
+        if (qry.next()) {
+            // Retrieve the values
+            name = qry.value("Name").toString();
+            date = qry.value("Date").toString();
+            winSituation = qry.value("Win_Situation").toString();
+            gameMode = qry.value("Game_Mode").toString();
+            gameFormat = qry.value("Game_Format").toString();
+
+            // Output the values
+            qDebug() << "Name:" << name;
+            qDebug() << "Date:" << date;
+            qDebug() << "Win_Situation:" << winSituation;
+            qDebug() << "Game_Mode:" << gameMode;
+            qDebug() << "Game_Format:" << gameFormat;
+        } else {
+            qDebug() << "No data found for ID:" << idValue;
+            QMessageBox::warning(this, "Warning", "This is the last match");
+            idValue--;
+        }
+
+    }
+
+    connClose();
+}
+
+
+
+void MainWindow::on_history_clicked()
+{
+
+
+
+
+    readgames();
+    display_hostory_id();
+
+    /*
     int idValue=1;
     QString username = currentgame.getPlayer1name();
 
@@ -653,10 +721,8 @@ void MainWindow::on_history_clicked()
         } else {
             qDebug() << "No data found for ID:" << idValue;
         }
-
     }
-
-
+    */
 
 
 
@@ -866,5 +932,44 @@ void MainWindow::on_pushButton_11_clicked()
     connClose();
 */
 
+}
+
+
+void MainWindow::display_hostory_id(){
+
+    //QString gameFormat;
+    ui->Gamestatelabel->setText(winSituation);
+    ui->Datelabel->setText(date);
+    ui->Vslabel->setText(name+" Vs "+gameMode);
+    //XObuttons[index]->setText(currentgame.getCellValue(row, col));
+
+
+}
+
+void MainWindow::on_Historybackb_clicked()
+{
+    idValue=1;
+    ui->stackedWidget->setCurrentIndex(Main_Page);
+}
+
+
+void MainWindow::on_historyPrev_clicked()
+{
+    if(idValue==1){
+        QMessageBox::warning(this, "Warning", "This is the first match");
+    }
+    else{
+        idValue--;
+        readgames();
+        display_hostory_id();
+    }
+}
+
+
+void MainWindow::on_historybext_clicked()
+{
+    idValue++;
+    readgames();
+    display_hostory_id();
 }
 
