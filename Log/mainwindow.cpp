@@ -43,6 +43,7 @@ MainWindow::MainWindow(QWidget *parent)
     XObuttons[7] = ui->XO8;
     XObuttons[8] = ui->XO9;
 
+    //history
     history_labelArray[0]=ui->XO1_h;
     history_labelArray[1]=ui->XO2_h;
     history_labelArray[2]=ui->XO3_h;
@@ -94,7 +95,6 @@ void MainWindow::on_pushButton_LogIn_clicked()
 
         if(count==1)
         {
-
             saveflage=true;
             currentgame.setPlayer1name(username);
             //end time
@@ -108,36 +108,7 @@ void MainWindow::on_pushButton_LogIn_clicked()
 
     if(1!=count)
         QMessageBox::warning(this, "LogIn", "Invalid user or passward");
-
 }
-
-
-void MainWindow::on_Defaultb_clicked()
-{
-    saveflage=false;
-    currentgame.setPlayer1name("Default");
-    ui->stackedWidget->setCurrentIndex(Selection_Page);
-}
-
-
-
-void MainWindow::on_pushButton_SignUp_clicked()
-{
-    ui->lineEdit_Username1->clear();
-    ui->lineEdit_Password1->clear();
-    ui->lineEdit_ConfirmPassword->clear();
-    ui->stackedWidget->setCurrentIndex(SignUp_Page);
-}
-
-
-
-void MainWindow::on_pushButton_SignUp_Back_clicked()
-{
-    ui->lineEdit_Username->clear();
-    ui->lineEdit_Password->clear();
-    ui->stackedWidget->setCurrentIndex(LogIn_Page);
-}
-
 
 void MainWindow::on_pushButton_SignUp_LogIn_clicked()
 {
@@ -204,7 +175,6 @@ void MainWindow::on_pushButton_SignUp_LogIn_clicked()
                 }
 
                 // Construct the SQL query string
-
                 QString createTableQuery = QString(
                                                "CREATE TABLE \"%1\" ("
                                                "\"ID\" INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -236,6 +206,99 @@ void MainWindow::on_pushButton_SignUp_LogIn_clicked()
     return;
 }
 
+
+void MainWindow::insert_into_Database( QString winSituation )
+{
+    QVector<QVector<QString>> currentBoard = currentgame.getBoard();
+    QString SQLgame=" ";
+    for(int i=0;i<3;i++){
+        for(int j=0;j<3;j++){
+            SQLgame+=currentBoard[i][j];
+        }
+    }
+    qDebug() << SQLgame;
+
+    if (!connOpen())
+    {
+        qDebug() << "Error: Unable to connect to database!";
+        return;
+    }
+    // Get the current date
+    QDateTime currentDateTime = QDateTime::currentDateTime();
+
+    QString date = currentDateTime.toString("dd-MM-yyyy HH:mm:ss");
+
+    QString username = currentgame.getPlayer1name();
+    QSqlQuery qry;
+    int winIncrement=0,loseIncrement=0,drawIncrement=0;
+    if(winSituation=="Win")
+        winIncrement=1;
+    if(winSituation=="Lose")
+        loseIncrement=1;
+    if(winSituation=="Draw")
+        drawIncrement=1;
+
+    // Prepare the query
+    qry.prepare( "UPDATE Players_Data SET "
+                "Win_Count = Win_Count + :winIncrement, "
+                "Lose_Count = Lose_Count + :loseIncrement, "
+                "Draw_Count = Draw_Count + :drawIncrement "
+                "WHERE Name = :username");
+
+    // Bind values to the placeholders
+    qry.bindValue(":winIncrement", winIncrement);
+    qry.bindValue(":loseIncrement", loseIncrement);
+    qry.bindValue(":drawIncrement", drawIncrement);
+    qry.bindValue(":username", username);
+
+    // Execute the query
+    if (!qry.exec()) {
+        qDebug() << "Error updating data in table:" << qry.lastError();
+    } else {
+        qDebug() << "Data successfully updated in table";
+    }
+
+    int gamemode=currentgame.getMode();
+
+    QString gamelevel ;
+    if(gamemode==1)
+        gamelevel="esay";
+    if(gamemode==2)
+        gamelevel="impossible";
+    if(gamemode==3)
+        gamelevel="two_players";
+
+    qry.prepare("insert into " + username + " (Name,Date,Win_Situation,Game_Mode,Game_Format) values ('"+username+"','"+date+"','"+winSituation+"','"+gamelevel+"','"+SQLgame+"')");
+    if(qry.exec()){
+        qDebug() << "Data updated successfully for username:" <<username ;
+    } else {
+        qDebug() << "Error updating data:" << qry.lastError().text();
+    }
+    connClose();
+}
+
+void MainWindow::on_Defaultb_clicked()
+{
+    saveflage=false;
+    currentgame.setPlayer1name("Default");
+    ui->stackedWidget->setCurrentIndex(Selection_Page);
+}
+
+void MainWindow::on_pushButton_SignUp_clicked()
+{
+    ui->lineEdit_Username1->clear();
+    ui->lineEdit_Password1->clear();
+    ui->lineEdit_ConfirmPassword->clear();
+    ui->stackedWidget->setCurrentIndex(SignUp_Page);
+}
+
+void MainWindow::on_pushButton_SignUp_Back_clicked()
+{
+    ui->lineEdit_Username->clear();
+    ui->lineEdit_Password->clear();
+    ui->stackedWidget->setCurrentIndex(LogIn_Page);
+}
+
 void MainWindow::on_XO1_clicked()
 {
     updateButton(0);
@@ -244,7 +307,6 @@ void MainWindow::on_XO1_clicked()
     if(currentgame.getwincode()==-1){ //continuou
         checkCPU();
     }
-
 }
 
 void MainWindow::on_XO2_clicked()
@@ -295,8 +357,6 @@ void MainWindow::on_XO6_clicked()
     }
 }
 
-
-
 void MainWindow::on_XO7_clicked()
 {
     updateButton(6);
@@ -306,7 +366,6 @@ void MainWindow::on_XO7_clicked()
         checkCPU();
     }
 }
-
 
 void MainWindow::on_XO8_clicked()
 {
@@ -318,7 +377,6 @@ void MainWindow::on_XO8_clicked()
     }
 }
 
-
 void MainWindow::on_XO9_clicked()
 {
     updateButton(8);
@@ -326,6 +384,27 @@ void MainWindow::on_XO9_clicked()
     checkgamestate();
     if(currentgame.getwincode()==-1){ //continuou
         checkCPU();
+    }
+}
+
+void MainWindow::checkCPU(){
+    switch (currentgame.getMode()) {
+    case 3: //2player
+        //Nothing
+        break;
+    case 2: //impossible
+        updateButton(currentgame.getCPUindex());
+        CheckEnableBoard();
+        checkgamestate();
+        break;
+    case 1: //easy
+        updateButton(currentgame.getCPUindex());
+        CheckEnableBoard();
+        checkgamestate();
+        break;
+    default:
+        QMessageBox::warning(this, "Error", "something went wrong");
+        break;
     }
 }
 
@@ -457,105 +536,7 @@ void MainWindow::clearButtonText() {
     }
 }
 
-void MainWindow::checkCPU(){
-    switch (currentgame.getMode()) {
-    case 3: //2player
-        //Nothing
-        break;
-    case 2: //impossible
-        updateButton(currentgame.getCPUindex());
-        CheckEnableBoard();
-        checkgamestate();
-        break;
-    case 1: //easy
-        updateButton(currentgame.getCPUindex());
-        CheckEnableBoard();
-        checkgamestate();
-        break;
-    default:
-        QMessageBox::warning(this, "Error", "something went wrong");
-        break;
-    }
-}
-
-
-void MainWindow::insert_into_Database( QString winSituation )
-{
-    QVector<QVector<QString>> currentBoard = currentgame.getBoard();
-    QString SQLgame=" ";
-    for(int i=0;i<3;i++){
-        for(int j=0;j<3;j++){
-            SQLgame+=currentBoard[i][j];
-        }
-    }
-    qDebug() << SQLgame;
-
-    if (!connOpen())
-    {
-        qDebug() << "Error: Unable to connect to database!";
-        return;
-    }
-    // Get the current date
-    QDateTime currentDateTime = QDateTime::currentDateTime();
-
-    QString date = currentDateTime.toString("dd-MM-yyyy HH:mm:ss");
-
-    QString username = currentgame.getPlayer1name();
-    QSqlQuery qry;
-    int winIncrement=0,loseIncrement=0,drawIncrement=0;
-    if(winSituation=="Win")
-        winIncrement=1;
-    if(winSituation=="Lose")
-        loseIncrement=1;
-    if(winSituation=="Draw")
-        drawIncrement=1;
-
-
-
-    // Prepare the query
-    qry.prepare(                              "UPDATE Players_Data SET "
-                 "Win_Count = Win_Count + :winIncrement, "
-                 "Lose_Count = Lose_Count + :loseIncrement, "
-                 "Draw_Count = Draw_Count + :drawIncrement "
-                 "WHERE Name = :username");
-
-    // Bind values to the placeholders
-    qry.bindValue(":winIncrement", winIncrement);
-    qry.bindValue(":loseIncrement", loseIncrement);
-    qry.bindValue(":drawIncrement", drawIncrement);
-    qry.bindValue(":username", username);
-
-    // Execute the query
-    if (!qry.exec()) {
-        qDebug() << "Error updating data in table:" << qry.lastError();
-    } else {
-        qDebug() << "Data successfully updated in table";
-    }
-
-
-
-
-    int gamemode=currentgame.getMode();
-
-    QString gamelevel ;
-    if(gamemode==1)
-        gamelevel="esay";
-    if(gamemode==2)
-        gamelevel="impossible";
-    if(gamemode==3)
-        gamelevel="two_players";
-
-    qry.prepare("insert into " + username + " (Name,Date,Win_Situation,Game_Mode,Game_Format) values ('"+username+"','"+date+"','"+winSituation+"','"+gamelevel+"','"+SQLgame+"')");
-    if(qry.exec()){
-        qDebug() << "Data updated successfully for username:" <<username ;
-    } else {
-        qDebug() << "Error updating data:" << qry.lastError().text();
-    }
-    connClose();
-}
-
 void MainWindow::checkgamestate(){
-
 
     QString winSituation;
     QVector<QVector<QString>> currentBoard = currentgame.getBoard();
@@ -602,17 +583,62 @@ void MainWindow::checkgamestate(){
             insert_into_Database(winSituation);
         }
         break;
-
     default:
         QMessageBox::warning(this, "Error", "something went wrong");
         break;
     }
 }
 
-
 void MainWindow::on_play_clicked()
 {
     ui->stackedWidget->setCurrentIndex(Selection_Page);
+}
+
+void MainWindow::on_history_clicked()
+{
+    readgames();
+    display_hostory_id();
+    ui->lineEdit_Username->clear();
+    ui->lineEdit_Password->clear();
+    ui->stackedWidget->setCurrentIndex(History_Page);
+}
+
+void MainWindow::display_hostory_id(){
+
+    ui->Gamestatelabel->setText(winSituation);
+    ui->Datelabel->setText(date);
+    ui->Vslabel->setText(name+" Vs "+gameMode);
+
+    for(int i=0;i<9;i++){
+        QString test=gameFormat[i+1];
+        history_labelArray[i]->setText(test+"   ");
+    }
+
+}
+
+void MainWindow::on_Historybackb_clicked()
+{
+    idValue=1;
+    ui->stackedWidget->setCurrentIndex(Main_Page);
+}
+
+void MainWindow::on_historyPrev_clicked()
+{
+    if(idValue==1){
+        QMessageBox::warning(this, "Warning", "This is the first match");
+    }
+    else{
+        idValue--;
+        readgames();
+        display_hostory_id();
+    }
+}
+
+void MainWindow::on_historybext_clicked()
+{
+    idValue++;
+    readgames();
+    display_hostory_id();
 }
 
 void MainWindow::readgames(){
@@ -668,69 +694,11 @@ void MainWindow::readgames(){
     connClose();
 }
 
-
-
-void MainWindow::on_history_clicked()
-{
-
-
-
-
-    readgames();
-    display_hostory_id();
-
-    /*
-    int idValue=1;
-    QString username = currentgame.getPlayer1name();
-
-    // Construct the SQL query string to select the data based on ID
-    QString selectQuery = QString(
-                              "SELECT Name, Date, Win_Situation, Game_Mode, Game_Format FROM %1 WHERE ID = :id"
-                              ).arg(username);
-
-    QSqlQuery qry;
-
-    // Prepare the query
-    qry.prepare(selectQuery);
-
-    // Bind the ID value to the placeholder
-    qry.bindValue(":id", idValue);
-
-    // Execute the query
-    if (!qry.exec()) {
-        qDebug() << "Error executing select query:" << qry.lastError();
-    } else {
-        // Check if the query returned a result
-        if (qry.next()) {
-            // Retrieve the values
-            QString name = qry.value("Name").toString();
-            QString date = qry.value("Date").toString();
-            QString winSituation = qry.value("Win_Situation").toString();
-            QString gameMode = qry.value("Game_Mode").toString();
-            QString gameFormat = qry.value("Game_Format").toString();
-
-            // Output the values
-            qDebug() << "Name:" << name;
-            qDebug() << "Date:" << date;
-            qDebug() << "Win_Situation:" << winSituation;
-            qDebug() << "Game_Mode:" << gameMode;
-            qDebug() << "Game_Format:" << gameFormat;
-        } else {
-            qDebug() << "No data found for ID:" << idValue;
-        }
+void setEnableArray(char value) {
+    for (int i = 0; i < 9; ++i) {
+        EnableARRAY[i] = value;
     }
-    */
-
-
-
-
-
-
-    ui->lineEdit_Username->clear();
-    ui->lineEdit_Password->clear();
-    ui->stackedWidget->setCurrentIndex(History_Page);
 }
-
 
 void MainWindow::on_logout_clicked()
 {
@@ -739,13 +707,6 @@ void MainWindow::on_logout_clicked()
     ui->stackedWidget->setCurrentIndex(LogIn_Page);
 }
 
-void setEnableArray(char value) {
-    for (int i = 0; i < 9; ++i) {
-        EnableARRAY[i] = value;
-    }
-}
-
-
 void MainWindow::on_XOback_clicked()
 {   currentgame.clear();
     setEnableArray(1);
@@ -753,7 +714,6 @@ void MainWindow::on_XOback_clicked()
     clearButtonText();
     ui->stackedWidget->setCurrentIndex(Selection_Page);
 }
-
 
 void MainWindow::on_testb_clicked()
 {
@@ -765,7 +725,6 @@ void MainWindow::on_testb_clicked()
     ui->stackedWidget->setCurrentIndex(Game_Page);
 }
 
-
 void MainWindow::on_XOreset_clicked()
 {
     ui->gamestatelabel->setText(currentgame.getPlayer1name()+"'s turn");
@@ -775,13 +734,11 @@ void MainWindow::on_XOreset_clicked()
     clearButtonText();
 }
 
-
 void MainWindow::on_player2b_clicked()
 {
     ui->Player2_lineedit->clear();
     ui->stackedWidget->setCurrentIndex(Player2_Page);
 }
-
 
 void MainWindow::on_pushButton_SignUp_2_clicked()
 {
@@ -797,7 +754,6 @@ void MainWindow::on_pushButton_SignUp_2_clicked()
     ui->stackedWidget->setCurrentIndex(Player1_Page);
 }
 
-
 void MainWindow::on_CPUb_clicked()
 {
     currentgame.clear();
@@ -806,7 +762,6 @@ void MainWindow::on_CPUb_clicked()
     ui->gamestatelabel->setText(currentgame.getPlayer1name()+"'s turn");
     ui->stackedWidget->setCurrentIndex(Player1_Page);
 }
-
 
 void MainWindow::on_AIb_clicked()
 {
@@ -817,12 +772,10 @@ void MainWindow::on_AIb_clicked()
     ui->stackedWidget->setCurrentIndex(Player1_Page);
 }
 
-
 void MainWindow::on_Player2_backb_clicked()
 {
     ui->stackedWidget->setCurrentIndex(Selection_Page);
 }
-
 
 void MainWindow::on_Selection_backb_clicked()
 {   if(saveflage){
@@ -833,13 +786,11 @@ void MainWindow::on_Selection_backb_clicked()
     }
 }
 
-
 void MainWindow::on_Ob_clicked()
 {
     currentgame.setPlayer1Symbol("O");
     ui->stackedWidget->setCurrentIndex(Game_Page);
 }
-
 
 void MainWindow::on_Xb_clicked()
 {
@@ -852,15 +803,11 @@ void MainWindow::on_Player1_backb_clicked()
     ui->stackedWidget->setCurrentIndex(Selection_Page);
 }
 
-
 //to avoid error
 void MainWindow::on_Player2_lineedit_cursorPositionChanged(int arg1, int arg2)
 {
 
 }
-
-
-//SQL
 
 void MainWindow::on_pushButton_11_clicked()
 {
@@ -904,80 +851,6 @@ void MainWindow::on_pushButton_11_clicked()
         }
     }
 
-
-
-
-
-
-    /*
-    QSqlQueryModel * Model = new QSqlQueryModel();
-    if (!connOpen())
-    {
-        qDebug() << "Error: Unable to connect to database!";
-        delete Model;
-        return;
-    }
-    QSqlQuery * qry= new QSqlQuery(db);
-
-
-
-    qry->prepare( "SELECT * FROM '"+username+"' ");
-    qry->exec();
-    Model->setQuery(*qry);
-    //ui->History_Table->setModel(Model);
-
-    connClose();
-*/
-
 }
 
-
-void MainWindow::display_hostory_id(){
-
-
-    ui->Gamestatelabel->setText(winSituation);
-    ui->Datelabel->setText(date);
-    ui->Vslabel->setText(name+" Vs "+gameMode);
-
-    for(int i=0;i<9;i++){
-        QString test=gameFormat[i+1];
-        history_labelArray[i]->setText(test+"   ");
-    }
-
-    /*
-    QString SQLgamed="1256";
-    qDebug() << SQLgamed[1];
-
-    XObuttons[index]->setText(currentgame.getCellValue(row, col));
-    */
-
-
-}
-
-void MainWindow::on_Historybackb_clicked()
-{
-    idValue=1;
-    ui->stackedWidget->setCurrentIndex(Main_Page);
-}
-
-
-void MainWindow::on_historyPrev_clicked()
-{
-    if(idValue==1){
-        QMessageBox::warning(this, "Warning", "This is the first match");
-    }
-    else{
-        idValue--;
-        readgames();
-        display_hostory_id();
-    }
-}
-
-
-void MainWindow::on_historybext_clicked()
-{
-    idValue++;
-    readgames();
-    display_hostory_id();
-}
 
