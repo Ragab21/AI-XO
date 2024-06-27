@@ -13,6 +13,7 @@ class GameBoard : public QObject
     Q_OBJECT
 
 public:
+    Q_INVOKABLE bool checkWin(const QString &symbol);
     explicit GameBoard(QObject *parent = nullptr);
     Q_INVOKABLE void clear();
     Q_INVOKABLE int playAtPosition(int row, int col);
@@ -56,7 +57,7 @@ signals:
     void boardChanged();
 
 private:
-    Q_INVOKABLE bool checkWin(const QString &symbol);
+
     QVector<QVector<QString>> m_board;
     QString m_player1Symbol="X";
     QString m_player2Symbol="O";

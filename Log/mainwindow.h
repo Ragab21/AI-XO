@@ -35,7 +35,7 @@ public:
 
 
         db = QSqlDatabase::addDatabase("QSQLITE");
-        db.setDatabaseName("D:/project/AI-XO/copy/AI-XO/Log/test.db");
+        db.setDatabaseName("D:/Qt projects/Log/test.db");
 
         if (!db.open()) {
             qDebug() << "Error: Unable to connect to database!";
