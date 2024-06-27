@@ -33,9 +33,16 @@ public:
     bool connOpen()
     {
 
-
+        QString projectPath = QCoreApplication::applicationDirPath();
+        qDebug() << "Project path:" << projectPath;
+        int index = projectPath.indexOf("Log");
+        qDebug() << index;
+        projectPath=projectPath.left(index);
+        qDebug() << "Project path:" << projectPath;
+        projectPath=projectPath.replace("\\", "/");
         db = QSqlDatabase::addDatabase("QSQLITE");
-        db.setDatabaseName("D:/Qt projects/Log/test.db");
+        db.setDatabaseName(projectPath+"Log/test.db");
+
 
         if (!db.open()) {
             qDebug() << "Error: Unable to connect to database!";
